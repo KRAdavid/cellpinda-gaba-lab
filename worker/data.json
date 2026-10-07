@@ -40515,10 +40515,10 @@
       "publishedAt": "2026-10-06T17:34:22.042242Z",
       "verification": "Sites v485 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
       "currentCodeDeployment": {
-        "siteVersion": 770,
-        "sourceCommit": "a2145b0805cc497ef9268c9d799753250e2f7255",
-        "publicMirrorCommit": "61ae69068899a8f51129e168eafec849ae83ad8e",
-        "publishedAt": "2026-10-07T18:32:44.040737Z"
+        "siteVersion": 772,
+        "sourceCommit": "6ad6fa9f7b8191107544d902feda648401029ff2",
+        "publicMirrorCommit": "5408b14e9dcff20b56d3819c5323fdc496fe4ac0",
+        "publishedAt": "2026-10-07T18:40:47.266389Z"
       }
     },
     "notice": "이 웹 인덱스는 배포 시점의 읽기 전용 스냅샷입니다."
