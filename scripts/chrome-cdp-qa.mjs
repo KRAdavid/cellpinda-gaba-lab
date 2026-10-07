@@ -842,6 +842,8 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#intelligence-detail')?.open"), false);
   await evaluate(client, "document.querySelector('[data-review-status]').click()");
   assert.match(String(await evaluate(client, "localStorage.getItem('gaba-review-decisions')")), /status/);
+  assert.equal(await evaluate(client, "document.querySelector('.review-decision-meta')?.textContent.includes('개인 검토')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('.review-decision-meta')?.textContent.includes('완료')"), true);
   const importPath = resolve(profile, "review-import.json");
   await writeFile(importPath, JSON.stringify({
     schemaVersion: "gaba-review-queue-0.1",
