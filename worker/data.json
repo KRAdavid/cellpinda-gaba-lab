@@ -30,18 +30,18 @@
     },
     "discovery": {
       "snapshotDate": "2026-10-07",
-      "generatedAt": "2026-10-07T05:47:23.498Z",
+      "generatedAt": "2026-10-07T08:43:31.701Z",
       "triageVersion": "2026-09-09.1",
       "identifierExtraction": "PubMed primary ArticleIdList only",
       "pubmedUnique": 3259,
       "openAlexRetrieved": 1400,
       "crossrefRetrieved": 900,
       "sourceErrors": [],
-      "mergedUnique": 5135,
+      "mergedUnique": 5136,
       "stagedCandidates": 1000,
       "delta": {
-        "pubmedUnique": 2,
-        "mergedUnique": -1,
+        "pubmedUnique": 0,
+        "mergedUnique": 1,
         "stagedCandidates": 0
       },
       "priority": 5,
@@ -26296,41 +26296,6 @@
         {
           "candidateId": "C-20261007-0752",
           "collectedDate": "2026-10-07",
-          "title": "Dietary Supplementation with Powdered Cucumeropsis mannii Seeds Mitigates High-Fat Diet–Induced dysmetabolism and Hepatorenal injury in Pubertal Rats",
-          "author": "Damilola Mogbojuri",
-          "journal": "Acta Bioscientia: Journal of Biomedical and Biological Science Research",
-          "year": 2026,
-          "pmid": "",
-          "doi": "10.71181/actabioscientia12650",
-          "sourceUrl": "https://doi.org/10.71181/actabioscientia12650",
-          "screeningRecommendation": "일반 원문검토",
-          "screeningStatus": "미검토",
-          "screeningPriority": "",
-          "bucket": "일반검토",
-          "score": 44,
-          "queryLabels": [
-            "crossref_03"
-          ],
-          "exclusionSignals": [],
-          "routeSignals": [
-            "/\\bintake\\b/i",
-            "/\\bdiet(?:ary)?\\b/i",
-            "/\\bfeed(?:ing)?\\b/i",
-            "/\\bsupplement(?:ation|ed|ing)?\\b/i"
-          ],
-          "interventionSignals": [],
-          "subjectSignals": [
-            "/\\brats?\\b/i"
-          ],
-          "studySignals": [
-            "/\\bgroup(?:s)?\\b/i",
-            "/\\bweeks?\\b/i",
-            "/\\b%/"
-          ]
-        },
-        {
-          "candidateId": "C-20261007-0753",
-          "collectedDate": "2026-10-07",
           "title": "Effects of Sequential 4‐Channel Neuromuscular Electrical Stimulation on Hyoid Excursion, Swallowing Safety and Oral Intake in Older Adults With Sarcopenic Dysphagia: A Randomized Controlled Trial",
           "author": "Ji‐Su Park",
           "journal": "Journal of Oral Rehabilitation",
@@ -26364,7 +26329,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0754",
+          "candidateId": "C-20261007-0753",
           "collectedDate": "2026-10-07",
           "title": "Oral Collagen Supplementation for Skin Hydration and Elasticity: A Systematic Review and Meta-Analysis",
           "author": "Pedro Moltó-Balado",
@@ -26399,7 +26364,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0755",
+          "candidateId": "C-20261007-0754",
           "collectedDate": "2026-10-07",
           "title": "Preoperative oral whey protein supplementation improves postoperative inflammatory and nutritional biomarkers: a systematic review and meta-analysis",
           "author": "Hümeyra Yüksel",
@@ -26435,7 +26400,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0756",
+          "candidateId": "C-20261007-0755",
           "collectedDate": "2026-10-07",
           "title": "A Novel Combined Mung Bean and Mulberry Powder: Combination Index and Shelf Life of Total Phenolic, Anthocyanin, and GABA Contents and Neuroprotective Activity.",
           "author": "Polyiam P",
@@ -26465,7 +26430,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0757",
+          "candidateId": "C-20261007-0756",
           "collectedDate": "2026-10-07",
           "title": "Effect of Maternal Dietary DHA and Prenatal Stress Mouse Model on Autistic-like Behaviors, Lipid Peroxidation Activity, and GABA Expression in Offspring Pups.",
           "author": "Woo T",
@@ -26501,7 +26466,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0758",
+          "candidateId": "C-20261007-0757",
           "collectedDate": "2026-10-07",
           "title": "TAURINE SUPPLEMENTATION IN HOUSEFLY MAGGOT MEAL-BASED DIETS ON FEEDING, GROWTH PERFORMANCE, AND MUSCLE QUALITY OF MANDARIN FISH (SINIPERCA CHUATSI)",
           "author": "Qiu-Sheng JING",
@@ -26536,7 +26501,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0759",
+          "candidateId": "C-20261007-0758",
           "collectedDate": "2026-10-07",
           "title": "Analysis of Melatonin-Modulating Effects Against Tartrazine-Induced Neurotoxicity in Male Rats: Biochemical, Pathological and Immunohistochemical Markers.",
           "author": "Essawy AE",
@@ -26571,7 +26536,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0760",
+          "candidateId": "C-20261007-0759",
           "collectedDate": "2026-10-07",
           "title": "Effect of fluralaner on the biology, survival, and reproductive fitness of the neotropical malaria vector Anopheles aquasalis.",
           "author": "Alcântara JA",
@@ -26605,7 +26570,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0761",
+          "candidateId": "C-20261007-0760",
           "collectedDate": "2026-10-07",
           "title": "Experimental Substantiation of the Use of Phenibut Combinations with Salicylic, Nicotinic, and Glutamic Acids in Cerebral Ischemia.",
           "author": "Monov D",
@@ -26640,7 +26605,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0762",
+          "candidateId": "C-20261007-0761",
           "collectedDate": "2026-10-07",
           "title": "Use of monosodium-glutamate as a novel dietary supplement strategy for ovarian stimulation in goats",
           "author": "Anne Caroline Santos Soares",
@@ -26674,7 +26639,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0763",
+          "candidateId": "C-20261007-0762",
           "collectedDate": "2026-10-07",
           "title": "High-dose Vitamin B6 supplementation reduces anxiety and strengthens visual surround suppression.",
           "author": "Field DT",
@@ -26708,7 +26673,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0764",
+          "candidateId": "C-20261007-0763",
           "collectedDate": "2026-10-07",
           "title": "A standardized polyherbal preparation POL-6 diminishes alcohol withdrawal anxiety by regulating Gabra1, Gabra2, Gabra3, Gabra4, Gabra5 gene expression of GABA A receptor signaling pathway in rats.",
           "author": "Sharma L",
@@ -26744,7 +26709,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0765",
+          "candidateId": "C-20261007-0764",
           "collectedDate": "2026-10-07",
           "title": "Concerted outcome of metformin and low dose of radiation in modulation of cisplatin induced uremic encephalopathy via renal and neural preservation.",
           "author": "Hasan HF",
@@ -26779,7 +26744,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0766",
+          "candidateId": "C-20261007-0765",
           "collectedDate": "2026-10-07",
           "title": "Effect of the Intake of a Traditional Mexican Beverage Fermented with Lactic Acid Bacteria on Academic Stress in Medical Students",
           "author": "Laura Márquez-Morales",
@@ -26815,7 +26780,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0767",
+          "candidateId": "C-20261007-0766",
           "collectedDate": "2026-10-07",
           "title": "Influence of acute exposure to a low dose of systemic insecticide fipronil on locomotor activity and emotional behavior in adult male mice.",
           "author": "Maeda M",
@@ -26851,7 +26816,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0768",
+          "candidateId": "C-20261007-0767",
           "collectedDate": "2026-10-07",
           "title": "Melatonin exerts a neuroprotective effect against γ-radiation-induced brain injury in the rat through the modulation of neurotransmitters, inflammatory cytokines, oxidative stress, and apoptosis.",
           "author": "El-Missiry MA",
@@ -26886,7 +26851,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0769",
+          "candidateId": "C-20261007-0768",
           "collectedDate": "2026-10-07",
           "title": "Sexual dimorphism in rats exposed to maternal high fat diet: alterations in medullary sympathetic network.",
           "author": "Gemici A",
@@ -26919,7 +26884,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0770",
+          "candidateId": "C-20261007-0769",
           "collectedDate": "2026-10-07",
           "title": "Combined Maternal Exposure to Cypermethrin and Stress Affect Embryonic Brain and Placental Outcomes in Mice.",
           "author": "Elser BA",
@@ -26955,7 +26920,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0771",
+          "candidateId": "C-20261007-0770",
           "collectedDate": "2026-10-07",
           "title": "Metformin and trimetazidine ameliorate diabetes-induced cognitive impediment in status epileptic rats.",
           "author": "Mohamed MAE",
@@ -26990,7 +26955,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0772",
+          "candidateId": "C-20261007-0771",
           "collectedDate": "2026-10-07",
           "title": "Nebulized MIDD0301 Reduces Airway Hyperresponsiveness in Moderate and Severe Murine Asthma Models.",
           "author": "Zahn NM",
@@ -27025,7 +26990,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0773",
+          "candidateId": "C-20261007-0772",
           "collectedDate": "2026-10-07",
           "title": "Nigella sativa (black seed) oil ameliorates CCl 4 -induced hepatotoxicity and mediates neurotransmitter levels in male Sprague Dawley albino rats.",
           "author": "Ebuehi OAT",
@@ -27060,7 +27025,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0774",
+          "candidateId": "C-20261007-0773",
           "collectedDate": "2026-10-07",
           "title": "PHARMACOKINETICS OF A SINGLE DOSE OF FLURALANER ADMINISTERED ORALLY TO AMERICAN BLACK BEARS ( URSUS AMERICANUS ).",
           "author": "Van Wick P",
@@ -27094,7 +27059,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0775",
+          "candidateId": "C-20261007-0774",
           "collectedDate": "2026-10-07",
           "title": "Effects of Mild Perinatal Hypothyroidism on Cognitive Function of Adult Male Offspring.",
           "author": "Amano I",
@@ -27130,7 +27095,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0776",
+          "candidateId": "C-20261007-0775",
           "collectedDate": "2026-10-07",
           "title": "Targeted metabolomics analysis reveals the association between maternal folic acid supplementation and fatty acids and amino acids profiles in rat pups.",
           "author": "Liu Z",
@@ -27164,7 +27129,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0777",
+          "candidateId": "C-20261007-0776",
           "collectedDate": "2026-10-07",
           "title": "Mosquitocidal Activity and Mode of Action of the Isoxazoline Fluralaner.",
           "author": "Jiang S",
@@ -27199,7 +27164,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0778",
+          "candidateId": "C-20261007-0777",
           "collectedDate": "2026-10-07",
           "title": "Age-dependent changes in amino acid phenotype and the role of glutamate release from hypothalamic proopiomelanocortin neurons.",
           "author": "Dennison CS",
@@ -27232,7 +27197,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0779",
+          "candidateId": "C-20261007-0778",
           "collectedDate": "2026-10-07",
           "title": "A Combination Supplement of Fructo- and Xylo-Oligosaccharides Significantly Abrogates Oxidative Impairments and Neurotoxicity in Maternal/Fetal Milieu Following Gestational Exposure to Acrylamide in Rat.",
           "author": "Krishna G",
@@ -27268,7 +27233,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0780",
+          "candidateId": "C-20261007-0779",
           "collectedDate": "2026-10-07",
           "title": "Renoprotective effects of gamma-aminobutyric acid on cisplatin-induced acute renal injury in rats.",
           "author": "Ali BH",
@@ -27307,7 +27272,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0781",
+          "candidateId": "C-20261007-0780",
           "collectedDate": "2026-10-07",
           "title": "Effect of vaccination against foot-and-mouth disease on growth performance of Korean native goat (Capra hircus coreanae).",
           "author": "Jo NC",
@@ -27348,7 +27313,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0782",
+          "candidateId": "C-20261007-0781",
           "collectedDate": "2026-10-07",
           "title": "Prior antipsychotic drug treatment prevents response to novel antipsychotic agent in the methylazoxymethanol acetate model of schizophrenia.",
           "author": "Gill KM",
@@ -27383,7 +27348,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0783",
+          "candidateId": "C-20261007-0782",
           "collectedDate": "2026-10-07",
           "title": "Perinatal TCDD exposure alters developmental neuroendocrine system.",
           "author": "Ahmed RG",
@@ -27418,7 +27383,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0784",
+          "candidateId": "C-20261007-0783",
           "collectedDate": "2026-10-07",
           "title": "Piracetam improves cognitive deficits caused by chronic cerebral hypoperfusion in rats.",
           "author": "He Z",
@@ -27453,7 +27418,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0785",
+          "candidateId": "C-20261007-0784",
           "collectedDate": "2026-10-07",
           "title": "Protective effect of adenosine reuptake inhibitors in haloperidol-induced orofacial dyskinesia and associated behavioural, biochemical and neurochemical changes.",
           "author": "Bishnoi M",
@@ -27488,7 +27453,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0786",
+          "candidateId": "C-20261007-0785",
           "collectedDate": "2026-10-07",
           "title": "Alleviative Effects of .GAMMA.-Aminobutyric Acid (GABA) on Behavioral Abnormalities in Aged Dogs",
           "author": "Kentaro Inagawa",
@@ -27519,7 +27484,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0787",
+          "candidateId": "C-20261007-0786",
           "collectedDate": "2026-10-07",
           "title": "Changes in GABAA receptor gamma 2 subunit gene expression induced by long-term administration of oral contraceptives in rats.",
           "author": "Follesa P",
@@ -27556,7 +27521,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0788",
+          "candidateId": "C-20261007-0787",
           "collectedDate": "2026-10-07",
           "title": "Neurotransmitter levels in brains of chronically Jiawey Siwu-treated rats.",
           "author": "Yu S",
@@ -27591,7 +27556,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0789",
+          "candidateId": "C-20261007-0788",
           "collectedDate": "2026-10-07",
           "title": "[The effect of gamma-aminobutyric acid injected into lateral brain ventricle of rats after prenatal cadmium intoxication on flash visual evoked potentials (FVEP)].",
           "author": "Herba E",
@@ -27629,7 +27594,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0790",
+          "candidateId": "C-20261007-0789",
           "collectedDate": "2026-10-07",
           "title": "Chronic prenatal ethanol exposure increases GABA(A) receptor subunit protein expression in the adult guinea pig cerebral cortex.",
           "author": "Bailey CD",
@@ -27666,7 +27631,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0791",
+          "candidateId": "C-20261007-0790",
           "collectedDate": "2026-10-07",
           "title": "The GAbAergic and cholinergic systems in the retina are differentially affected by postnatal malnutrition during the suckling period.",
           "author": "Almeida MF",
@@ -27699,7 +27664,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0792",
+          "candidateId": "C-20261007-0791",
           "collectedDate": "2026-10-07",
           "title": "Treatment of painful sensory neuropathy with tiagabine: a pilot study.",
           "author": "Novak V",
@@ -27735,7 +27700,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0793",
+          "candidateId": "C-20261007-0792",
           "collectedDate": "2026-10-07",
           "title": "Paradoxical aggravation of paroxysmal dystonia during chronic treatment with phenobarbital in a genetic rodent model.",
           "author": "Richter A",
@@ -27769,7 +27734,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0794",
+          "candidateId": "C-20261007-0793",
           "collectedDate": "2026-10-07",
           "title": "Tiagabine: absence of kinetic or dynamic interactions with ethanol.",
           "author": "Kastberg H",
@@ -27806,7 +27771,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0795",
+          "candidateId": "C-20261007-0794",
           "collectedDate": "2026-10-07",
           "title": "The effect of chronic treatment with the GABA transaminase inhibitors gamma-vinyl-GABA and ethanolamine-O-sulphate on the in vivo release of GABA from rat hippocampus.",
           "author": "Qume M",
@@ -27844,7 +27809,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0796",
+          "candidateId": "C-20261007-0795",
           "collectedDate": "2026-10-07",
           "title": "Glutamate in pyridoxine-dependent epilepsy: neurotoxic glutamate concentration in the cerebrospinal fluid and its normalization by pyridoxine.",
           "author": "Baumeister FA",
@@ -27880,7 +27845,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0797",
+          "candidateId": "C-20261007-0796",
           "collectedDate": "2026-10-07",
           "title": "Acute ethanol ingestion raises plasma gamma amino-butyric acid levels in healthy men.",
           "author": "Bannister P",
@@ -27913,7 +27878,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0798",
+          "candidateId": "C-20261007-0797",
           "collectedDate": "2026-10-07",
           "title": "Effects of maternal vitamin B-6 deficiency on specific regions of developing rat brain: the extrapyramidal motor system.",
           "author": "Wasynczuk A",
@@ -27946,7 +27911,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0799",
+          "candidateId": "C-20261007-0798",
           "collectedDate": "2026-10-07",
           "title": "Clinical and Haematological Improvement Following a 90-Day Oral Iron Supplementation Regimen in Adults with Iron Deficiency Anemia - A Prospective Real-World Observational Study",
           "author": "Chetan Savaliya",
@@ -27980,7 +27945,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0800",
+          "candidateId": "C-20261007-0799",
           "collectedDate": "2026-10-07",
           "title": "Fermented Beetroot Supplementation Increases Urinary NOx and Reduces Thromboxane B <sub>2</sub> in eNOS-Deficient Mice",
           "author": "Joseph A. Bauer",
@@ -28013,7 +27978,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0801",
+          "candidateId": "C-20261007-0800",
           "collectedDate": "2026-10-07",
           "title": "Identification of a pathological feed-forward loop linking succinate, HIF1α signalling and vascular remodelling in abdominal aortic aneurysm.",
           "author": "Griepke S",
@@ -28048,7 +28013,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0802",
+          "candidateId": "C-20261007-0801",
           "collectedDate": "2026-10-07",
           "title": "Novel food ingredients from Cyperus rotundus L.: an ancient famine food and the world's pernicious weed coming back on the table.",
           "author": "Giorgi G",
@@ -28079,7 +28044,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0803",
+          "candidateId": "C-20261007-0802",
           "collectedDate": "2026-10-07",
           "title": "Dietary texture-driven masticatory activity and its impact on stress tolerance.",
           "author": "Kamate M",
@@ -28113,7 +28078,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0804",
+          "candidateId": "C-20261007-0803",
           "collectedDate": "2026-10-07",
           "title": "Influence of Peptide-Rich Nitrogen Sources on GAD System Activation and GABA Production in Levilactobacillus brevis CRL 2013.",
           "author": "Urquiza Martínez MP",
@@ -28143,7 +28108,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0805",
+          "candidateId": "C-20261007-0804",
           "collectedDate": "2026-10-07",
           "title": "A unique multi-synaptic mechanism involving acetylcholine and GABA regulates dopamine release in the nucleus accumbens through early adolescence in male rats.",
           "author": "Iacino MC",
@@ -28173,7 +28138,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0806",
+          "candidateId": "C-20261007-0805",
           "collectedDate": "2026-10-07",
           "title": "Dietary betaine supplementation improved egg quality and gut microbes of laying hens under dexamethasone-induced oxidative stress.",
           "author": "Wang C",
@@ -28208,7 +28173,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0807",
+          "candidateId": "C-20261007-0806",
           "collectedDate": "2026-10-07",
           "title": "Dipeptidyl peptidase-4 inhibitors may lower body temperature: A case-control study.",
           "author": "Okada S",
@@ -28244,7 +28209,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0808",
+          "candidateId": "C-20261007-0807",
           "collectedDate": "2026-10-07",
           "title": "HMOs Impact the Gut Microbiome of Children and Adults Starting from Low Predicted Daily Doses.",
           "author": "Bajic D",
@@ -28279,7 +28244,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0809",
+          "candidateId": "C-20261007-0808",
           "collectedDate": "2026-10-07",
           "title": "What's GABA got to do with it? A potential link between the microbiome, schizophrenia, and the endo-cannabinoid system.",
           "author": "Glinert A",
@@ -28310,7 +28275,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0810",
+          "candidateId": "C-20261007-0809",
           "collectedDate": "2026-10-07",
           "title": "Chrysanthemum morifolium and Its Bioactive Substance Enhanced the Sleep Quality in Rodent Models via Cl - Channel Activation.",
           "author": "Kim M",
@@ -28344,7 +28309,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0811",
+          "candidateId": "C-20261007-0810",
           "collectedDate": "2026-10-07",
           "title": "DL-methionyl-DL-methionine as an efficient methionine source for promoting zootechnical performance and methionine-related pathways in the whiteleg shrimp ( Penaeus vannamei )",
           "author": "Marina Machado",
@@ -28378,7 +28343,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0812",
+          "candidateId": "C-20261007-0811",
           "collectedDate": "2026-10-07",
           "title": "Ligilactobacillus Salivarius improve body growth and anti-oxidation capacity of broiler chickens via regulation of the microbiota-gut-brain axis.",
           "author": "Yang J",
@@ -28411,7 +28376,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0813",
+          "candidateId": "C-20261007-0812",
           "collectedDate": "2026-10-07",
           "title": "Depressive-like behaviors induced by chronic cerebral hypoperfusion associate with a dynamic change of GABA B1/B2 receptors expression in hippocampal CA1 region.",
           "author": "Lu Y",
@@ -28441,7 +28406,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0814",
+          "candidateId": "C-20261007-0813",
           "collectedDate": "2026-10-07",
           "title": "Transgenerational transmission of aspartame-induced anxiety and changes in glutamate-GABA signaling and gene expression in the amygdala.",
           "author": "Jones SK",
@@ -28478,7 +28443,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0815",
+          "candidateId": "C-20261007-0814",
           "collectedDate": "2026-10-07",
           "title": "Dietary supplementation of chenodeoxycholic acid improved the growth performance, immune response and intestinal health of juvenile Penaeus monodon fed a low fish-meal diet",
           "author": "Shiwei Xie",
@@ -28512,7 +28477,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0816",
+          "candidateId": "C-20261007-0815",
           "collectedDate": "2026-10-07",
           "title": "Effect of adzuki bean sprout fermented milk enriched in γ-aminobutyric acid on mild depression in a mouse model.",
           "author": "Wu Z",
@@ -28548,7 +28513,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0817",
+          "candidateId": "C-20261007-0816",
           "collectedDate": "2026-10-07",
           "title": "Enhanced γ-aminobutyric acid and sialic acid in fermented deer antler velvet and immune promoting effects",
           "author": "Jiseon Yoo",
@@ -28581,7 +28546,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0818",
+          "candidateId": "C-20261007-0817",
           "collectedDate": "2026-10-07",
           "title": "Jianpi Jieyu Decoction, An Empirical Herbal Formula, Exerts Psychotropic Effects in Association With Modulation of Gut Microbial Diversity and GABA Activity",
           "author": "Lanying Liu",
@@ -28613,7 +28578,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0819",
+          "candidateId": "C-20261007-0818",
           "collectedDate": "2026-10-07",
           "title": "Chemical-nutritional quality and oxidative stability of milk and dairy products obtained from Friesian cows fed with a dietary supplementation of dried grape pomace.",
           "author": "Ianni A",
@@ -28647,7 +28612,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0820",
+          "candidateId": "C-20261007-0819",
           "collectedDate": "2026-10-07",
           "title": "Gamma-aminobutyric acid-producing lactobacilli positively affect metabolism and depressive-like behaviour in a mouse model of metabolic syndrome.",
           "author": "Patterson E",
@@ -28685,7 +28650,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0821",
+          "candidateId": "C-20261007-0820",
           "collectedDate": "2026-10-07",
           "title": "Effects of nonprotein amino acids on survival and locomotion of Osmia bicornis.",
           "author": "Felicioli A",
@@ -28716,7 +28681,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0822",
+          "candidateId": "C-20261007-0821",
           "collectedDate": "2026-10-07",
           "title": "The performance of microbial flocs produced with aquaculture waste as food for Artemia",
           "author": "Guozhi Luo",
@@ -28750,7 +28715,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0823",
+          "candidateId": "C-20261007-0822",
           "collectedDate": "2026-10-07",
           "title": "Neural behavioral outcomes of a ketogenic diet in engrailed-2 null male mice",
           "author": "Jessica L. Verpeut",
@@ -28783,7 +28748,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0824",
+          "candidateId": "C-20261007-0823",
           "collectedDate": "2026-10-07",
           "title": "Pathway-Based Genome-Wide Association Studies for Two Meat Production Traits in Simmental Cattle.",
           "author": "Fan H",
@@ -28816,7 +28781,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0825",
+          "candidateId": "C-20261007-0824",
           "collectedDate": "2026-10-07",
           "title": "Manipulation of GABA in the ventral pallidum, but not the nucleus accumbens, induces intense, preferential, fat consumption in rats.",
           "author": "Covelo IR",
@@ -28852,7 +28817,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0826",
+          "candidateId": "C-20261007-0825",
           "collectedDate": "2026-10-07",
           "title": "Allopregnanolone induces a diurnally dependent hyperphagic effect and alters feeding latency and duration in male Wistar rats.",
           "author": "Holmberg E",
@@ -28885,7 +28850,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0827",
+          "candidateId": "C-20261007-0826",
           "collectedDate": "2026-10-07",
           "title": "L-Theanine intake increases threshold for limbic seizures but decreases threshold for generalized seizures.",
           "author": "Schallier A",
@@ -28917,7 +28882,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0828",
+          "candidateId": "C-20261007-0827",
           "collectedDate": "2026-10-07",
           "title": "Multimodal Evaluation of Stress Level Affected by Beverage Intakes",
           "author": "Tsuyoshi Moriyama",
@@ -28951,7 +28916,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0829",
+          "candidateId": "C-20261007-0828",
           "collectedDate": "2026-10-07",
           "title": "Omic analyses unravels global molecular changes in the brain and liver of a rat model for chronic Sake (Japanese alcoholic beverage) intake.",
           "author": "Masuo Y",
@@ -28984,7 +28949,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0830",
+          "candidateId": "C-20261007-0829",
           "collectedDate": "2026-10-07",
           "title": "Circadian control of the daily plasma glucose rhythm: an interplay of GABA and glutamate.",
           "author": "Kalsbeek A",
@@ -29014,7 +28979,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0831",
+          "candidateId": "C-20261007-0830",
           "collectedDate": "2026-10-07",
           "title": "Iron deficient and manganese supplemented diets alter metals and transporters in the developing rat brain.",
           "author": "Garcia SJ",
@@ -29047,7 +29012,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0832",
+          "candidateId": "C-20261007-0831",
           "collectedDate": "2026-10-07",
           "title": "Influence of alcohol on gait in patients with essential tremor.",
           "author": "Klebe S",
@@ -29081,7 +29046,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0833",
+          "candidateId": "C-20261007-0832",
           "collectedDate": "2026-10-07",
           "title": "Ethanol enhances alpha 4 beta 3 delta and alpha 6 beta 3 delta gamma-aminobutyric acid type A receptors at low concentrations known to affect humans.",
           "author": "Wallner M",
@@ -29111,7 +29076,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0834",
+          "candidateId": "C-20261007-0833",
           "collectedDate": "2026-10-07",
           "title": "Cocaine- and amphetamine-regulated transcript peptide projections in the ventral midbrain: colocalization with gamma-aminobutyric acid, melanin-concentrating hormone, dynorphin, and synaptic interactions with dopamine neurons.",
           "author": "Dallvechia-Adams S",
@@ -29141,7 +29106,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0835",
+          "candidateId": "C-20261007-0834",
           "collectedDate": "2026-10-07",
           "title": "Diets Enriched in Foods with High Antioxidant Activity Reverse Age-Induced Decreases in Cerebellar β-Adrenergic Function and Increases in Proinflammatory Cytokines",
           "author": "Carmelina Gemma",
@@ -29176,7 +29141,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0836",
+          "candidateId": "C-20261007-0835",
           "collectedDate": "2026-10-07",
           "title": "Metabolism and mode of action of cis- and trans-3-pinanones (the active ingredients of hyssop oil).",
           "author": "Höld KM",
@@ -29212,7 +29177,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0837",
+          "candidateId": "C-20261007-0836",
           "collectedDate": "2026-10-07",
           "title": "Participation of GABA in establishing behavioral hierarchies in the terrestrial snail.",
           "author": "Bravarenko NI",
@@ -29242,7 +29207,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0838",
+          "candidateId": "C-20261007-0837",
           "collectedDate": "2026-10-07",
           "title": "Duration-dependent increase in striatal glutamate following prolonged fluphenazine administration in rats.",
           "author": "See RE",
@@ -29275,7 +29240,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0839",
+          "candidateId": "C-20261007-0838",
           "collectedDate": "2026-10-07",
           "title": "Mice lacking tissue non-specific alkaline phosphatase die from seizures due to defective metabolism of vitamin B-6.",
           "author": "Waymire KG",
@@ -29309,7 +29274,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0840",
+          "candidateId": "C-20261007-0839",
           "collectedDate": "2026-10-07",
           "title": "Effects of chronic treatment with trihexyphenidyl and carbamazepine alone or in combination with haloperidol on substance P content in rat brain: a possible implication of substance P in affective disorders.",
           "author": "Mitsushio H",
@@ -29343,7 +29308,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0841",
+          "candidateId": "C-20261007-0840",
           "collectedDate": "2026-10-07",
           "title": "beta-N-Oxalylamino-L-alanine: action on high-affinity transport of neurotransmitters in rat brain and spinal cord synaptosomes.",
           "author": "Ross SM",
@@ -29375,7 +29340,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0842",
+          "candidateId": "C-20261007-0841",
           "collectedDate": "2026-10-07",
           "title": "A model for oral dyskinesia in rats.",
           "author": "Gunne LM",
@@ -29409,7 +29374,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0843",
+          "candidateId": "C-20261007-0842",
           "collectedDate": "2026-10-07",
           "title": "[Mechanism of Baidi Jielv Anshen Formula regulating abnormal polarization of amygdala microglia in mice with anxiety disorder based on CB2R mediated TLR4 signaling pathway].",
           "author": "Liu Y",
@@ -29444,7 +29409,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0844",
+          "candidateId": "C-20261007-0843",
           "collectedDate": "2026-10-07",
           "title": "Angiotensin-(1-7) Activates Proopiomelanocortin Neurons in the Arcuate Nucleus.",
           "author": "Vernail VL",
@@ -29480,7 +29445,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0845",
+          "candidateId": "C-20261007-0844",
           "collectedDate": "2026-10-07",
           "title": "Ashwagandha Supplementation in Healthy Students: Protocol for the Single-Center Pilot Study SUPplementation and Perceived RESponse to Stress (SUPPRESS) (Preprint)",
           "author": "Olivia Schmidt",
@@ -29517,7 +29482,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0846",
+          "candidateId": "C-20261007-0845",
           "collectedDate": "2026-10-07",
           "title": "Dietary thymol supplementation improves growth performance and reproductive endocrine status in growing Texel × Kazakh rams and remodels the rumen microbiota and metabolome",
           "author": "Qiming Zheng",
@@ -29552,7 +29517,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0847",
+          "candidateId": "C-20261007-0846",
           "collectedDate": "2026-10-07",
           "title": "Effects of a Group-Based Cognitive Behavioral Therapy for Sleep in Nursing Students: Pilot Randomized Controlled Trial",
           "author": "David Pérez-Manchón",
@@ -29590,7 +29555,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0848",
+          "candidateId": "C-20261007-0847",
           "collectedDate": "2026-10-07",
           "title": "Genotoxicity and 90-day oral toxicity of a monk fruit ( <i>Siraitia grosvenorii</i> ) mogroside preparation (≥95% mogrosides) produced by microbial fermentation",
           "author": "Christine Nicole S. Santos",
@@ -29628,7 +29593,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0849",
+          "candidateId": "C-20261007-0848",
           "collectedDate": "2026-10-07",
           "title": "Pharmacokinetics and Safety of 1 mg Oral Minoxidil Tablets in Healthy Female Volunteers: A Phase I Randomized Crossover Clinical Trial",
           "author": "Dolores Ochoa Mazarro",
@@ -29667,7 +29632,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0850",
+          "candidateId": "C-20261007-0849",
           "collectedDate": "2026-10-07",
           "title": "Body fat percentage is a key factor in elevated plasma levels of caffeine and its metabolite in women",
           "author": "Przemysław Domaszewski",
@@ -29703,7 +29668,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0851",
+          "candidateId": "C-20261007-0850",
           "collectedDate": "2026-10-07",
           "title": "Investigation of the Effects of Lacticaseibacillus rhamnosus GG Administration on Penicillin-Induced Epileptiform Activity in Rats.",
           "author": "Tekbas M",
@@ -29739,7 +29704,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0852",
+          "candidateId": "C-20261007-0851",
           "collectedDate": "2026-10-07",
           "title": "The efficacy of transcranial direct current stimulation in the treatment of anorexia nervosa: a randomized double-blind clinical trial",
           "author": "Zuzanna Rząd",
@@ -29777,7 +29742,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0853",
+          "candidateId": "C-20261007-0852",
           "collectedDate": "2026-10-07",
           "title": "Thymol abates the detrimental impacts of imidacloprid on rat brains by lessening oxidative damage and apoptotic and inflammatory reactions.",
           "author": "Abd-Elhakim YM",
@@ -29812,7 +29777,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0854",
+          "candidateId": "C-20261007-0853",
           "collectedDate": "2026-10-07",
           "title": "Neuroprotective Effects of Theobromine in permanent bilateral common carotid artery occlusion rat model of cerebral hypoperfusion.",
           "author": "Bhat JA",
@@ -29848,7 +29813,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0855",
+          "candidateId": "C-20261007-0854",
           "collectedDate": "2026-10-07",
           "title": "Ayurvedic processing of α-HgS gives novel physicochemistry and distinct toxicokinetics in zebrafish.",
           "author": "Biswas S",
@@ -29883,7 +29848,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0856",
+          "candidateId": "C-20261007-0855",
           "collectedDate": "2026-10-07",
           "title": "Prepubertal overexposure to manganese induce precocious puberty through GABA A receptor/nitric oxide pathway in immature female rats.",
           "author": "Yang X",
@@ -29920,7 +29885,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0857",
+          "candidateId": "C-20261007-0856",
           "collectedDate": "2026-10-07",
           "title": "Probiotic treatment reduces the autistic-like excitation/inhibition imbalance in juvenile hamsters induced by orally administered propionic acid and clindamycin.",
           "author": "El-Ansary A",
@@ -29954,7 +29919,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0858",
+          "candidateId": "C-20261007-0857",
           "collectedDate": "2026-10-07",
           "title": "Co-Treatment with Anthocyanins and Vitamin C Ameliorates Ethanol- Induced Neurodegeneration via Modulation of GABAB Receptor Signaling in the Adult Rat Brain.",
           "author": "Badshah H",
@@ -29991,7 +29956,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0859",
+          "candidateId": "C-20261007-0858",
           "collectedDate": "2026-10-07",
           "title": "Dihydromyricetin prevents fetal alcohol exposure-induced behavioral and physiological deficits: the roles of GABAA receptors in adolescence.",
           "author": "Liang J",
@@ -30029,7 +29994,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0860",
+          "candidateId": "C-20261007-0859",
           "collectedDate": "2026-10-07",
           "title": "Glycidol induces axonopathy and aberrations of hippocampal neurogenesis affecting late-stage differentiation by exposure to rats in a framework of 28-day toxicity study.",
           "author": "Akane H",
@@ -30066,7 +30031,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0861",
+          "candidateId": "C-20261007-0860",
           "collectedDate": "2026-10-07",
           "title": "Effect of bisphenol A on rat metabolic profiling studied by using capillary electrophoresis time-of-flight mass spectrometry.",
           "author": "Zeng J",
@@ -30101,7 +30066,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0862",
+          "candidateId": "C-20261007-0861",
           "collectedDate": "2026-10-07",
           "title": "Effects of acute progesterone administration in healthy postmenopausal women and normally-cycling women.",
           "author": "de Wit H",
@@ -30137,7 +30102,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0863",
+          "candidateId": "C-20261007-0862",
           "collectedDate": "2026-10-07",
           "title": "The GABA uptake inhibitor tiagabine promotes slow wave sleep in normal elderly subjects.",
           "author": "Mathias S",
@@ -30177,7 +30142,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0864",
+          "candidateId": "C-20261007-0863",
           "collectedDate": "2026-10-07",
           "title": "Progesterone-induced changes in sleep in male subjects.",
           "author": "Friess E",
@@ -30212,7 +30177,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0865",
+          "candidateId": "C-20261007-0864",
           "collectedDate": "2026-10-07",
           "title": "Disposition of acrivastine in the male beagle dog.",
           "author": "McNulty MJ",
@@ -30246,7 +30211,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0866",
+          "candidateId": "C-20261007-0865",
           "collectedDate": "2026-10-07",
           "title": "Effects of THIP on chronic anxiety.",
           "author": "Hoehn-Saric R",
@@ -30281,7 +30246,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0867",
+          "candidateId": "C-20261007-0866",
           "collectedDate": "2026-10-07",
           "title": "The neuro-endocrine impact of 3-hydroxy-diazepam (temazepam) in women.",
           "author": "Beary MD",
@@ -30324,7 +30289,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0868",
+          "candidateId": "C-20261007-0867",
           "collectedDate": "2026-10-07",
           "title": "Valproic acid: metabolite concentrations in plasma and brain, anticonvulsant activity, and effects on GABA metabolism during subacute treatment in mice.",
           "author": "Löscher W",
@@ -30362,7 +30327,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0869",
+          "candidateId": "C-20261007-0868",
           "collectedDate": "2026-10-07",
           "title": "Acute oral dose toxicity study of micro- and nano-plastics of polystyrene in female Wistar albino rats",
           "author": "Srilekha Chintala",
@@ -30398,7 +30363,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0870",
+          "candidateId": "C-20261007-0869",
           "collectedDate": "2026-10-07",
           "title": "Chronic dietary tartrazine exposure leads disability in brain function through behavioural alteration and sex drive reduction in-vivo zebrafish: A translational model for human health risk assessment.",
           "author": "Madesh S",
@@ -30430,7 +30395,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0871",
+          "candidateId": "C-20261007-0870",
           "collectedDate": "2026-10-07",
           "title": "Clinical assessment and early intervention for deviations in children's growth and development.",
           "author": "Tang G",
@@ -30465,7 +30430,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0872",
+          "candidateId": "C-20261007-0871",
           "collectedDate": "2026-10-07",
           "title": "Effects of Compound Attractants on Intestinal Transcriptome, and Microbiota of Mandarin Fish (Siniperca chuatsi)",
           "author": "Yefeng Lv",
@@ -30499,7 +30464,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0873",
+          "candidateId": "C-20261007-0872",
           "collectedDate": "2026-10-07",
           "title": "Emerging Challenges in Oral Trials: Is Amino Acid Supplementation Beneficial in Replacing Amino Acid Losses Incurred During Haemodialysis?",
           "author": "Piergiorgio Bolasco",
@@ -30532,7 +30497,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0874",
+          "candidateId": "C-20261007-0873",
           "collectedDate": "2026-10-07",
           "title": "Individual and Combined Effects of Acute Caffeine and Sodium Bicarbonate Supplementation on Exercise Performance and Metabolic Responses: A Bayesian Network Meta-Analysis of Co-Supplementation Trials",
           "author": "Shenghui Liu",
@@ -30567,7 +30532,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0875",
+          "candidateId": "C-20261007-0874",
           "collectedDate": "2026-10-07",
           "title": "Integrated metabolome and microbiome analysis deciphers the effects of resveratrol and β-hydroxy-β-methylbutyric acid on jejunal function under different protein levels in Tibetan sheep.",
           "author": "Zhu K",
@@ -30601,7 +30566,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0876",
+          "candidateId": "C-20261007-0875",
           "collectedDate": "2026-10-07",
           "title": "Neurobiology of co-morbid stress and a western diet in mice: mitochondrial, proteomic and behavioral outcomes.",
           "author": "Helman T",
@@ -30634,7 +30599,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0877",
+          "candidateId": "C-20261007-0876",
           "collectedDate": "2026-10-07",
           "title": "Seasonal metabolic and growth responses of grazing beef heifers divergent in residual feed intake.",
           "author": "Londono-Mendez MC",
@@ -30667,7 +30632,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0878",
+          "candidateId": "C-20261007-0877",
           "collectedDate": "2026-10-07",
           "title": "Supplementation of black pepper (Piper nigrum) in goats’ diet: influence on nutrient utilization and ruminal microbial characteristics",
           "author": "Oluwatosin Omotoso",
@@ -30702,7 +30667,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0879",
+          "candidateId": "C-20261007-0878",
           "collectedDate": "2026-10-07",
           "title": "Effects of Raga music and Chinese five-element on milk production, antioxidant, neuroendocrine, immune, and welfare indicators in dairy cows.",
           "author": "Cao Z",
@@ -30737,7 +30702,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0880",
+          "candidateId": "C-20261007-0879",
           "collectedDate": "2026-10-07",
           "title": "Interactive effects of light at night and high fructose intake on the central circadian clock and endocrine outputs in rats.",
           "author": "Zeman M",
@@ -30770,7 +30735,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0881",
+          "candidateId": "C-20261007-0880",
           "collectedDate": "2026-10-07",
           "title": "Probiotic interventions with highly acid-tolerant Levilactobacillus brevis strains improve lipid metabolism and gut microbial balance in obese mice.",
           "author": "Zhou L",
@@ -30805,7 +30770,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0882",
+          "candidateId": "C-20261007-0881",
           "collectedDate": "2026-10-07",
           "title": "Vitamin B-6 Deficiency Induces Anxiety-Like Behavior in Sprague-Dawley Rats by Disrupting Gut Homeostasis.",
           "author": "Amarasena S",
@@ -30840,7 +30805,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0883",
+          "candidateId": "C-20261007-0882",
           "collectedDate": "2026-10-07",
           "title": "γ-Aminobutyric acid alleviates litchi thaumatin-like protein-induced inflammation and reduces gut microbial translocation",
           "author": "Yao Wang",
@@ -30874,7 +30839,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0884",
+          "candidateId": "C-20261007-0883",
           "collectedDate": "2026-10-07",
           "title": "5-(4-Pyridinyl)-3-isothiazolols as Competitive Antagonists of Insect GABA Receptors: Design, Synthesis, and a New Mechanism Leading to Insecticidal Effects.",
           "author": "Huang C",
@@ -30903,7 +30868,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0885",
+          "candidateId": "C-20261007-0884",
           "collectedDate": "2026-10-07",
           "title": "Producing and analyzing gamma-aminobutyric acid containing probiotic black grape juice using Lactobacillus plantarum plantarum IBRC(10817) and Lactobacillus brevis IBRC(10818)",
           "author": "Mahboobeh Rezaei",
@@ -30932,7 +30897,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0886",
+          "candidateId": "C-20261007-0885",
           "collectedDate": "2026-10-07",
           "title": "Maternal Undernutrition during Pregnancy Alters Amino Acid Metabolism and Gene Expression Associated with Energy Metabolism and Angiogenesis in Fetal Calf Muscle.",
           "author": "Muroya S",
@@ -30965,7 +30930,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0887",
+          "candidateId": "C-20261007-0886",
           "collectedDate": "2026-10-07",
           "title": "Increasing γ-Aminobutyric Acid Content in Vegetable Soybeans via High-Pressure Processing and Efficacy of Their Antidepressant-Like Activity in Mice.",
           "author": "Wu SJ",
@@ -30998,7 +30963,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0888",
+          "candidateId": "C-20261007-0887",
           "collectedDate": "2026-10-07",
           "title": "Positive effects of a Clostridium butyricum-based compound probiotic on growth performance, immune responses, intestinal morphology, hypothalamic neurotransmitters, and colonic microbiota in weaned piglets.",
           "author": "Cao G",
@@ -31032,7 +30997,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0889",
+          "candidateId": "C-20261007-0888",
           "collectedDate": "2026-10-07",
           "title": "The efficacy and safety of nutrient supplements in the treatment of mental disorders: a meta‐review of meta‐analyses of randomized controlled trials",
           "author": "Joseph Firth",
@@ -31067,7 +31032,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0890",
+          "candidateId": "C-20261007-0889",
           "collectedDate": "2026-10-07",
           "title": "Alogliptin abates memory injuries of hepatic encephalopathy induced by acute paracetamol intoxication via switching-off autophagy-related apoptosis.",
           "author": "Saad MA",
@@ -31101,7 +31066,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0891",
+          "candidateId": "C-20261007-0890",
           "collectedDate": "2026-10-07",
           "title": "Dietary therapy restores glutamatergic input to orexin/hypocretin neurons after traumatic brain injury in mice.",
           "author": "Elliott JE",
@@ -31133,7 +31098,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0892",
+          "candidateId": "C-20261007-0891",
           "collectedDate": "2026-10-07",
           "title": "Exercise Training Attenuates Proinflammatory Cytokines, Oxidative Stress and Modulates Neurotransmitters in the Rostral Ventrolateral Medulla of Salt-Induced Hypertensive Rats.",
           "author": "Li HB",
@@ -31165,7 +31130,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0893",
+          "candidateId": "C-20261007-0892",
           "collectedDate": "2026-10-07",
           "title": "Developmental vitamin D deficiency alters multiple neurotransmitter systems in the neonatal rat brain.",
           "author": "Kesby JP",
@@ -31197,7 +31162,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0894",
+          "candidateId": "C-20261007-0893",
           "collectedDate": "2026-10-07",
           "title": "The drug candidate, ADX71441, is a novel, potent and selective positive allosteric modulator of the GABA B receptor with a potential for treatment of anxiety, pain and spasticity.",
           "author": "Kalinichev M",
@@ -31236,7 +31201,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0895",
+          "candidateId": "C-20261007-0894",
           "collectedDate": "2026-10-07",
           "title": "Blockade of Salusin-β in Hypothalamic Paraventricular Nucleus Attenuates Hypertension and Cardiac Hypertrophy in Salt-induced Hypertensive Rats.",
           "author": "Li HB",
@@ -31268,7 +31233,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0896",
+          "candidateId": "C-20261007-0895",
           "collectedDate": "2026-10-07",
           "title": "Dehydrated blood plasma in the feeding nile tilapia",
           "author": "Eric Portilho [UNESP] Araujo",
@@ -31303,7 +31268,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0897",
+          "candidateId": "C-20261007-0896",
           "collectedDate": "2026-10-07",
           "title": "Dietary taurine enhances growth and feed utilization in larval Nile tilapia (Oreochromis niloticus) fed soybean meal-based diets",
           "author": "S.S.A. Al-Feky",
@@ -31337,7 +31302,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0898",
+          "candidateId": "C-20261007-0897",
           "collectedDate": "2026-10-07",
           "title": "Early Detection of Autism (ASD) by a Non-invasive Quick Measurement of Markedly Reduced Acetylcholine & DHEA and Increased β-Amyloid (1-42), Asbestos (Chrysotile), Titanium Dioxide, Al, Hg & often Coexisting Virus Infections (CMV, HPV 16 and 18), Bacterial Infections etc. in the Brain and Corresponding Safe Individualized Effective Treatment.",
           "author": "Omura Y",
@@ -31371,7 +31336,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0899",
+          "candidateId": "C-20261007-0898",
           "collectedDate": "2026-10-07",
           "title": "Initial study on the possible mechanisms involved in the effects of high doses of perfluorooctane sulfonate (PFOS) on prolactin secretion.",
           "author": "Salgado R",
@@ -31405,7 +31370,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0900",
+          "candidateId": "C-20261007-0899",
           "collectedDate": "2026-10-07",
           "title": "Determination of monoamine and amino acid neurotransmitters and their metabolites in rat brain samples by UFLC-MS/MS for the study of the sedative-hypnotic effects observed during treatment with S. chinensis.",
           "author": "Wei B",
@@ -31439,7 +31404,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0901",
+          "candidateId": "C-20261007-0900",
           "collectedDate": "2026-10-07",
           "title": "Extremely low frequency electromagnetic field exposure causes cognitive impairment associated with alteration of the glutamate level, MAPK pathway activation and decreased CREB phosphorylation in mice hippocampus: reversal by procyanidins extracted from the lotus seedpod.",
           "author": "Duan Y",
@@ -31473,7 +31438,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0902",
+          "candidateId": "C-20261007-0901",
           "collectedDate": "2026-10-07",
           "title": "Reduced ethanol consumption by alcohol-preferring (P) rats following pharmacological silencing and deep brain stimulation of the nucleus accumbens shell.",
           "author": "Wilden JA",
@@ -31512,7 +31477,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0903",
+          "candidateId": "C-20261007-0902",
           "collectedDate": "2026-10-07",
           "title": "Aberration in epigenetic gene regulation in hippocampal neurogenesis by developmental exposure to manganese chloride in mice.",
           "author": "Wang L",
@@ -31546,7 +31511,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0904",
+          "candidateId": "C-20261007-0903",
           "collectedDate": "2026-10-07",
           "title": "Chronic h1-antihistamine treatment increases seizure susceptibility after withdrawal by impairing glutamine synthetase.",
           "author": "Hu WW",
@@ -31580,7 +31545,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0905",
+          "candidateId": "C-20261007-0904",
           "collectedDate": "2026-10-07",
           "title": "The effect of puer-tea supplementation on antioxidant enzymes during acute exercise of rats fed a high fat diet",
           "author": "Jun-Yong Kang",
@@ -31613,7 +31578,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0906",
+          "candidateId": "C-20261007-0905",
           "collectedDate": "2026-10-07",
           "title": "Cadmium chloride exposure modifies amino acid daily pattern in the mediobasal hypothalamus in adult male rat.",
           "author": "Caride A",
@@ -31648,7 +31613,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0907",
+          "candidateId": "C-20261007-0906",
           "collectedDate": "2026-10-07",
           "title": "Effects of Dietary Manganese Supplementation on Antioxidant Enzyme Activity in the Shrimp (Neocaridina heteropoda)",
           "author": "Hongwei Wang",
@@ -31682,7 +31647,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0908",
+          "candidateId": "C-20261007-0907",
           "collectedDate": "2026-10-07",
           "title": "Protective effects of pre-germinated brown rice diet on low levels of Pb-induced learning and memory deficits in developing rat.",
           "author": "Zhang R",
@@ -31719,7 +31684,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0909",
+          "candidateId": "C-20261007-0908",
           "collectedDate": "2026-10-07",
           "title": "Effect of an oral contraceptive with chlormadinone acetate on depressive mood : analysis of data from four observational studies.",
           "author": "Huber JC",
@@ -31753,7 +31718,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0910",
+          "candidateId": "C-20261007-0909",
           "collectedDate": "2026-10-07",
           "title": "Can Exogenous Betaine Be an Effective Osmolyte in Broiler Chicks under Water Salinity Stress?",
           "author": "Shirin Honarbakhsh",
@@ -31788,7 +31753,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0911",
+          "candidateId": "C-20261007-0910",
           "collectedDate": "2026-10-07",
           "title": "Neuropharmacological effects of deltamethrin in rats.",
           "author": "Manna S",
@@ -31822,7 +31787,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0912",
+          "candidateId": "C-20261007-0911",
           "collectedDate": "2026-10-07",
           "title": "Celecoxib does not induce convulsions nor does it affect GABAA receptor binding activity in the presence of new quinolones in mice.",
           "author": "Yoshino T",
@@ -31857,7 +31822,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0913",
+          "candidateId": "C-20261007-0912",
           "collectedDate": "2026-10-07",
           "title": "Differential adaptations in GABAergic and glutamatergic systems during ethanol withdrawal in male and female rats.",
           "author": "Alele PE",
@@ -31889,7 +31854,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0914",
+          "candidateId": "C-20261007-0913",
           "collectedDate": "2026-10-07",
           "title": "Lithium alters measures of auditory gating in two strains of mice.",
           "author": "O'Neill HC",
@@ -31923,7 +31888,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0915",
+          "candidateId": "C-20261007-0914",
           "collectedDate": "2026-10-07",
           "title": "In vivo neurochemical effects of the acetylcholinesterase inhibitor ENA713 in rat hippocampus.",
           "author": "Trabace L",
@@ -31957,7 +31922,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0916",
+          "candidateId": "C-20261007-0915",
           "collectedDate": "2026-10-07",
           "title": "Prenatal ethanol exposure alters the modulation of the gamma-aminobutyric acidA1 receptor-gated chloride ion channel in adult rat offspring.",
           "author": "Allan AM",
@@ -31992,7 +31957,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0917",
+          "candidateId": "C-20261007-0916",
           "collectedDate": "2026-10-07",
           "title": "[A comparative study of the permeability across the hemato-encephalic barrier and of the effect on cerebral blood flow of the new neurotropic agent calcium ketohomopantothenate and of pantogam].",
           "author": "Nasybullina NM",
@@ -32026,7 +31991,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0918",
+          "candidateId": "C-20261007-0917",
           "collectedDate": "2026-10-07",
           "title": "Effects of Nardostachys jatamansi on biogenic amines and inhibitory amino acids in the rat brain.",
           "author": "Prabhu V",
@@ -32060,7 +32025,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0919",
+          "candidateId": "C-20261007-0918",
           "collectedDate": "2026-10-07",
           "title": "Effect of aging and diet restriction on monoamines and amino acids in cerebral cortex of Fischer-344 rats.",
           "author": "Yeung JM",
@@ -32092,7 +32057,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0920",
+          "candidateId": "C-20261007-0919",
           "collectedDate": "2026-10-07",
           "title": "GABAergic supersensitivity within the pars reticulata of the rat substantia nigra following chronic haloperidol administration.",
           "author": "Frey JM",
@@ -32126,7 +32091,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0921",
+          "candidateId": "C-20261007-0920",
           "collectedDate": "2026-10-07",
           "title": "Maternal undernutrition during lactation: effect on amino acids in brain regions of offspring.",
           "author": "Rathbun WE",
@@ -32158,7 +32123,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0922",
+          "candidateId": "C-20261007-0921",
           "collectedDate": "2026-10-07",
           "title": "Chlordecone-induced alterations in content and subcellular distribution of calcium in mouse brain.",
           "author": "Hoskins B",
@@ -32192,7 +32157,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0923",
+          "candidateId": "C-20261007-0922",
           "collectedDate": "2026-10-07",
           "title": "The role of thiamine pyrophosphate in regulating the level of gamma-aminobutyric acid in the central nervous system",
           "author": "Bryant Adams",
@@ -32223,7 +32188,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0924",
+          "candidateId": "C-20261007-0923",
           "collectedDate": "2026-10-07",
           "title": "<em>Lactobacillus rhamnosus</em> CCFM1131 Alleviates Hyperuricemia through Modulation of Gut Microbiota and Metabolites: A Randomized, Double-Blind, Placebo-Controlled Trial",
           "author": "Dingxu Zhu",
@@ -32260,7 +32225,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0925",
+          "candidateId": "C-20261007-0924",
           "collectedDate": "2026-10-07",
           "title": "A Noninvasive Acupoint Patch as an Adjunct to Antiemetic Therapy for Chemotherapy-Induced Nausea and Vomiting: A Multicenter Randomized Crossover Trial",
           "author": "Xinghan Zhang",
@@ -32299,7 +32264,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0926",
+          "candidateId": "C-20261007-0925",
           "collectedDate": "2026-10-07",
           "title": "Adenosine signaling driven by the gut microbiota underlies chronic alcohol-induced anesthetic resistance.",
           "author": "Wang S",
@@ -32331,7 +32296,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0927",
+          "candidateId": "C-20261007-0926",
           "collectedDate": "2026-10-07",
           "title": "Adjunctive Acorus tatarinowii essential-oil ear-canal packing for idiopathic sudden sensorineural hearing loss: study protocol for a single-center, randomized, double-blind, placebo-controlled clinical trial",
           "author": "Sibei Chen",
@@ -32369,7 +32334,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0928",
+          "candidateId": "C-20261007-0927",
           "collectedDate": "2026-10-07",
           "title": "Adolescent ethanol exposure reduces central amygdala GABA transmission but preserves noradrenergic signaling in adulthood.",
           "author": "Marsland P",
@@ -32397,7 +32362,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0929",
+          "candidateId": "C-20261007-0928",
           "collectedDate": "2026-10-07",
           "title": "Bexagliflozin controls hyperinsulinemia in horses with naturally occurring insulin dysregulation: a placebo-controlled crossover trial",
           "author": "Caitrin R. Lowndes",
@@ -32434,7 +32399,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0930",
+          "candidateId": "C-20261007-0929",
           "collectedDate": "2026-10-07",
           "title": "Combined Effects of Combined Resistance Exercise and Vitamin D Supplementation on Cardiometabolic Profiles and Functional Capacities in Elderly Women with Type 2 Diabetes",
           "author": "Hyoung-Jun Kim",
@@ -32471,7 +32436,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0931",
+          "candidateId": "C-20261007-0930",
           "collectedDate": "2026-10-07",
           "title": "Combined Effects of Curcumin and Zinc Co-Supplementation on Inflammatory and Oxidative Stress Biomarkers in Prediabetes: A Double-Blind, Randomized, Placebo- Controlled Trial",
           "author": "Maryam Azhdari",
@@ -32509,7 +32474,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0932",
+          "candidateId": "C-20261007-0931",
           "collectedDate": "2026-10-07",
           "title": "Diet and Oral Supplementation as Adjuncts to Pharmacological Treatment in Thyroid Diseases: A Narrative Review",
           "author": "Marcelina Rybińska",
@@ -32541,7 +32506,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0933",
+          "candidateId": "C-20261007-0932",
           "collectedDate": "2026-10-07",
           "title": "Does Acute Caffeine Alter the Temporal Countermovement Jump Response Following Reactive Strength Index-Individualized Drop Jumps in Chinese Han Basketball Players with Different Habitual Caffeine Exposure? A Randomized, Double-Blind, Placebo-Controlled Crossover Trial",
           "author": "Jiaxuan Sun",
@@ -32579,7 +32544,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0934",
+          "candidateId": "C-20261007-0933",
           "collectedDate": "2026-10-07",
           "title": "Early-Life Obesity Leaves a Metabolic Memory That Accelerates Aging-Related Decline Through the Gut Microbiota-GABA Axis.",
           "author": "Dong Y",
@@ -32609,7 +32574,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0935",
+          "candidateId": "C-20261007-0934",
           "collectedDate": "2026-10-07",
           "title": "Effects of caffeine ingestion on outdoor 800-m running performance: a randomized controlled crossover study with hierarchical regression analysis",
           "author": "Kohei Dobashi",
@@ -32647,7 +32612,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0936",
+          "candidateId": "C-20261007-0935",
           "collectedDate": "2026-10-07",
           "title": "Effects of Preoperative Coenzyme Q10 Supplementation on Oxidative Stress and Wound Healing Following Orthognathic Surgery: A Randomized Placebo-Controlled Trial",
           "author": "Apitchaya Saibua",
@@ -32685,7 +32650,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0937",
+          "candidateId": "C-20261007-0936",
           "collectedDate": "2026-10-07",
           "title": "Efficacy of a new tablet hepatotropic drug in patients with chronic diffuse liver diseases: A multicenter, randomized, placebo-controlled, comparative study",
           "author": "K. L. Raikhelson",
@@ -32722,7 +32687,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0938",
+          "candidateId": "C-20261007-0937",
           "collectedDate": "2026-10-07",
           "title": "GABA-TaGAD6 Signaling Mediates Salt Tolerance in Wheat via Regulation of Antioxidant Defense, Ion Transport, and Autophagic Activity.",
           "author": "Yue JY",
@@ -32750,7 +32715,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0939",
+          "candidateId": "C-20261007-0938",
           "collectedDate": "2026-10-07",
           "title": "Hepatic Fatty Acid Profile and Gut Microbiota Changes in Response to Dietary Bile Acid Supplementation in Late-Laying Hens",
           "author": "Zhenhui Liu",
@@ -32785,7 +32750,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0940",
+          "candidateId": "C-20261007-0939",
           "collectedDate": "2026-10-07",
           "title": "High-Dose Versus Standard-Dose Manidipine for Albuminuria Reduction in Hypertensive Patients With Chronic Kidney Disease: A Triple-Blind, Randomized, Placebo-Controlled Trial",
           "author": "Wichian Swangrungruengkul",
@@ -32824,7 +32789,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0941",
+          "candidateId": "C-20261007-0940",
           "collectedDate": "2026-10-07",
           "title": "Intrauterine Mepivacaine Instillation vs Placebo for Pain During IUD Placement",
           "author": "Karin Elgemark",
@@ -32862,7 +32827,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0942",
+          "candidateId": "C-20261007-0941",
           "collectedDate": "2026-10-07",
           "title": "Not just a cycle: mitochondrial CsgabD is involved in GABA metabolism during citrus defense against biotic stress.",
           "author": "Nehela Y",
@@ -32890,7 +32855,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0943",
+          "candidateId": "C-20261007-0942",
           "collectedDate": "2026-10-07",
           "title": "Pharmacokinetics, Pharmacodynamics and Safety of Mocravimod After Single and Multiple Oral Dosing in Healthy Japanese Participants",
           "author": "Dymphy Huntjens",
@@ -32927,7 +32892,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0944",
+          "candidateId": "C-20261007-0943",
           "collectedDate": "2026-10-07",
           "title": "Phytochemical Screening, Antibacterial Efficacy and Acute Oral Toxicity Evaluation of Methanolic and Aqueous Vernonia amygdalina Leaf Extracts against Selected Bacterial Isolates",
           "author": "Auwal Magaji",
@@ -32964,7 +32929,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0945",
+          "candidateId": "C-20261007-0944",
           "collectedDate": "2026-10-07",
           "title": "PS13-19. Dietary Supplementation of a Blend of Probiotics and Prebiotics Alters the Plasma Metabolome and Improves Growth Performance in Newly Weaned Beef Steers During the Receiving Period.",
           "author": "Modoluwamu Idowu",
@@ -32997,7 +32962,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0946",
+          "candidateId": "C-20261007-0945",
           "collectedDate": "2026-10-07",
           "title": "Quality of Life assessment among participants with recurrent Clostridioides difficile infection treated with fecal microbiota transplantation versus placebo in a randomized clinical trial",
           "author": "Aasma Shaukat",
@@ -33035,7 +33000,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0947",
+          "candidateId": "C-20261007-0946",
           "collectedDate": "2026-10-07",
           "title": "Self-Reported Effects of Daily Oral Liposomal Glutathione Supplementation on Skin Appearance, Energy, And Digestive Comfort in Healthy Indian Adults: A Prospective Open-Label Pilot Study",
           "author": "Sunil Agarwal",
@@ -33070,7 +33035,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0948",
+          "candidateId": "C-20261007-0947",
           "collectedDate": "2026-10-07",
           "title": "Short-term effects of an SGLT2 inhibitor on divalent ions in autosomal dominant polycystic kidney disease: a randomized crossover trial",
           "author": "Lorena Roth",
@@ -33108,7 +33073,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0949",
+          "candidateId": "C-20261007-0948",
           "collectedDate": "2026-10-07",
           "title": "Synergistic Impact of Dietary Black Cumin (Nigella sativa L.) Powder and Probiotic Supplementation on Growth Performance, Feed Efficiency, and Economic Viability in Caged Broiler Chickens",
           "author": "Harsh Ravsaheb Latthe",
@@ -33139,7 +33104,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0950",
+          "candidateId": "C-20261007-0949",
           "collectedDate": "2026-10-07",
           "title": "Temporal effects of Palmitoylethanolamide (PEA) in modulating knee osteoarthritis symptoms: A randomized, double-blind, placebo-controlled trial",
           "author": "Shalini Srivastava",
@@ -33175,7 +33140,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0951",
+          "candidateId": "C-20261007-0950",
           "collectedDate": "2026-10-07",
           "title": "Assessment of Antimicrobial and Cytotoxicity effect of GABA extracted from Lactiplantibacillus plantarum",
           "author": "Gopalakrishnan Rajesh",
@@ -33203,7 +33168,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0952",
+          "candidateId": "C-20261007-0951",
           "collectedDate": "2026-10-07",
           "title": "Bifidobacterium longum P77 and Lactiplantibacillus plantarum P72 and Their Mix-Live or Heat-Treated-Mitigate Sleeplessness and Depression in Mice: Involvement of Serotonergic and GABAergic Systems.",
           "author": "Baek JS",
@@ -33236,7 +33201,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0953",
+          "candidateId": "C-20261007-0952",
           "collectedDate": "2026-10-07",
           "title": "CHARACTERISATION OF Lactiplantibacillus plantarum B13 AND ITS SYNBIOTIC INTERACTION WITH SELECTED PREBIOTICS FOR THE PRODUCTION OF γ-AMINOBUTYRIC ACID (GABA)-ENRICHED FERMENTED MILK",
           "author": "Shang Wei Tan",
@@ -33265,7 +33230,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0954",
+          "candidateId": "C-20261007-0953",
           "collectedDate": "2026-10-07",
           "title": "Dose-Dependent Effects of Catecholaminergic Modulation on Interference Control: Role of Baseline GABA and Glx in Cortico-Subcortical Networks.",
           "author": "Koyun AH",
@@ -33307,7 +33272,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0955",
+          "candidateId": "C-20261007-0954",
           "collectedDate": "2026-10-07",
           "title": "Fructooligosaccharides and Aspergillus enzymes increase brain GABA and homocarnosine by modulating microbiota in adolescent mice.",
           "author": "Braga JD",
@@ -33336,7 +33301,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0956",
+          "candidateId": "C-20261007-0955",
           "collectedDate": "2026-10-07",
           "title": "GABA-dependent ethylene response mitigates salt-induced growth and yield inhibition through stabilizing carbon energy, nutrients accumulation and metabolomic fingerprinting in wheat.",
           "author": "Kumari S",
@@ -33364,7 +33329,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0957",
+          "candidateId": "C-20261007-0956",
           "collectedDate": "2026-10-07",
           "title": "Gut microbial GABA imbalance emerges as a metabolic signature in mild autism spectrum disorder linked to overrepresented Escherichia.",
           "author": "Wang D",
@@ -33392,7 +33357,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0958",
+          "candidateId": "C-20261007-0957",
           "collectedDate": "2026-10-07",
           "title": "High-fat diet triggers transcriptomic changes in the olfactory bulb.",
           "author": "Kim YK",
@@ -33422,7 +33387,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0959",
+          "candidateId": "C-20261007-0958",
           "collectedDate": "2026-10-07",
           "title": "Inhibition of GABA metabolism by β-lactam antibiotics affects encystation in Acanthamoeba.",
           "author": "Tsai CM",
@@ -33451,7 +33416,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0960",
+          "candidateId": "C-20261007-0959",
           "collectedDate": "2026-10-07",
           "title": "NKCC1 inhibition improves sleep quality and EEG information content in a Down syndrome mouse model.",
           "author": "Bolla M",
@@ -33483,7 +33448,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0961",
+          "candidateId": "C-20261007-0960",
           "collectedDate": "2026-10-07",
           "title": "Novel intranasal delivery of sihosogansan demonstrates rapid antidepressant activity via GABAergic and BDNF/TrkB pathways: identification of potential bioactive quality markers.",
           "author": "Tran KN",
@@ -33515,7 +33480,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0962",
+          "candidateId": "C-20261007-0961",
           "collectedDate": "2026-10-07",
           "title": "A brainstem to hypothalamic arcuate nucleus GABAergic circuit drives feeding.",
           "author": "Martinez de Morentin PB",
@@ -33544,7 +33509,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0963",
+          "candidateId": "C-20261007-0962",
           "collectedDate": "2026-10-07",
           "title": "Acute Stress Effects over Time on the Gene Expression and Neurotransmitter Patterns in the Carp ( Cyprinus carpio ) Brain.",
           "author": "Pietsch C",
@@ -33576,7 +33541,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0964",
+          "candidateId": "C-20261007-0963",
           "collectedDate": "2026-10-07",
           "title": "Association between alcohol use and retinal dysfunctions in patients with alcohol use disorder: A window on GABA, glutamate, and dopamine modulations.",
           "author": "Polli L",
@@ -33604,7 +33569,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0965",
+          "candidateId": "C-20261007-0964",
           "collectedDate": "2026-10-07",
           "title": "Differentiation of Myoblasts in Culture: Focus on Serum and Gamma-Aminobutyric Acid.",
           "author": "Sibgatullina G",
@@ -33633,7 +33598,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0966",
+          "candidateId": "C-20261007-0965",
           "collectedDate": "2026-10-07",
           "title": "Doxycycline for the treatment of nodding syndrome: a randomised, placebo-controlled, phase 2 trial.",
           "author": "Idro R",
@@ -33674,7 +33639,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0967",
+          "candidateId": "C-20261007-0966",
           "collectedDate": "2026-10-07",
           "title": "Eucalyptus essential oil exerted a sedative-hypnotic effect by influencing brain neurotransmitters and gut microbes via the gut microbiota-brain axis.",
           "author": "Li X",
@@ -33708,7 +33673,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0968",
+          "candidateId": "C-20261007-0967",
           "collectedDate": "2026-10-07",
           "title": "Exogenous GABA-Ca Alleviates Growth Inhibition Induced by a Low-P Environment in Peanuts ( Arachis hypogaea ).",
           "author": "Sun Z",
@@ -33737,7 +33702,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0969",
+          "candidateId": "C-20261007-0968",
           "collectedDate": "2026-10-07",
           "title": "Lamotrigine for cognitive deficits associated with neurofibromatosis type 1: A phase II randomized placebo‐controlled trial",
           "author": "Myrthe J. Ottenhoff",
@@ -33775,7 +33740,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0970",
+          "candidateId": "C-20261007-0969",
           "collectedDate": "2026-10-07",
           "title": "Sodium chloride promotes macrophage pyroptosis and aggravates rheumatoid arthritis by activating SGK1 through GABA receptors Slc6a12.",
           "author": "Zhang X",
@@ -33805,7 +33770,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0971",
+          "candidateId": "C-20261007-0970",
           "collectedDate": "2026-10-07",
           "title": "Sodium glucose transporter 2 inhibitor Dapagliflozin Regulates kisspeptin and GABA receptors mRNA expression in hypothalamic arcuate nucleus in polycystic ovary rat model, Can it be a therapeutic target?",
           "author": "",
@@ -33845,7 +33810,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0972",
+          "candidateId": "C-20261007-0971",
           "collectedDate": "2026-10-07",
           "title": "A pragmatic, multicentre, double-blind, placebo-controlled randomised trial to assess the safety, clinical and cost-effectiveness of mirtazapine and carbamazepine in people with Alzheimer’s disease and agitated behaviours: the HTA-SYMBAD trial",
           "author": "Sube Banerjee",
@@ -33883,7 +33848,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0973",
+          "candidateId": "C-20261007-0972",
           "collectedDate": "2026-10-07",
           "title": "A randomized, double-blind, placebo-controlled decentralized trial to assess sleep, health outcomes, and overall well-being in healthy adults reporting disturbed sleep, taking a melatonin-free supplement",
           "author": "Antonija Kolobaric",
@@ -33923,7 +33888,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0974",
+          "candidateId": "C-20261007-0973",
           "collectedDate": "2026-10-07",
           "title": "Caffeine Decreases Neuromuscular Fatigue in the Lumbar Muscles: A Randomized Blind Study",
           "author": "LARISSA MARTIRNS BRAGA CARDOSO",
@@ -33960,7 +33925,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0975",
+          "candidateId": "C-20261007-0974",
           "collectedDate": "2026-10-07",
           "title": "Gut microbiota-derived gamma-aminobutyric acid from metformin treatment reduces hepatic ischemia/reperfusion injury through inhibiting ferroptosis",
           "author": "Fangyan Wang",
@@ -33989,7 +33954,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0976",
+          "candidateId": "C-20261007-0975",
           "collectedDate": "2026-10-07",
           "title": "Malic Acid Improves Behavioral, Biochemical, and Molecular Disturbances in the Hypothalamus of Stressed Rats.",
           "author": "Koriem KMM",
@@ -34024,7 +33989,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0977",
+          "candidateId": "C-20261007-0976",
           "collectedDate": "2026-10-07",
           "title": "The role of GPR39 zinc receptor in the modulation of glutamatergic and GABAergic transmission.",
           "author": "Starowicz G",
@@ -34055,7 +34020,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0978",
+          "candidateId": "C-20261007-0977",
           "collectedDate": "2026-10-07",
           "title": "Y-Aminobutyric acid (GABA) as a potential bioactive food component : Food sources, bioavailability and effects on human cardiometabolic health",
           "author": "Tessa H. de Bie",
@@ -34086,7 +34051,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0979",
+          "candidateId": "C-20261007-0978",
           "collectedDate": "2026-10-07",
           "title": "Alcohol Dependence Induces CRF Sensitivity in Female Central Amygdala GABA Synapses.",
           "author": "Rodriguez L",
@@ -34114,7 +34079,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0980",
+          "candidateId": "C-20261007-0979",
           "collectedDate": "2026-10-07",
           "title": "Drosophila carrying epilepsy-associated variants in the vitamin B6 metabolism gene PNPO display allele- and diet-dependent phenotypes.",
           "author": "Chi W",
@@ -34146,7 +34111,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0981",
+          "candidateId": "C-20261007-0980",
           "collectedDate": "2026-10-07",
           "title": "Effect of Fermented Sarco Oyster ( Crassostrea gigas ) Extract on Muscle Strength Enhancement in Postmenopausal Females: A Randomized, Double-Blind, Placebo-Controlled Trial.",
           "author": "Rheu KM",
@@ -34186,7 +34151,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0982",
+          "candidateId": "C-20261007-0981",
           "collectedDate": "2026-10-07",
           "title": "Lactobacillus Ameliorates SD-Induced Stress Responses and Gut Dysbiosis by Increasing the Absorption of Gut-Derived GABA in Rhesus Monkeys.",
           "author": "Zhao N",
@@ -34214,7 +34179,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0983",
+          "candidateId": "C-20261007-0982",
           "collectedDate": "2026-10-07",
           "title": "TET3 epigenetically controls feeding and stress response behaviors via AGRP neurons.",
           "author": "Xie D",
@@ -34244,7 +34209,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0984",
+          "candidateId": "C-20261007-0983",
           "collectedDate": "2026-10-07",
           "title": "A Randomized, Triple-Blind, Placebo-Controlled, Crossover Study to Investigate the Efficacy of a Single Dose of AlphaWave® l-Theanine on Stress in a Healthy Adult Population",
           "author": "Malkanthi Evans",
@@ -34282,7 +34247,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0985",
+          "candidateId": "C-20261007-0984",
           "collectedDate": "2026-10-07",
           "title": "Astrocyte metabolism of the medium-chain fatty acids octanoic acid and decanoic acid promotes GABA synthesis in neurons via elevated glutamine supply.",
           "author": "Andersen JV",
@@ -34310,7 +34275,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0986",
+          "candidateId": "C-20261007-0985",
           "collectedDate": "2026-10-07",
           "title": "Effects of SSRI treatment on GABA and glutamate levels in an associative relearning paradigm.",
           "author": "Spurny B",
@@ -34351,7 +34316,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0987",
+          "candidateId": "C-20261007-0986",
           "collectedDate": "2026-10-07",
           "title": "GABAergic cortical network physiology in frontotemporal lobar degeneration.",
           "author": "Adams NE",
@@ -34398,7 +34363,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0988",
+          "candidateId": "C-20261007-0987",
           "collectedDate": "2026-10-07",
           "title": "Low dose red yeast rice with monacolin K lowers LDL cholesterol and blood pressure in Japanese with mild dyslipidemia: A multicenter, randomized trial.",
           "author": "Minamizuka T",
@@ -34438,7 +34403,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0989",
+          "candidateId": "C-20261007-0988",
           "collectedDate": "2026-10-07",
           "title": "Transcriptomics reveal different metabolic strategies for acid resistance and gamma-aminobutyric acid (GABA) production in select Levilactobacillus brevis strains",
           "author": "Sagarika Banerjee",
@@ -34466,7 +34431,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0990",
+          "candidateId": "C-20261007-0989",
           "collectedDate": "2026-10-07",
           "title": "Correlations between subunits of GABA A and NMDA receptors after chronic alcohol treatment or withdrawal, and the effect of taurine in the hippocampus of rats.",
           "author": "Hansen AW",
@@ -34503,7 +34468,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0991",
+          "candidateId": "C-20261007-0990",
           "collectedDate": "2026-10-07",
           "title": "Distinct actions of the fermented beverage kefir on host behaviour, immunity and microbiome gut-brain modules in the mouse",
           "author": "Marcel van de Wouw",
@@ -34533,7 +34498,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0992",
+          "candidateId": "C-20261007-0991",
           "collectedDate": "2026-10-07",
           "title": "Manganese induced nervous injury by α-synuclein accumulation via ATP-sensitive K(+) channels and GABA receptors.",
           "author": "Sun Y",
@@ -34561,7 +34526,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0993",
+          "candidateId": "C-20261007-0992",
           "collectedDate": "2026-10-07",
           "title": "The Role of Microbiome, Dietary Supplements, and Probiotics in Autism Spectrum Disorder",
           "author": "Bhagavathi Sundaram Sivamaruthi",
@@ -34593,7 +34558,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0994",
+          "candidateId": "C-20261007-0993",
           "collectedDate": "2026-10-07",
           "title": "Ascorbic Acid Supplementation Prevents the Detrimental Effects of Prenatal and Postnatal Lead Exposure on the Purkinje Cell and Related Proteins in the Cerebellum of Developing Rats.",
           "author": "Nam SM",
@@ -34632,7 +34597,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0995",
+          "candidateId": "C-20261007-0994",
           "collectedDate": "2026-10-07",
           "title": "Coadministered cannabidiol and clobazam: Preclinical evidence for both pharmacodynamic and pharmacokinetic interactions.",
           "author": "Anderson LL",
@@ -34664,7 +34629,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0996",
+          "candidateId": "C-20261007-0995",
           "collectedDate": "2026-10-07",
           "title": "EFFECTS OF ALPHA-S1-CASEIN TRYPTIC HYDROLYSATE AND L-THEANINE ON SLEEP DISORDER AND PSYCHOLOGICAL COMPONENTS: A RANDOMIZED, DOUBLE-BLIND, PLACEBO-CONTROLLED STUDY",
           "author": "Chee Huei Phing",
@@ -34701,7 +34666,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0997",
+          "candidateId": "C-20261007-0996",
           "collectedDate": "2026-10-07",
           "title": "Selective Activation of Cholecystokinin-Expressing GABA (CCK-GABA) Neurons Enhances Memory and Cognition",
           "author": "Paul D. Whissell",
@@ -34730,7 +34695,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-0998",
+          "candidateId": "C-20261007-0997",
           "collectedDate": "2026-10-07",
           "title": "Anxiolytic actions of Nardostachys jatamansi via GABA benzodiazepine channel complex mechanism and its biodistribution studies.",
           "author": "Razack S",
@@ -34769,7 +34734,7 @@
           ]
         },
         {
-          "candidateId": "C-20261007-0999",
+          "candidateId": "C-20261007-0998",
           "collectedDate": "2026-10-07",
           "title": "Gamma-Aminobutyric Acid Signaling in Brown Adipose Tissue Promotes Systemic Metabolic Derangement in Obesity.",
           "author": "Ikegami R",
@@ -34797,7 +34762,7 @@
           "studySignals": []
         },
         {
-          "candidateId": "C-20261007-1000",
+          "candidateId": "C-20261007-0999",
           "collectedDate": "2026-10-07",
           "title": "GR3027 reversal of neurosteroid-induced, GABA-A receptor-mediated inhibition of human brain function: an allopregnanolone challenge study.",
           "author": "Johansson M",
@@ -34839,6 +34804,35 @@
             "/\\bmg\\/kg\\b/i",
             "/\\bmg\\b/i"
           ]
+        },
+        {
+          "candidateId": "C-20261007-1000",
+          "collectedDate": "2026-10-07",
+          "title": "Gamma-aminobutyric acid (GABA) permeates ovine ruminal and jejunal epithelia, mainly by passive diffusion.",
+          "author": "Rackwitz R",
+          "journal": "Journal of animal physiology and animal nutrition",
+          "year": 2017,
+          "pmid": "26987460",
+          "doi": "10.1111/jpn.12497",
+          "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/26987460/",
+          "screeningRecommendation": "일반 원문검토",
+          "screeningStatus": "미검토",
+          "screeningPriority": "",
+          "bucket": "일반검토",
+          "score": 40,
+          "queryLabels": [
+            "animal_direct",
+            "livestock_aquaculture"
+          ],
+          "exclusionSignals": [],
+          "routeSignals": [
+            "/\\bdiet(?:ary)?\\b/i"
+          ],
+          "interventionSignals": [],
+          "subjectSignals": [
+            "/\\bsheep\\b/i"
+          ],
+          "studySignals": []
         },
         {
           "candidateId": "C-20261007-0001",
