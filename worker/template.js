@@ -2445,7 +2445,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         <div class="quick-row">
           <div class="quick-filter-group" role="group" aria-label="연구구분 빠른 필터" aria-describedby="quick-scope-note">
           <span class="quick-section-label">근거 범위</span>
-          <button class="quick-button active" type="button" data-kind="">전체</button>
+          <button class="quick-button active" type="button" data-kind="">전체 <span class="quick-count" data-total-count>__COUNT_TOTAL__</span></button>
           <button class="quick-button" type="button" data-kind="임상">인체 임상 <span class="quick-count" data-kind-count="임상">__COUNT_KIND_CLINICAL__</span></button>
           <button class="quick-button" type="button" data-kind="동물">동물시험 <span class="quick-count" data-kind-count="동물">__COUNT_KIND_ANIMAL__</span></button>
           <button class="quick-button" type="button" data-kind="규제">규제·안전성 <span class="quick-count" data-kind-count="규제">__COUNT_KIND_REGULATORY__</span></button>
@@ -5977,6 +5977,7 @@ const DIRECTION_COUNTS = DATABASE.records.reduce((counts, record) => {
 const PAGE = PAGE_TEMPLATE
   .replace("__EMBEDDED_DATA__", JSON.stringify(DATABASE).replaceAll("<", "\\u003c"))
   .replaceAll("__COUNT_PURE__", String(INTERVENTION_COUNTS["순수 GABA 섭취"] || 0))
+  .replaceAll("__COUNT_TOTAL__", String(DATABASE.records.length))
   .replaceAll("__COUNT_KIND_CLINICAL__", String(KIND_COUNTS["임상"] || 0))
   .replaceAll("__COUNT_KIND_ANIMAL__", String(KIND_COUNTS["동물"] || 0))
   .replaceAll("__COUNT_KIND_REGULATORY__", String(KIND_COUNTS["규제"] || 0))
