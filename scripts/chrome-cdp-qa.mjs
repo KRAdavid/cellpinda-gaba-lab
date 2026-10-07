@@ -445,6 +445,9 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('[data-review-filter=audit]')?.classList.contains('active')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#review-queue-list')?.textContent.includes('원문 접근 감사')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#review-queue-summary')?.textContent.includes('원문 접근 제한')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('[data-review-filter=candidate]')?.getAttribute('aria-label')?.includes('건')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('[data-review-filter=partial]')?.getAttribute('aria-label')?.includes('건')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('[data-review-filter=missing]')?.getAttribute('aria-label')?.includes('건')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#review-queue-tools')?.open"), false);
   await evaluate(client, "document.querySelector('#review-queue-tools summary').click()");
   assert.equal(await evaluate(client, "document.querySelector('#review-queue-tools')?.open"), true);

@@ -3990,8 +3990,21 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var completionRate = baseQueue.length ? Math.round(doneCount / baseQueue.length * 100) : 0;
         var highCount = baseQueue.filter(function (item) { return item.priority.key === "high"; }).length;
         var identifierGapCount = baseQueue.filter(function (item) { return item.missing.indexOf("식별자") >= 0; }).length;
+        var candidateGapCount = baseQueue.filter(function (item) { return item.record.status === "후보"; }).length;
+        var partialGapCount = baseQueue.filter(function (item) { return item.record.extraction === "부분"; }).length;
+        var missingGapCount = baseQueue.filter(function (item) { return item.missing.length >= 3; }).length;
         var auditGapCount = baseQueue.filter(function (item) { return sourceAuditRecord(item.record)?.status === "unavailable"; }).length;
         var freshnessGapCount = baseQueue.filter(function (item) { return freshnessBucket(item.record) !== "recent"; }).length;
+        var reviewFilterCounts = { all: baseQueue.length, candidate: candidateGapCount, partial: partialGapCount, missing: missingGapCount, audit: auditGapCount, freshness: freshnessGapCount };
+        document.querySelectorAll("[data-review-filter]").forEach(function (button) {
+          var filterKey = button.dataset.reviewFilter || "all";
+          var filterCount = Number(reviewFilterCounts[filterKey] || 0);
+          if (filterKey !== "freshness" || filterCount) {
+            var filterLabel = reviewQueueFilterLabels[filterKey] || filterKey;
+            button.textContent = filterLabel + " " + filterCount.toLocaleString("ko-KR");
+            button.setAttribute("aria-label", filterLabel + " " + filterCount.toLocaleString("ko-KR") + "건");
+          }
+        });
         var auditFilterButton = document.querySelector('[data-review-filter="audit"]');
         if (auditFilterButton) {
           auditFilterButton.textContent = "원문 접근 제한 " + auditGapCount.toLocaleString("ko-KR");
