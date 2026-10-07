@@ -38487,10 +38487,10 @@
       "publishedAt": "2026-10-06T17:34:22.042242Z",
       "verification": "Sites v485 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
       "currentCodeDeployment": {
-        "siteVersion": 668,
-        "sourceCommit": "c819a50ad73a2b13ad8d5f392c2c16f721f7a403",
-        "publicMirrorCommit": "5284622d26dfaea6d46073bc4eb328cb051a2158",
-        "publishedAt": "2026-10-07T08:45:00.000Z"
+        "siteVersion": 669,
+        "sourceCommit": "9c6a5c2069f7ee825653e482bbc8030c3019a40e",
+        "publicMirrorCommit": "59dbf51a39d70239f601de44b9101b073066c610",
+        "publishedAt": "2026-10-07T08:52:00.000Z"
       }
     },
     "notice": "이 웹 인덱스는 배포 시점의 읽기 전용 스냅샷입니다."
