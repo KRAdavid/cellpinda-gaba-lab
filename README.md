@@ -68,6 +68,21 @@ data-quality → build → built-provenance → validate → build-pending-sheet
 - `lastAttempt.openAlexAttemptedQueries`와 `lastAttempt.openAlexSkippedQueries`는 rate limit 단락이 실제로 몇 회 요청을 시도하고 몇 회를 중단했는지 기록해 화면의 부분 탐색 범위를 재현합니다.
 - 최근 탐색 provenance에는 ClinicalTrials.gov 등록시험과 Europe PMC preprint 후보 수를 별도로 기록합니다. 두 원천은 후보 탐색 신호이며 검증 인덱스 승격 전 원문·섭취경로·대조군·후속 공지를 확인합니다.
 - OpenAlex가 429/rate limit을 반환하면 남은 질의를 반복 재시도하지 않고 `skippedQueries`로 기록한 뒤 PubMed·Crossref 처리를 계속합니다. 이는 부분 결과의 공개 승격을 허용하지 않습니다.
+
+### OpenAlex 복구 실행
+
+OpenAlex가 익명 요청에서 429를 반환하면 저장소나 공개 사이트에 자격증명을 넣지 말고, 운영 실행 환경에서만 `OPENALEX_MAILTO` 또는 `OPENALEX_API_KEY`를 설정한 뒤 `pnpm daily:refresh`를 한 번 실행합니다. `OPENALEX_RETRIES=1`은 복구 확인용 단일 시도에 사용할 수 있습니다. 결과가 `PARTIAL_NOT_PROMOTED`이면 현재 검증 스냅샷을 유지하고, `READY_FOR_VALIDATION`일 때만 `build → preflight → 브라우저 QA` 후 공개 배포를 진행합니다.
+
+PowerShell 예시:
+
+```powershell
+$env:OPENALEX_MAILTO = "운영용 이메일 주소"
+$env:OPENALEX_RETRIES = "1"
+pnpm daily:refresh
+```
+
+이메일·API 키는 셸 세션과 비밀 저장소에서만 관리하며, `worker/data.json`·공개 미러·Health 응답에는 값 자체를 기록하지 않습니다.
+
 - `pnpm validate:ui`: 포털·Intelligence·검토 큐 UI 계약 확인
 - `node scripts/audit-public-links.mjs`: 원문·DOI·PubMed 대체 링크 체인을 검사하고 서버 접근 제한과 실제 실패를 구분
 - 비교 기능 QA: 최소 2건 선택 → 비교 대화상자 → 연구 설계·결과 방향·해석 주의문 표시를 확인
