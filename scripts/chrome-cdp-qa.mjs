@@ -277,6 +277,14 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('.quick-scope-note')?.textContent.includes('전체 검증 인덱스 기준')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('aria-describedby')"), "quick-scope-note");
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('role')"), "group");
+  await client.call("Emulation.setDeviceMetricsOverride", { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
+  assert.equal(await evaluate(client, "document.querySelector('#filter-collapse')?.getAttribute('aria-expanded')"), "true");
+  await evaluate(client, "document.querySelector('#filter-collapse').click()");
+  assert.equal(await evaluate(client, "document.querySelector('#filter-panel')?.hidden"), true);
+  assert.equal(await evaluate(client, "document.querySelector('.explorer-grid')?.classList.contains('filters-collapsed')"), true);
+  await evaluate(client, "document.querySelector('#filter-reopen').click()");
+  assert.equal(await evaluate(client, "document.querySelector('#filter-panel')?.hidden"), false);
+  assert.equal(await evaluate(client, "document.querySelector('.explorer-grid')?.classList.contains('filters-collapsed')"), false);
   await navigate(`http://127.0.0.1:${httpPort}/`);
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=oral]')?.textContent.includes('경구·섭취')"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=animal]')?.textContent.includes('동물·전임상')"), true);

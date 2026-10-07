@@ -1307,6 +1307,22 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       gap: 6px;
       margin-left: auto;
     }
+    .filter-collapse {
+      min-height: 30px;
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--teal-dark);
+      font-size: 10px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .filter-collapse:hover,
+    .filter-collapse:focus-visible { border-color: var(--teal); background: var(--teal-soft); }
+    .filter-collapse[hidden],
+    .filter-reopen[hidden] { display: none; }
+    .explorer-grid.filters-collapsed { grid-template-columns: minmax(0, 1fr); }
     .filter-result-count {
       padding: 4px 8px;
       border-radius: 999px;
@@ -2538,6 +2554,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             <div class="filter-head-actions">
               <span class="filter-result-count" id="filter-result-count" aria-live="polite">전체 결과 확인 중</span>
               <button class="filter-quick-reset" id="filter-reset-quick" type="button" hidden>초기화</button>
+              <button class="filter-collapse" id="filter-collapse" type="button" aria-controls="filter-panel" aria-expanded="true">숨기기</button>
             </div>
             <button class="filter-close" id="filter-close" type="button" aria-label="필터 닫기">×</button>
           </div>
@@ -2648,6 +2665,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
                 <button type="button" data-view-mode="cards" aria-pressed="true">카드</button>
                 <button type="button" data-view-mode="list" aria-pressed="false">간결</button>
               </div>
+              <button class="result-reset filter-reopen" id="filter-reopen" type="button" hidden>상세 필터 열기</button>
               <button class="result-reset" id="result-reset" type="button">필터 초기화</button>
               <button class="result-reset" id="result-share" type="button">조건 링크 복사</button>
               <details class="result-export-menu saved-search-menu" id="saved-search-menu">
@@ -5309,6 +5327,35 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         el("mobile-filter").setAttribute("aria-expanded", String(open));
         if (open) el("filter-close").focus();
       }
+      var desktopFiltersHidden = false;
+      function syncDesktopFilterLayout() {
+        var panel = el("filter-panel");
+        var grid = panel ? panel.parentElement : null;
+        var collapse = el("filter-collapse");
+        var reopen = el("filter-reopen");
+        var mobile = window.matchMedia && window.matchMedia("(max-width: 980px)").matches;
+        if (!panel || !grid) return;
+        if (mobile) {
+          panel.hidden = false;
+          grid.classList.remove("filters-collapsed");
+          if (collapse) collapse.hidden = true;
+          if (reopen) reopen.hidden = true;
+          return;
+        }
+        panel.hidden = desktopFiltersHidden;
+        grid.classList.toggle("filters-collapsed", desktopFiltersHidden);
+        if (collapse) {
+          collapse.hidden = false;
+          collapse.setAttribute("aria-expanded", String(!desktopFiltersHidden));
+          collapse.setAttribute("aria-label", desktopFiltersHidden ? "상세 필터 숨김 상태" : "상세 필터 숨기기");
+        }
+        if (reopen) reopen.hidden = !desktopFiltersHidden;
+      }
+      function setDesktopFiltersHidden(hidden, focusReopen) {
+        desktopFiltersHidden = Boolean(hidden);
+        syncDesktopFilterLayout();
+        if (focusReopen && desktopFiltersHidden && el("filter-reopen")) el("filter-reopen").focus();
+      }
       var toastTimer;
       function toast(message) {
         clearTimeout(toastTimer);
@@ -5870,6 +5917,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       el("search-clear").addEventListener("click", function () { changeState("q", ""); controls.q.focus(); });
       el("reset").addEventListener("click", resetFilters);
       el("result-reset").addEventListener("click", resetFilters);
+      el("filter-collapse").addEventListener("click", function () { setDesktopFiltersHidden(true, true); });
+      el("filter-reopen").addEventListener("click", function () { setDesktopFiltersHidden(false, false); el("filter-collapse").focus(); });
       el("filter-reset-quick").addEventListener("click", resetFilters);
       el("filter-status-reset").addEventListener("click", resetFilters);
       el("result-export").addEventListener("click", function () { exportFilteredResults(); closeResultExportMenu(); });
@@ -5889,6 +5938,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (resultCount && typeof resultCount.focus === "function") resultCount.focus({ preventScroll: true });
         el("results").scrollIntoView({ behavior: preferredScrollBehavior(), block: "start" });
       });
+      window.addEventListener("resize", syncDesktopFilterLayout);
+      syncDesktopFilterLayout();
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
           if (el("copy-dialog").open) closeCopyDialog();
