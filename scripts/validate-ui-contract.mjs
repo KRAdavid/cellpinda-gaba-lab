@@ -263,6 +263,7 @@ const required = [
   ,["Candidate progressive disclosure", "id=\"candidate-preview-disclosure\""]
   ,["Candidate separation label", "검증 근거와 별도 관리"]
   ,["Candidate scope summary", "candidate-preview-disclosure-count"]
+  ,["Pure GABA primary quick filter", 'data-intervention="순수 GABA 섭취"']
   ,["Copy dialog accessible name", 'id="copy-dialog-value" aria-labelledby="copy-dialog-title"']
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']

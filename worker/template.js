@@ -2423,6 +2423,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <button class="quick-button" type="button" data-kind="동물">동물시험</button>
           <button class="quick-button" type="button" data-kind="규제">규제·안전성</button>
           <button class="quick-button" type="button" data-category="안전성">안전성 자료</button>
+          <button class="quick-button" type="button" data-intervention="순수 GABA 섭취">순수 GABA <span class="quick-count" data-intervention-count="순수 GABA 섭취">__COUNT_PURE__</span></button>
           <button class="quick-button" type="button" data-effect-category="수면">수면</button>
           <details class="quick-advanced" id="quick-advanced">
             <summary data-quick-advanced-summary>추가 필터</summary>

@@ -257,6 +257,11 @@ try {
   await evaluate(client, "document.querySelector('#route-group').value = '비경구·기타'; document.querySelector('#route-group').dispatchEvent(new Event('change', { bubbles: true }))");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('routeGroup')"), "비경구·기타");
   await navigate(`http://127.0.0.1:${httpPort}/`);
+  assert.equal(await evaluate(client, "document.querySelector('.quick-row [data-intervention=\"순수 GABA 섭취\"]')?.textContent.includes('순수 GABA')"), true);
+  await evaluate(client, "document.querySelector('.quick-row [data-intervention=\"순수 GABA 섭취\"]').click()");
+  assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('intervention')"), "순수 GABA 섭취");
+  assert.equal(await evaluate(client, "document.querySelector('.quick-row [data-intervention=\"순수 GABA 섭취\"]')?.classList.contains('active')"), true);
+  await navigate(`http://127.0.0.1:${httpPort}/`);
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=oral]')?.textContent.includes('경구·섭취')"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=animal]')?.textContent.includes('동물·전임상')"), true);
   await evaluate(client, "document.querySelector('[data-result-preset=animal]').click()");
