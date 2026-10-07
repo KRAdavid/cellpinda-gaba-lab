@@ -159,6 +159,7 @@ const required = [
   ["Per-card freshness badge", "function freshnessBadge"],
   ["Per-card deep-link copy", "data-copy-record-link=\"' + esc(record.id) + '\""],
   ["Deep-link label boundary", "사이트 상세 링크 복사"],
+  ["Deep-link context boundary", 'params.delete(key)'],
   ["Freshness interpretation guard", "근거의 질·효능·규제 승인을 평가하지 않습니다"],
   ["Reduced-motion scroll behavior", "function preferredScrollBehavior"],
   ["Exploration presets", "data-preset"],

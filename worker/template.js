@@ -4231,6 +4231,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var record = records.find(function (item) { return String(item.id) === String(recordId); });
         if (!record) return;
         var params = new URLSearchParams(location.search);
+        ["record", "candidateId", "candidate", "compare", "read", "review", "reviewFilter"].forEach(function (key) { params.delete(key); });
         params.set("record", String(record.id));
         var link = location.origin + location.pathname + "?" + params.toString();
         try {
