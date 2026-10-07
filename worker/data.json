@@ -40516,12 +40516,12 @@
     "publicRelease": true,
     "release": {
       "snapshotVersion": 457,
-      "siteVersion": 800,
-      "sourceCommit": "56e774877b8fc6e3492a26bb338ab2ffb94399c6",
-      "siteSourceCommit": "56e774877b8fc6e3492a26bb338ab2ffb94399c6",
-      "publicMirrorCommit": "f6373f4aeaec06364312fdf82f85a8f420c5ea85",
-      "publishedAt": "2026-10-07T20:29:39.873135Z",
-      "verification": "Sites v800 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
+      "siteVersion": 803,
+      "sourceCommit": "9848dddbf2356510ad85a893cb864a6210f44394",
+      "siteSourceCommit": "9848dddbf2356510ad85a893cb864a6210f44394",
+      "publicMirrorCommit": "0a76f06a5fc17d5f46c31379c62aed2e48dbde58",
+      "publishedAt": "2026-10-07T20:56:23.126685Z",
+      "verification": "Sites v803 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
       "currentCodeDeployment": {
         "siteVersion": 802,
         "sourceCommit": "1ebde4c68a48df947cf04caaad71d06fec875e80",
