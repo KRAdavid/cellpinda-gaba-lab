@@ -182,6 +182,7 @@ try {
   await waitForExpression(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐')");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-disclosure')?.open"), false);
+  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-disclosure-count')?.textContent.includes('전체 후보')"), true);
   await evaluate(client, "document.querySelector('#candidate-preview-disclosure summary').click()");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-disclosure')?.open"), true);
   await waitForExpression(client, "document.querySelector('.candidate-preview-card .candidate-preview-signal')?.parentElement?.textContent.includes('큐 진입 신호')");
@@ -406,6 +407,7 @@ try {
   await evaluate(client, "document.querySelector('[data-candidate-filter=all]').click()");
   await navigate(`http://127.0.0.1:${httpPort}/?candidate=priority`);
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=priority]')?.getAttribute('aria-pressed')"), "true");
+  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-disclosure')?.open"), true);
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "priority");
   assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length > 0"), true);
   assert.equal(await evaluate(client, "document.activeElement?.id"), "candidate-preview-title");

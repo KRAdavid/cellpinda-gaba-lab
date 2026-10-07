@@ -695,6 +695,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .candidate-preview-disclosure { margin-top: 14px; border-top: 1px solid rgba(180, 132, 35, .22); }
     .candidate-preview-disclosure > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 38px; color: var(--amber); font-size: 11px; font-weight: 900; cursor: pointer; list-style: none; }
     .candidate-preview-disclosure > summary::-webkit-details-marker { display: none; }
+    .candidate-preview-disclosure > summary span:last-child { color: var(--muted); font-size: 10px; font-weight: 800; }
     .candidate-preview-disclosure > summary::after { content: "후보 목록 열기 ＋"; flex: 0 0 auto; padding: 5px 8px; border: 1px solid rgba(180,132,35,.28); border-radius: 8px; background: var(--amber-soft); color: var(--amber); font-size: 10px; }
     .candidate-preview-disclosure[open] > summary::after { content: "후보 목록 접기 －"; }
     .candidate-preview-disclosure > summary:focus-visible { outline: 3px solid rgba(180,132,35,.24); outline-offset: -3px; border-radius: 7px; }
@@ -2124,7 +2125,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         <div class="candidate-preview-head-actions"><span class="candidate-preview-note">확정 근거 아님</span><button class="candidate-preview-export" id="candidate-preview-export" type="button">전체 후보 CSV</button></div>
       </div>
       <details class="candidate-preview-disclosure" id="candidate-preview-disclosure">
-        <summary aria-label="자동 탐색 후보 목록 열기">자동 탐색 후보 목록 <span>검증 근거와 별도 관리</span></summary>
+        <summary aria-label="자동 탐색 후보 목록 열기"><span>자동 탐색 후보 목록</span><span id="candidate-preview-disclosure-count">검증 근거와 별도 관리</span></summary>
         <div class="candidate-preview-content">
           <div class="candidate-preview-filters" aria-label="후보 유형 필터">
             <button class="candidate-preview-filter active" type="button" data-candidate-filter="all" aria-pressed="true">전체</button>
@@ -2944,6 +2945,9 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var activeFilter = candidatePreviewFilter;
         section.dataset.filter = activeFilter;
         var candidateDisclosure = el("candidate-preview-disclosure");
+        var candidateDisclosureCount = el("candidate-preview-disclosure-count");
+        if (candidateDisclosureCount) candidateDisclosureCount.textContent = "미리보기 " + candidates.length.toLocaleString("ko-KR") + "건 · 전체 후보 " + totalCandidates.toLocaleString("ko-KR") + "건 · 검증 근거와 별도 관리";
+        if (candidateDisclosure) candidateDisclosure.setAttribute("aria-label", "자동 탐색 후보 목록, 미리보기 " + candidates.length.toLocaleString("ko-KR") + "건, 전체 후보 " + totalCandidates.toLocaleString("ko-KR") + "건");
         if (candidateDisclosure && activeFilter !== "all") candidateDisclosure.open = true;
         var filtered = filterCandidatePreviewRecords(candidates, activeFilter);
         var candidateExportButton = el("candidate-preview-export");

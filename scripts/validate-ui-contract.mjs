@@ -262,6 +262,7 @@ const required = [
   ,["Distribution disclosure label", "분포 열기 ＋"]
   ,["Candidate progressive disclosure", "id=\"candidate-preview-disclosure\""]
   ,["Candidate separation label", "검증 근거와 별도 관리"]
+  ,["Candidate scope summary", "candidate-preview-disclosure-count"]
   ,["Copy dialog accessible name", 'id="copy-dialog-value" aria-labelledby="copy-dialog-title"']
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']
