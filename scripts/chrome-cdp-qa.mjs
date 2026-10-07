@@ -255,6 +255,7 @@ try {
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('routeGroup')"), "경구·섭취");
   assert.equal(await evaluate(client, "document.querySelector('#result-count')?.textContent.includes('건')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#result-count')?.textContent.includes('검증 스냅샷') && document.querySelector('#result-count')?.textContent.includes('자동 탐색')"), true);
+  assert.equal(await evaluate(client, "document.querySelectorAll('#result-count time[datetime]').length"), 2);
   await evaluate(client, "document.querySelector('#route-group').value = '비경구·기타'; document.querySelector('#route-group').dispatchEvent(new Event('change', { bubbles: true }))");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('routeGroup')"), "비경구·기타");
   await navigate(`http://127.0.0.1:${httpPort}/`);
