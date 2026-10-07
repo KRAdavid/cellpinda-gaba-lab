@@ -636,6 +636,7 @@ try {
   await navigate(`http://127.0.0.1:${httpPort}/?compare=${overflowCompareIds}`);
   assert.equal(await evaluate(client, "document.querySelector('#compare-shared-note')?.textContent.includes('최대 4개 제한')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#compare-dialog')?.open"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#compare-dialog-insight')?.textContent.includes('공유 링크 주의')"), true);
   await evaluate(client, "document.querySelector('#compare-dialog-close').click(); document.querySelector('#compare-clear').click()");
   await navigate(`http://127.0.0.1:${httpPort}/?kind=${encodeURIComponent('임상')}`);
   await evaluate(client, "document.querySelector('[data-reading-toggle]').click()");

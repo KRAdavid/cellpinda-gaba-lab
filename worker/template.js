@@ -4626,6 +4626,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function compareKind(record) {
         return record.kind === "규제" ? "규제·안전성" : record.kind === "임상" ? "인체 연구" : record.kind === "동물" ? "동물·전임상" : "근거 자료";
       }
+      function compareLinkBoundaryNote() {
+        if (!urlCompareRequested || (!urlCompareMissingCount && !urlCompareOverflowCount)) return "";
+        var parts = [];
+        if (urlCompareMissingCount) parts.push("현재 스냅샷에서 찾지 못한 자료 " + urlCompareMissingCount.toLocaleString("ko-KR") + "건");
+        if (urlCompareOverflowCount) parts.push("최대 4개 제한으로 제외된 자료 " + urlCompareOverflowCount.toLocaleString("ko-KR") + "건");
+        return "공유 링크 주의: " + parts.join(" · ") + ". 현재 표시 자료만 비교하며 최신 원문·식별자를 다시 확인하세요.";
+      }
       function compareValue(record, key) {
         var values = {
           kind: compareKind(record), status: record.status, population: record.population || record.species || record.subject,
@@ -4645,7 +4652,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var mixed = [counts["인체 연구"], counts["동물·전임상"], counts["규제·안전성"]].filter(function (value) { return value; }).length > 1;
         return "선택 자료 " + selected.length + "건 · " + parts.join(" · ") + ". " + (mixed
           ? "자료 유형이 다르므로 결과를 직접 합산하지 말고 연구 설계·개입·대조군·기간을 먼저 비교하세요."
-          : "연구 설계·개입·대조군·기간을 먼저 확인하세요.") + " 이 표는 근거의 우열이나 제품 효능을 자동 판정하지 않습니다.";
+          : "연구 설계·개입·대조군·기간을 먼저 확인하세요.") + " 이 표는 근거의 우열이나 제품 효능을 자동 판정하지 않습니다." + (compareLinkBoundaryNote() ? " " + compareLinkBoundaryNote() : "");
       }
       function renderCompareTray() {
         var tray = el("compare-tray");
