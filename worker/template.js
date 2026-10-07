@@ -1066,6 +1066,14 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       align-items: center;
       gap: 8px;
     }
+    .quick-filter-group {
+      min-width: 0;
+      display: flex;
+      flex: 1 1 auto;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
     .quick-button {
       min-height: 38px;
       padding: 7px 13px;
@@ -2423,7 +2431,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <button class="intent-button" type="button" data-preset="audit-unavailable">접근 제한 후속검토</button>
           <button class="intent-button" type="button" data-preset="review">추가 검토</button>
         </div>
-        <div class="quick-row" role="group" aria-label="연구구분 빠른 필터" aria-describedby="quick-scope-note">
+        <div class="quick-row">
+          <div class="quick-filter-group" role="group" aria-label="연구구분 빠른 필터" aria-describedby="quick-scope-note">
           <button class="quick-button active" type="button" data-kind="">전체</button>
           <button class="quick-button" type="button" data-kind="임상">인체 임상</button>
           <button class="quick-button" type="button" data-kind="동물">동물시험</button>
@@ -2480,6 +2489,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
               </details>
             </div>
           </details>
+          </div>
           <span class="quick-spacer"></span>
           <label class="sr-only" for="sort">정렬</label>
           <select class="sort-select" id="sort" aria-describedby="sort-help">

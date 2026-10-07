@@ -266,8 +266,8 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('.quick-row [data-preset=oral]')?.classList.contains('active')"), true);
   assert.equal(await evaluate(client, "/^경구·섭취 \\d+$/.test(document.querySelector('.quick-row [data-preset=oral]')?.textContent.trim() || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.quick-scope-note')?.textContent.includes('전체 검증 인덱스 기준')"), true);
-  assert.equal(await evaluate(client, "document.querySelector('.quick-row')?.getAttribute('aria-describedby')"), "quick-scope-note");
-  assert.equal(await evaluate(client, "document.querySelector('.quick-row')?.getAttribute('role')"), "group");
+  assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('aria-describedby')"), "quick-scope-note");
+  assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('role')"), "group");
   await navigate(`http://127.0.0.1:${httpPort}/`);
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=oral]')?.textContent.includes('경구·섭취')"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=animal]')?.textContent.includes('동물·전임상')"), true);
