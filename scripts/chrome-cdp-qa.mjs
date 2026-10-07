@@ -606,6 +606,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('Crossref')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('최근 OpenAlex 요청') && document.querySelector('#discovery-stats')?.textContent.includes('1회 시도 · 13회 중단')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('최근 탐색 원천') && document.querySelector('#discovery-stats')?.textContent.includes('임상시험 등록 200건 · preprint 200건')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('후보 출처 레인')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('이번 갱신 변화')"), true);
   assert.equal(await evaluate(client, "document.querySelector(\".portal-nav a[href='#market-use']\")?.textContent.includes('시장·활용')"), true);
   assert.equal(await evaluate(client, "document.querySelector(\".portal-nav a[href='#review-queue']\")?.textContent.includes('추가 검토')"), true);

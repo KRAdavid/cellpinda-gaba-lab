@@ -100,6 +100,7 @@ const required = [
   ["Candidate full export", "candidateExport"],
   ["Candidate export health", "candidateExportCount"],
   ["Candidate source-lane health", "candidateSourceLaneCounts"],
+  ["Candidate source-lane summary", "후보 출처 레인"],
   ["Candidate screening signals", "routeSignals"],
   ["Candidate human signal labels", "candidateHumanSignals"],
   ["Candidate review URL regression", 'requestedCandidateFilter'],

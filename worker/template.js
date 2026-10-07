@@ -3379,6 +3379,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         } else if (discoveryNextAction) {
           discoveryNextAction.hidden = true;
         }
+        var candidateLaneCounts = discovery.candidateSourceLaneCounts || {};
+        var candidateLaneSummary = "문헌 " + Number(candidateLaneCounts.literature || 0).toLocaleString("ko-KR") + "건 · 등록시험 " + Number(candidateLaneCounts.registry || 0).toLocaleString("ko-KR") + "건 · preprint " + Number(candidateLaneCounts.preprint || 0).toLocaleString("ko-KR") + "건";
         el("discovery-stats").innerHTML = [
           ["탐색일", koreanDate(discovery.snapshotDate || DB.meta.snapshotDate)],
           ["현재 운영 코드 기준(런타임)", release.currentCodeDeployment ? "Sites v" + Number(release.currentCodeDeployment.siteVersion || 0) + (release.currentCodeDeployment.publicMirrorCommit ? " · GitHub " + String(release.currentCodeDeployment.publicMirrorCommit).slice(0, 7) : "") : "확인 필요"],
@@ -3386,6 +3388,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ["OpenAlex", Number(discovery.openAlexRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["최근 OpenAlex 요청", discovery.lastAttempt ? Number(discovery.lastAttempt.openAlexAttemptedQueries || 0).toLocaleString("ko-KR") + "회 시도 · " + Number(discovery.lastAttempt.openAlexSkippedQueries || 0).toLocaleString("ko-KR") + "회 중단" : "확인 필요"],
           ["최근 탐색 원천", discovery.lastAttempt ? "임상시험 등록 " + Number(discovery.lastAttempt.clinicalTrialsRetrieved || 0).toLocaleString("ko-KR") + "건 · preprint " + Number(discovery.lastAttempt.preprintsRetrieved || 0).toLocaleString("ko-KR") + "건" : "확인 필요"],
+          ["후보 출처 레인", candidateLaneSummary],
           ["Crossref", Number(discovery.crossrefRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["통합 고유", Number(discovery.mergedUnique || 0).toLocaleString("ko-KR") + "건"],
           ["신규 후보 게이트", "GABA 신호 또는 후속조치 검색 신호"],
