@@ -84,7 +84,7 @@ pnpm daily:refresh
 이메일·API 키는 셸 세션과 비밀 저장소에서만 관리하며, `worker/data.json`·공개 미러·Health 응답에는 값 자체를 기록하지 않습니다.
 
 - `pnpm validate:ui`: 포털·Intelligence·검토 큐 UI 계약 확인
-- `node scripts/audit-public-links.mjs`: 원문·DOI·PubMed 대체 링크 체인을 검사하고 서버 접근 제한과 실제 실패를 구분
+- `node scripts/audit-public-links.mjs [데이터 경로] [--write-meta]`: 원문·DOI·PubMed 대체 링크 체인을 검사하고 서버 접근 제한과 실제 실패를 구분합니다. 메타데이터에는 레코드별 `rateLimitedCount`(HTTP 429)가 저장되며, 요청 제한은 근거 약함이나 원문 부재가 아니라 재감사 대상으로 안내합니다.
 - 비교 기능 QA: 최소 2건 선택 → 비교 대화상자 → 연구 설계·결과 방향·해석 주의문 표시를 확인
 - `pnpm qa:chrome`: Playwright 없이 설치된 Chrome으로 desktop/mobile 핵심 흐름과 overflow 확인
 - `GABA_QA_URL=https://gaba-evidence-index-kr.dubaissday.chatgpt.site node scripts/chrome-cdp-qa.mjs`: 같은 Chrome QA를 실제 공개 운영 URL에서 실행해 라이브 UI·Health·모바일 overflow를 확인
