@@ -60,6 +60,7 @@ data-quality → build → built-provenance → validate → build-pending-sheet
 - `node scripts/release-preflight.mjs [공개 미러 경로]`: 배포 전 대기 payload·데이터·문구·UI·Health·감사·공개면·parity 검사를 한 번에 실행
 - `node scripts/validate-audit-consistency.mjs`: 공개 데이터의 원문 감사 수치와 NAVI 감사 보고서의 정합성 검증
 - `node scripts/validate-health-contract.mjs`: 탐색일·PubMed·OpenAlex·Crossref·병합·후보·원천 오류 Health 지표의 데이터 계약 검증
+- `node scripts/discover-literature.mjs --max-candidates=1000`: 날짜별 PubMed·OpenAlex·Crossref 후보 탐색 산출물 생성. OpenAlex는 `OPENALEX_API_KEY` 또는 `OPENALEX_MAILTO`를 선택적으로 사용하며, `OPENALEX_RETRIES`로 질의별 재시도 상한(기본 3회)을 둡니다. 429·원천 오류가 남으면 후보를 확정 인덱스로 승격하지 않습니다.
 - `pnpm validate:ui`: 포털·Intelligence·검토 큐 UI 계약 확인
 - `node scripts/audit-public-links.mjs`: 원문·DOI·PubMed 대체 링크 체인을 검사하고 서버 접근 제한과 실제 실패를 구분
 - 비교 기능 QA: 최소 2건 선택 → 비교 대화상자 → 연구 설계·결과 방향·해석 주의문 표시를 확인

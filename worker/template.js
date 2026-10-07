@@ -628,6 +628,14 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       font-size: 13px;
       line-height: 1.65;
     }
+    .discovery-attempt-note {
+      padding: 8px 10px;
+      border: 1px solid #f0d69a;
+      border-radius: 9px;
+      background: #fff8e8;
+      color: #76520e !important;
+      font-weight: 800;
+    }
     .discovery-stats {
       display: flex;
       flex-wrap: wrap;
@@ -2210,6 +2218,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       <div>
         <h2 id="discovery-title" tabindex="-1">검증 인덱스와 자동 탐색 후보를 분리해 관리합니다</h2>
         <p id="discovery-copy">대량 탐색 현황을 불러오는 중입니다.</p>
+        <p class="discovery-attempt-note" id="discovery-attempt-note" role="status" aria-live="polite" hidden></p>
         <div class="discovery-stats" id="discovery-stats" aria-label="대량 탐색 통계"></div>
         <p class="release-provenance-note" id="release-provenance-note" role="note">운영 코드 버전과 완전 검증 데이터 스냅샷 버전은 추적 목적이 달라 다를 수 있습니다. 버전 차이는 근거의 질·효능·규제 적합성을 의미하지 않습니다.</p>
         <div class="link-audit-note-wrap" id="link-audit-note-wrap" hidden>
@@ -2951,7 +2960,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (!delta) return "이전 탐색과 비교 불가";
         return "PubMed " + signedDelta(delta.pubmedUnique) + " · 통합 " + signedDelta(delta.mergedUnique) + " · 후보 " + signedDelta(delta.stagedCandidates);
       }
-      function updateFreshnessLabel(snapshotDate, discoveryDate) {
+      function updateFreshnessLabel(snapshotDate, discoveryDate, lastAttempt) {
         var target = el("freshness-label");
         if (!target) return;
         var startToday = kstDayStart(new Date());
@@ -2967,10 +2976,11 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ? null
           : Math.max(0, Math.floor((startToday - startDiscovery) / 86400000));
         var discoveryText = discoveryAge == null ? "탐색일 확인 필요" : "자동 탐색 " + discoveryAge + "일 전";
+        var partialAttempt = lastAttempt && lastAttempt.status === "PARTIAL_NOT_PROMOTED";
         if (age <= 7) {
-          target.textContent = "검증 최신 · 탐색 " + (discoveryAge == null ? "확인 필요" : discoveryAge + "일 전");
+          target.textContent = partialAttempt ? "검증 최신 · 탐색 반영 보류" : "검증 최신 · 탐색 " + (discoveryAge == null ? "확인 필요" : discoveryAge + "일 전");
           target.classList.add("freshness-recent");
-          target.title = "검증 인덱스는 " + age + "일 전 갱신되었습니다. " + discoveryText + "입니다.";
+          target.title = partialAttempt ? "최근 자동 탐색은 일부 원천 오류로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." : "검증 인덱스는 " + age + "일 전 갱신되었습니다. " + discoveryText + "입니다.";
         } else if (age <= 21) {
           target.textContent = "검증 갱신 예정 · 탐색 " + (discoveryAge == null ? "확인 필요" : discoveryAge + "일 전");
           target.title = "검증 인덱스가 " + age + "일 경과했습니다. " + discoveryText + "이며, 후보는 검증 인덱스와 별도입니다.";
@@ -3262,7 +3272,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         el("snapshot-label").textContent = "검증 스냅샷 " + koreanDate(DB.meta.snapshotDate);
         var distributionScope = el("distribution-scope");
         if (distributionScope) distributionScope.textContent = "전체 검증 인덱스 " + Number(DB.meta.total || 0).toLocaleString("ko-KR") + "건 기준";
-        updateFreshnessLabel(DB.meta.snapshotDate, discovery.snapshotDate);
+        updateFreshnessLabel(DB.meta.snapshotDate, discovery.snapshotDate, discovery.lastAttempt);
         el("coverage-label").textContent = DB.meta.minYear + "–" + DB.meta.maxYear + "년";
         el("metric-total").textContent = countText(DB.meta.literature || DB.meta.total);
         el("metric-clinical").textContent = countText(DB.meta.clinical);
@@ -3290,6 +3300,14 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         }
         el("discovery-copy").textContent = discovery.disclaimer
           || "자동 탐색 후보는 검증 자료와 분리하며, 최종 판정 후에만 공개 인덱스로 승격합니다.";
+        var discoveryAttemptNote = el("discovery-attempt-note");
+        if (discoveryAttemptNote && discovery.lastAttempt?.status === "PARTIAL_NOT_PROMOTED") {
+          var failedSources = Array.isArray(discovery.lastAttempt.failedSources) && discovery.lastAttempt.failedSources.length
+            ? " 실패 원천: " + discovery.lastAttempt.failedSources.join(", ") + "."
+            : "";
+          discoveryAttemptNote.textContent = "최근 자동 탐색 시도 " + koreanDate(discovery.lastAttempt.snapshotDate) + "는 원천 오류 " + Number(discovery.lastAttempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건으로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." + failedSources;
+          discoveryAttemptNote.hidden = false;
+        }
         el("discovery-stats").innerHTML = [
           ["탐색일", koreanDate(discovery.snapshotDate || DB.meta.snapshotDate)],
           ["현재 운영 코드 기준(런타임)", release.currentCodeDeployment ? "Sites v" + Number(release.currentCodeDeployment.siteVersion || 0) + (release.currentCodeDeployment.publicMirrorCommit ? " · GitHub " + String(release.currentCodeDeployment.publicMirrorCommit).slice(0, 7) : "") : "확인 필요"],

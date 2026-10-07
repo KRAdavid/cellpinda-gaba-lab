@@ -1,4 +1,4 @@
-import { readdir, readFile, stat, writeFile } from "node:fs/promises";
+import { readdir, readFile, rename, stat, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 
 const siteRoot = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
@@ -64,6 +64,14 @@ const latestSearchMtime = searchDated[0]?.mtime ?? 0;
 const discovery = latestSearchMtime >= latestCandidateSheetMtime
   ? searchDiscovery
   : (candidateSheetPayload?.summary || searchDiscovery);
+const discoveryErrors = Array.isArray(discovery?.sourceErrors) ? discovery.sourceErrors : [];
+if (discoveryErrors.length) {
+  const sources = discoveryErrors
+    .map((entry) => String(entry?.source || "unknown"))
+    .slice(0, 8)
+    .join(", ");
+  throw new Error(`Discovery source errors prevent data promotion (${discoveryErrors.length}): ${sources}`);
+}
 const previousDiscovery = previousData?.meta?.discovery || null;
 const discoveryDelta = previousDiscovery && discovery
   ? previousDiscovery.generatedAt === discovery.generatedAt && previousDiscovery.delta
@@ -518,6 +526,8 @@ const database = {
       identifierExtraction: discovery.identifierExtraction,
       pubmedUnique: discovery.pubmed?.uniqueRetrieved || 0,
       openAlexRetrieved: discovery.openAlex?.retrieved || 0,
+      openAlexAccessMode: discovery.openAlex?.accessMode || "unknown",
+      openAlexRetriesPerQuery: discovery.openAlex?.retriesPerQuery || null,
       crossrefRetrieved: discovery.crossref?.retrieved || 0,
       sourceErrors: Array.isArray(discovery.sourceErrors) ? discovery.sourceErrors : [],
       mergedUnique: discovery.mergedUnique || 0,
@@ -558,7 +568,10 @@ const database = {
   records
 };
 
-await writeFile(resolve(siteRoot, "worker", "data.json"), `${JSON.stringify(database, null, 2)}\n`, "utf8");
+const dataPath = resolve(siteRoot, "worker", "data.json");
+const tempDataPath = `${dataPath}.tmp`;
+await writeFile(tempDataPath, `${JSON.stringify(database, null, 2)}\n`, "utf8");
+await rename(tempDataPath, dataPath);
 console.log(JSON.stringify({
   payloadPath,
   output: resolve(siteRoot, "worker", "data.json"),

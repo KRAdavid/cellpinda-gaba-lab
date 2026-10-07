@@ -21,6 +21,7 @@
     "validate:pending-sheet-sync": "node scripts/validate-pending-sheet-sync.mjs",
     "sync:pending": "node scripts/build-pending-sheet-sync.mjs",
     "sync:pending:check": "node scripts/validate-pending-sheet-sync.mjs",
+    "record:discovery-attempt": "node scripts/record-discovery-attempt.mjs",
     "validate:audit": "node scripts/validate-audit-consistency.mjs --public",
     "validate:live": "node scripts/validate-live-release.mjs",
     "qa:chrome": "node scripts/chrome-cdp-qa.mjs",
