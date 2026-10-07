@@ -292,6 +292,7 @@ const required = [
   ,["Page size condition visibility", "pageSizeLabel"]
   ,["Default sort condition guard", 'state.sort === "latest"']
   ,["Empty result recovery", "data-empty-reset"]
+  ,["Empty result condition context", "data-empty-context"]
   ,["Visible filter status", 'id="filter-status-strip"']
   ,["Filter status summary", 'id="filter-status-text"']
   ,["Filter status reset", 'id="filter-status-reset"']

@@ -289,6 +289,7 @@ try {
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('routeGroup')"), "경구·섭취");
   await navigate(`http://127.0.0.1:${httpPort}/?q=${encodeURIComponent('존재하지 않는 GABA 자료 검색어')}`);
   assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-empty-reset]'))"), true);
+  assert.equal(await evaluate(client, "document.querySelector('[data-empty-context]')?.textContent.includes('검색: 존재하지 않는 GABA 자료 검색어')"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-empty-query=수면]')?.textContent"), "수면");
   await evaluate(client, "document.querySelector('[data-empty-query=수면]').click()");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('q')"), "수면");

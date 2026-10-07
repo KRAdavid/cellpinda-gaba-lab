@@ -1848,6 +1848,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     }
     .empty-state h3 { margin: 0; font-size: 20px; }
     .empty-state p { color: var(--muted); }
+    .empty-condition { margin: 10px auto 0; max-width: 620px; padding: 8px 10px; border-left: 3px solid var(--amber); border-radius: 6px; background: var(--amber-soft); color: var(--ink-2); font-size: 11px; line-height: 1.5; text-align: left; }
+    .empty-condition strong { color: var(--amber); }
     .empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
     .empty-action { min-height: 36px; padding: 7px 11px; border: 1px solid var(--teal); border-radius: 9px; background: var(--teal); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; }
     .empty-action.secondary { border-color: var(--line); background: #fff; color: var(--teal-dark); }
@@ -5232,9 +5234,11 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var pageRecords = list.slice(start, start + pageSize);
         var elapsed = Math.max(0, performance.now() - renderStarted);
         el("result-count").innerHTML = '검증 레코드 ' + DB.meta.total.toLocaleString("ko-KR") + '건 중 <strong>' + list.length.toLocaleString("ko-KR") + '건</strong> · ' + elapsed.toFixed(elapsed < 10 ? 1 : 0) + 'ms<small>문헌 ' + Number(DB.meta.literature || 0).toLocaleString("ko-KR") + '편 + 규제·안전성 자료 ' + Number(DB.meta.regulatory || 0).toLocaleString("ko-KR") + '건 · 자동 탐색 후보는 별도 큐</small>';
+        var emptyConditions = activeConditionLabels();
+        var emptyConditionMarkup = emptyConditions.length ? '<p class="empty-condition" data-empty-context><strong>현재 조건</strong> ' + esc(emptyConditions.slice(0, 3).join(" · ") + (emptyConditions.length > 3 ? " · 외 " + (emptyConditions.length - 3) + "개" : "")) + '</p>' : '';
         el("papers").innerHTML = pageRecords.length
           ? pageRecords.map(paperCard).join("")
-          : '<div class="empty-state"><h3>조건에 맞는 자료가 없습니다</h3><p>현재 조건을 완화하면 다시 탐색할 수 있습니다.</p><div class="empty-actions">' +
+          : '<div class="empty-state"><h3>조건에 맞는 자료가 없습니다</h3><p>현재 조건을 완화하면 다시 탐색할 수 있습니다.</p>' + emptyConditionMarkup + '<div class="empty-actions">' +
             (state.q ? '<button class="empty-action secondary" type="button" data-empty-clear-query>검색어 지우기</button>' : '') +
             '<button class="empty-action" type="button" data-empty-reset>모든 조건 초기화</button></div><div class="empty-suggestions" aria-label="추천 재탐색 경로"><span class="empty-suggestions-label">추천 재탐색</span><button class="empty-suggestion" type="button" data-empty-query="수면">수면</button><button class="empty-suggestion" type="button" data-empty-query="불안 스트레스">불안·스트레스</button><button class="empty-suggestion" type="button" data-empty-query="안전성 독성">안전성·독성</button></div></div>';
         el("page-status").textContent = state.page + " / " + totalPages;
