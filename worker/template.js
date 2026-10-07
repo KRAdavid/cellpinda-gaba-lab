@@ -570,7 +570,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     }
     .orientation-strip {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1px;
       margin-top: 18px;
       overflow: hidden;
@@ -2024,6 +2024,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       <a class="orientation-step" href="#explorer-title"><span class="orientation-step-number">1</span><span><strong>질문을 입력하세요</strong><span>수면·혈압·안전성 등 한국어 검색</span></span></a>
       <a class="orientation-step" href="#filter-panel"><span class="orientation-step-number">2</span><span><strong>조건을 좁히세요</strong><span>대상·연구유형·규제상태로 필터</span></span></a>
       <a class="orientation-step" href="#results"><span class="orientation-step-number">3</span><span><strong>근거를 확인하세요</strong><span>결과·의미·마케팅 활용 방향 비교</span></span></a>
+      <a class="orientation-step" href="#review-queue"><span class="orientation-step-number">4</span><span><strong>다음 검토를 기록하세요</strong><span>원문·누락·후속조치를 개인 큐에 저장</span></span></a>
     </nav>
 
     <section class="metric-grid" aria-label="데이터 요약">
