@@ -275,6 +275,7 @@ const required = [
   ,["Compare shared-link auto open", "urlCompareRequested && selectedCompareRecords().length >= 2"]
   ,["Compare shared-link missing note", 'id="compare-shared-note"']
   ,["Compare missing count boundary", "urlCompareMissingCount"]
+  ,["Compare overflow count boundary", "urlCompareOverflowCount"]
   ,["Search slash shortcut", 'event.key !== "/"']
   ,["Search slash shortcut focus", "controls.q.focus();"]
   ,["Result card citation action", 'class="paper-citation" type="button" data-copy-citation=']

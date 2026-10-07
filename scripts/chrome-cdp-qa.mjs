@@ -631,7 +631,12 @@ try {
   await navigate(`http://127.0.0.1:${httpPort}/?compare=QA-MISSING-RECORD`);
   assert.equal(await evaluate(client, "document.querySelector('#compare-dialog')?.open"), false);
   assert.equal(await evaluate(client, "document.querySelector('#compare-shared-note')?.hidden"), false);
-  assert.equal(await evaluate(client, "document.querySelector('#compare-shared-note')?.textContent.includes('현재 스냅샷에서 찾지 못했습니다')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#compare-shared-note')?.textContent.includes('현재 스냅샷에서 찾지 못한 자료')"), true);
+  const overflowCompareIds = await evaluate(client, "Array.from(document.querySelectorAll('[data-compare-toggle]')).slice(0, 5).map(function (button) { return button.dataset.compareToggle; }).join(',')");
+  await navigate(`http://127.0.0.1:${httpPort}/?compare=${overflowCompareIds}`);
+  assert.equal(await evaluate(client, "document.querySelector('#compare-shared-note')?.textContent.includes('최대 4개 제한')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#compare-dialog')?.open"), true);
+  await evaluate(client, "document.querySelector('#compare-dialog-close').click(); document.querySelector('#compare-clear').click()");
   await navigate(`http://127.0.0.1:${httpPort}/?kind=${encodeURIComponent('임상')}`);
   await evaluate(client, "document.querySelector('[data-reading-toggle]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#reading-list-count')?.textContent"), "1");

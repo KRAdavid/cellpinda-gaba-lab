@@ -2691,6 +2691,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       var urlReadingIds = [];
       var urlCompareRequested = false;
       var urlCompareMissingCount = 0;
+      var urlCompareOverflowCount = 0;
       var reviewDraftStatus = "pending";
       var reviewDraftNote = "";
       var state = {
@@ -3157,11 +3158,16 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           compareIds = requestedCompareIds.filter(function (id, index) {
             return index < 4 && records.some(function (record) { return String(record.id) === id; });
           });
-          urlCompareMissingCount = Math.max(0, requestedCompareIds.length - compareIds.length);
+          var validRequestedCompareCount = requestedCompareIds.filter(function (id) {
+            return records.some(function (record) { return String(record.id) === id; });
+          }).length;
+          urlCompareMissingCount = requestedCompareIds.length - validRequestedCompareCount;
+          urlCompareOverflowCount = Math.max(0, validRequestedCompareCount - 4);
           saveCompareIds();
         } else {
           urlCompareRequested = false;
           urlCompareMissingCount = 0;
+          urlCompareOverflowCount = 0;
         }
         if (params.has("read")) {
           urlReadingIds = String(params.get("read") || "").split(",").map(function (id) { return id.trim(); }).filter(Boolean).filter(function (id, index) {
@@ -4649,8 +4655,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         compareIds = selected.map(function (record) { return String(record.id); });
         tray.hidden = selected.length === 0;
         if (sharedNote) {
-          sharedNote.hidden = !(urlCompareRequested && urlCompareMissingCount);
-          if (!sharedNote.hidden) sharedNote.textContent = "공유된 비교 자료 중 " + urlCompareMissingCount.toLocaleString("ko-KR") + "건은 현재 스냅샷에서 찾지 못했습니다. 남은 자료만 표시하며, 최신 원문·식별자를 다시 확인하세요.";
+          sharedNote.hidden = !(urlCompareRequested && (urlCompareMissingCount || urlCompareOverflowCount));
+          if (!sharedNote.hidden) {
+            var noteParts = [];
+            if (urlCompareMissingCount) noteParts.push("현재 스냅샷에서 찾지 못한 자료 " + urlCompareMissingCount.toLocaleString("ko-KR") + "건");
+            if (urlCompareOverflowCount) noteParts.push("최대 4개 제한으로 제외된 자료 " + urlCompareOverflowCount.toLocaleString("ko-KR") + "건");
+            sharedNote.textContent = "공유 비교 링크의 " + noteParts.join(" · ") + ". 현재 표시 자료만 비교하며, 최신 원문·식별자를 다시 확인하세요.";
+          }
         }
         var compareSummary = el("compare-summary");
         compareSummary.textContent = selected.length + "개 선택 · 최대 4개까지 비교할 수 있습니다.";
