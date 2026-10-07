@@ -343,7 +343,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#candidate-review-progress')?.textContent.includes('현재 미리보기')"), true);
   assert.equal(await evaluate(client, "/수동 검토됨 0/.test(document.querySelector('[data-candidate-filter=reviewed]')?.textContent.trim() || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-more')?.hidden"), false);
-  assert.equal(await evaluate(client, "/^전체 \\d+$/.test(document.querySelector('[data-candidate-filter=all]')?.textContent.trim() || '')"), true);
+  assert.equal(await evaluate(client, "/^전체 [\\d,]+$/.test(document.querySelector('[data-candidate-filter=all]')?.textContent.trim() || '')"), true);
   const automaticPriorityLabel = await evaluate(client, "document.querySelector('[data-candidate-filter=priority]')?.textContent.trim() || ''");
   assert.match(String(automaticPriorityLabel), /^자동 우선검토\s+\d+$/, `Unexpected automatic priority label: ${automaticPriorityLabel}`);
   assert.equal(await evaluate(client, "/^직접 근거 \\d+$/.test(document.querySelector('[data-marketing-count=\"직접 근거 검토\"]')?.parentElement?.textContent.trim() || '')"), true);
@@ -362,7 +362,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-list')?.textContent.includes('개인 검토 상태')"), true);
   assert.equal(await evaluate(client, "/PubMed 원문|DOI 원문/.test(document.querySelector('#candidate-preview-list a')?.textContent || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-list')?.textContent.includes('경로·섭취 표현')"), true);
-  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('현재 필터 후보 CSV')"), true);
+  assert.equal(await waitForExpression(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('현재 필터 후보 CSV')"), true);
   await evaluate(client, "document.querySelector('[data-candidate-detail]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-dialog')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-checklist')?.textContent.includes('경구·섭취 여부')"), true);
@@ -405,7 +405,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=entry-followup]')?.getAttribute('aria-pressed')"), "true");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "entry-followup");
   assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length > 0"), true);
-  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('현재 필터 후보 CSV')"), true);
+  assert.equal(await waitForExpression(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('현재 필터 후보 CSV')"), true);
   await navigate(`http://127.0.0.1:${httpPort}/?candidate=reviewed`);
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=reviewed]')?.getAttribute('aria-pressed')"), "true");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "reviewed");
@@ -425,7 +425,7 @@ try {
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('audit')"), "ok");
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=audit-ok]')?.getAttribute('aria-pressed')"), "true");
   await navigate(`http://127.0.0.1:${httpPort}/`);
-  assert.equal(await evaluate(client, "document.querySelector('[data-view-mode=cards]')?.getAttribute('aria-pressed')"), "true");
+  assert.equal(await waitForExpression(client, "document.querySelector('[data-view-mode=cards]')?.getAttribute('aria-pressed') === 'true'"), true);
   await evaluate(client, "document.querySelector('[data-view-mode=list]').click()");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('view')"), "list");
   assert.equal(await evaluate(client, "document.querySelectorAll('.paper-card.compact-card').length > 0"), true);
@@ -518,10 +518,12 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.textContent.includes('순수 GABA')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.textContent.includes('출판 후속조치')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.textContent.includes('제목·초록의 GABA 언급 신호')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.textContent.includes('현재 필터 후보 CSV')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.textContent.includes('403이면 재시도하지 않고 동기화 대기목록')"), true);
   await evaluate(client, "document.querySelector('#methodology-close').click()");
-  assert.equal(await evaluate(client, "document.querySelector('#guide-title')?.parentElement?.parentElement?.textContent.includes('순수 GABA와 복합제')"), true);
-  assert.equal(await evaluate(client, "document.querySelector('#guide-title')?.parentElement?.parentElement?.textContent.includes('발효·프로바이오틱·수용체 약물')"), true);
+  assert.equal(await waitForExpression(client, "document.querySelector('[aria-labelledby=guide-title]')?.textContent.includes('순수 GABA와 복합제')"), true);
+  assert.equal(await waitForExpression(client, "document.querySelector('[aria-labelledby=guide-title]')?.textContent.includes('발효·프로바이오틱·수용체 약물')"), true);
   await sleep(180);
   assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.open"), false);
   assert.equal(await evaluate(client, "document.querySelector('#methodology-open')?.getAttribute('aria-haspopup')"), "dialog");
