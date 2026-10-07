@@ -350,6 +350,7 @@ try {
   assert.equal(await evaluate(client, "!localStorage.getItem('gaba-review-decisions') && !localStorage.getItem('gaba-reading-ids')"), true);
   await navigate(`http://127.0.0.1:${httpPort}/?q=${encodeURIComponent('GABA')}`);
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=human-direct]')?.textContent.includes('인체 직접근거')"), true);
+  assert.equal(await evaluate(client, "document.querySelectorAll('[data-result-preset=human-direct]').length"), 1);
   await evaluate(client, "document.querySelector('[data-result-preset=human-direct]').click()");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('q')"), "GABA");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('kind')"), "임상");
