@@ -623,6 +623,32 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       font-size: 17px;
       letter-spacing: -.02em;
     }
+    .discovery-state-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      margin-left: 8px;
+      padding: 0 8px;
+      border: 1px solid #a8d3c9;
+      border-radius: 999px;
+      background: #e8f7f3;
+      color: var(--teal-dark);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .discovery-state-badge.is-partial {
+      border-color: #efcf8b;
+      background: #fff8e8;
+      color: #76520e;
+    }
+    .discovery-state-badge.is-unknown {
+      border-color: #d5dfe2;
+      background: #f3f6f7;
+      color: var(--muted);
+    }
     .discovery-banner p {
       margin: 6px 0 0;
       color: var(--ink-2);
@@ -2218,7 +2244,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
 
     <section class="discovery-banner" id="discovery-banner" aria-labelledby="discovery-title">
       <div>
-        <h2 id="discovery-title" tabindex="-1">검증 인덱스와 자동 탐색 후보를 분리해 관리합니다</h2>
+        <h2 id="discovery-title" tabindex="-1">검증 인덱스와 자동 탐색 후보를 분리해 관리합니다 <span class="discovery-state-badge is-unknown" id="discovery-state-badge" role="status" aria-live="polite">탐색 상태 확인 중</span></h2>
         <p id="discovery-copy">대량 탐색 현황을 불러오는 중입니다.</p>
         <p class="discovery-attempt-note" id="discovery-attempt-note" role="status" aria-live="polite" hidden></p>
         <div class="discovery-stats" id="discovery-stats" aria-label="대량 탐색 통계"></div>
@@ -3287,6 +3313,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var distributionScope = el("distribution-scope");
         if (distributionScope) distributionScope.textContent = "전체 검증 인덱스 " + Number(DB.meta.total || 0).toLocaleString("ko-KR") + "건 기준";
         updateFreshnessLabel(DB.meta.snapshotDate, discovery.snapshotDate, discovery.lastAttempt);
+        syncDiscoveryStateBadge();
         el("coverage-label").textContent = DB.meta.minYear + "–" + DB.meta.maxYear + "년";
         el("metric-total").textContent = countText(DB.meta.literature || DB.meta.total);
         el("metric-clinical").textContent = countText(DB.meta.clinical);
@@ -5312,6 +5339,22 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (attempt.status === "PARTIAL_NOT_PROMOTED") return "반영 보류 · 원천 오류 " + Number(attempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건";
         if (attempt.status === "READY_FOR_PROMOTION") return "검증 대기";
         return "상태 확인 필요";
+      }
+      function syncDiscoveryStateBadge() {
+        var badge = el("discovery-state-badge");
+        if (!badge) return;
+        var attempt = DB.meta.discovery && DB.meta.discovery.lastAttempt;
+        var status = attempt && attempt.status;
+        badge.classList.toggle("is-partial", status === "PARTIAL_NOT_PROMOTED");
+        badge.classList.toggle("is-unknown", !status || !["PARTIAL_NOT_PROMOTED", "READY_FOR_PROMOTION"].includes(status));
+        badge.textContent = status === "PARTIAL_NOT_PROMOTED"
+          ? "부분 탐색 · 공개 반영 보류"
+          : status === "READY_FOR_PROMOTION"
+            ? "검증 대기"
+            : status
+              ? "탐색 상태 확인"
+              : "탐색 상태 확인 필요";
+        badge.setAttribute("aria-label", "자동 탐색 상태: " + badge.textContent);
       }
       function renderActiveFilters() {
         var chips = [];
