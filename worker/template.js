@@ -4591,6 +4591,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var marketingDirect = list.filter(function (record) { return marketingLabel(record) === "직접 근거 검토"; }).length;
         var marketingConditional = list.filter(function (record) { return marketingLabel(record) === "조건부 검토"; }).length;
         var marketingExclude = list.filter(function (record) { return marketingLabel(record) === "마케팅 사용 금지"; }).length;
+        var interventionPure = list.filter(function (record) { return interventionClass(record) === "순수 GABA 섭취"; }).length;
+        var interventionCombination = list.filter(function (record) { return interventionClass(record) === "복합제·복합개입"; }).length;
+        var interventionFermented = list.filter(function (record) { return interventionClass(record) === "GABA 생성 발효·프로바이오틱"; }).length;
+        var interventionReceptor = list.filter(function (record) { return interventionClass(record) === "수용체 약물·작용제"; }).length;
         var currentLink = location.origin + location.pathname + location.search;
         var lines = [
           "GABA 검색 결과 브리프",
@@ -4599,6 +4603,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           "검증 스냅샷: " + String(DB.meta.snapshotDate || "미상"),
           "자동 탐색 기준일: " + discoverySnapshotValue(),
           "결과: " + list.length.toLocaleString("ko-KR") + "건 · 인체 " + clinical + "건 · 동물·전임상 " + animal + "건 · 규제·안전성 " + regulatory + "건 · 추가 확인 " + review + "건",
+          "GABA 개입 유형: 순수 GABA " + interventionPure + "건 · 복합제·복합개입 " + interventionCombination + "건 · 발효·프로바이오틱 " + interventionFermented + "건 · 수용체 약물 " + interventionReceptor + "건",
           "활용 검토: 직접 근거 검토 " + marketingDirect + "건 · 조건부 검토 " + marketingConditional + "건 · 사용 금지 " + marketingExclude + "건",
           "조건 링크: " + currentLink,
           "공유 범위: 공개 검증 스냅샷과 현재 조건만 포함하며 브라우저 저장 검색·개인 검토 기록은 포함하지 않습니다.",

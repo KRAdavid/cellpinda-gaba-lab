@@ -226,6 +226,7 @@ const required = [
   ,["Intervention breakdown disclosure", 'id="result-intervention-disclosure"']
   ,["Intervention breakdown actions", 'result-interpretation-intervention']
   ,["Intervention boundary note", "효능·안전성·규제 적합성의 우열을 뜻하지 않습니다"]
+  ,["Brief intervention breakdown", "GABA 개입 유형: 순수 GABA"]
   ,["Review share dialog", "review-share-dialog"]
   ,["Review share copy action", "copyReviewShareUrl"]
   ,["Shared queue exit", "clearSharedReviewQueue"]
