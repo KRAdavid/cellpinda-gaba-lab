@@ -5229,6 +5229,14 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         clearTimeout(searchTimer);
         searchTimer = setTimeout(function () { changeState("q", controls.q.value, "replace"); }, 120);
       });
+      document.addEventListener("keydown", function (event) {
+        var target = event.target;
+        var tagName = target && target.tagName ? String(target.tagName).toLowerCase() : "";
+        if (event.key !== "/" || event.altKey || event.ctrlKey || event.metaKey || tagName === "input" || tagName === "textarea" || tagName === "select" || (target && target.isContentEditable)) return;
+        event.preventDefault();
+        controls.q.focus();
+        controls.q.select();
+      });
       ["category", "effectCategory", "status", "routeGroup", "grade", "agency", "safetyArea", "sci", "species", "topic", "extraction", "direction", "source", "audit", "freshness", "sort"].forEach(function (key) {
         controls[key].addEventListener("change", function () { changeState(key, controls[key].value); });
       });

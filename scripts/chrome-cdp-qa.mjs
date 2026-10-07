@@ -204,6 +204,8 @@ try {
   assert.ok(health.stagedCandidates >= health.candidatePreviewCount);
   assert.ok(health.candidateExportCount >= health.stagedCandidates);
   assert.ok(health.candidatePreviewCount > 0);
+  await evaluate(client, "document.dispatchEvent(new KeyboardEvent('keydown', { key: '/', bubbles: true }))");
+  assert.equal(await evaluate(client, "document.activeElement?.id"), "search");
   const speciesDistributionTotal = await evaluate(client, "document.querySelectorAll('#species-distribution [data-distribution-field=species]').length");
   const speciesDistributionHidden = await evaluate(client, "document.querySelectorAll('#species-distribution .distribution-item-extra[hidden]').length");
   assert.ok(speciesDistributionTotal > 8, `Expected all species distribution items, got ${speciesDistributionTotal}`);
