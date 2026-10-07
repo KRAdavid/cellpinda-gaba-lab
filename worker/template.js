@@ -157,6 +157,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       text-decoration: none;
       cursor: pointer;
     }
+    .top-link[hidden], .public-mode-note[hidden] { display: none !important; }
     .share-button {
       border-color: var(--teal);
       background: var(--teal);

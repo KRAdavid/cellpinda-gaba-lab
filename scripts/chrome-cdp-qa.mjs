@@ -439,6 +439,9 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#discovery-attempt-note')?.textContent.includes('최근 자동 탐색 시도')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-attempt-note')?.textContent.includes('재실행')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview')?.hidden"), false);
+  assert.equal(await evaluate(client, "document.querySelector('#sheet-link')?.hidden"), true);
+  assert.equal(await evaluate(client, "getComputedStyle(document.querySelector('#sheet-link')).display"), "none");
+  assert.equal(await evaluate(client, "document.querySelector('#public-mode-note')?.hidden"), false);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-review-progress')?.textContent.includes('현재 미리보기')"), true);
   assert.equal(await evaluate(client, "/수동 검토됨 0/.test(document.querySelector('[data-candidate-filter=reviewed]')?.textContent.trim() || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-more')?.hidden"), false);
