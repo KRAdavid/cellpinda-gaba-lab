@@ -266,6 +266,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('.quick-row [data-preset=oral]')?.classList.contains('active')"), true);
   assert.equal(await evaluate(client, "/^경구·섭취 \\d+$/.test(document.querySelector('.quick-row [data-preset=oral]')?.textContent.trim() || '')"), true);
   assert.equal(await evaluate(client, "Array.from(document.querySelectorAll('.quick-filter-group [data-kind-count]')).every((node) => /^\\d+$/.test(node.textContent.trim()))"), true);
+  assert.equal(await evaluate(client, "/^안전성 자료 \\d+$/.test(document.querySelector('.quick-filter-group [data-category=안전성]')?.textContent.trim() || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.textContent.includes('근거 범위') && document.querySelector('.quick-filter-group')?.textContent.includes('탐색 축')"), true);
   assert.equal(await evaluate(client, "getComputedStyle(document.querySelector('#toast')).pointerEvents"), "none");
   assert.equal(await evaluate(client, "parseFloat(getComputedStyle(document.querySelector('#toast')).maxWidth) <= window.innerWidth - 32"), true);

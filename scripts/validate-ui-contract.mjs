@@ -217,6 +217,7 @@ const required = [
   ,["Intervention classification URL restoration", '\"intervention\", \"routeGroup\", \"followup\", \"grade\"']
   ,["Oral intake quick-filter count", 'data-route-count=\"경구·섭취\"']
   ,["Evidence-kind quick-filter counts", "data-kind-count"]
+  ,["Safety quick-filter count", 'data-category-count=\"안전성\"']
   ,["Quick-filter evidence scope label", "근거 범위"]
   ,["Quick-filter exploration axis label", "탐색 축"]
   ,["Responsive toast width", "max-width: calc(100vw - 32px)"]
