@@ -1074,6 +1074,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       align-items: center;
       gap: 8px;
     }
+    .quick-section-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
     .quick-button {
       min-height: 38px;
       padding: 7px 13px;
@@ -2433,10 +2440,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         </div>
         <div class="quick-row">
           <div class="quick-filter-group" role="group" aria-label="연구구분 빠른 필터" aria-describedby="quick-scope-note">
+          <span class="quick-section-label">근거 범위</span>
           <button class="quick-button active" type="button" data-kind="">전체</button>
           <button class="quick-button" type="button" data-kind="임상">인체 임상 <span class="quick-count" data-kind-count="임상">__COUNT_KIND_CLINICAL__</span></button>
           <button class="quick-button" type="button" data-kind="동물">동물시험 <span class="quick-count" data-kind-count="동물">__COUNT_KIND_ANIMAL__</span></button>
           <button class="quick-button" type="button" data-kind="규제">규제·안전성 <span class="quick-count" data-kind-count="규제">__COUNT_KIND_REGULATORY__</span></button>
+          <span class="quick-section-label">탐색 축</span>
           <button class="quick-button" type="button" data-category="안전성">안전성 자료</button>
           <button class="quick-button" type="button" data-intervention="순수 GABA 섭취">순수 GABA <span class="quick-count" data-intervention-count="순수 GABA 섭취">__COUNT_PURE__</span></button>
           <button class="quick-button" type="button" data-preset="oral">경구·섭취 <span class="quick-count" data-route-count="경구·섭취">__COUNT_ORAL__</span></button>

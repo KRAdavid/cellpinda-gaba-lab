@@ -217,6 +217,8 @@ const required = [
   ,["Intervention classification URL restoration", '\"intervention\", \"routeGroup\", \"followup\", \"grade\"']
   ,["Oral intake quick-filter count", 'data-route-count=\"경구·섭취\"']
   ,["Evidence-kind quick-filter counts", "data-kind-count"]
+  ,["Quick-filter evidence scope label", "근거 범위"]
+  ,["Quick-filter exploration axis label", "탐색 축"]
   ,["Quick-filter count scope note", "빠른 필터의 숫자는 전체 검증 인덱스 기준"]
   ,["Quick-filter scope accessibility relation", 'aria-describedby=\"quick-scope-note\"']
   ,["Quick-filter semantic group", 'class=\"quick-filter-group\" role=\"group\" aria-label=\"연구구분 빠른 필터\"']
