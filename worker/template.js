@@ -2907,6 +2907,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var activeFilter = candidatePreviewFilter;
         section.dataset.filter = activeFilter;
         var filtered = filterCandidatePreviewRecords(candidates, activeFilter);
+        var candidateExportButton = el("candidate-preview-export");
+        if (candidateExportButton) {
+          var exportLabel = activeFilter === "all" ? "전체 후보 CSV" : "현재 필터 후보 CSV";
+          candidateExportButton.textContent = exportLabel;
+          candidateExportButton.setAttribute("aria-label", exportLabel + " 내보내기");
+        }
         var reviewedCount = candidates.filter(function (candidate) { return candidateReviewStatus(candidate) !== "미검토"; }).length;
         var progress = el("candidate-review-progress");
         if (progress) {

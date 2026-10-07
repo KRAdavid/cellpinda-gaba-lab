@@ -362,7 +362,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-list')?.textContent.includes('개인 검토 상태')"), true);
   assert.equal(await evaluate(client, "/PubMed 원문|DOI 원문/.test(document.querySelector('#candidate-preview-list a')?.textContent || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-list')?.textContent.includes('경로·섭취 표현')"), true);
-  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('전체 후보 CSV')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('현재 필터 후보 CSV')"), true);
   await evaluate(client, "document.querySelector('[data-candidate-detail]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-dialog')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-checklist')?.textContent.includes('경구·섭취 여부')"), true);
@@ -405,6 +405,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=entry-followup]')?.getAttribute('aria-pressed')"), "true");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "entry-followup");
   assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length > 0"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('현재 필터 후보 CSV')"), true);
   await navigate(`http://127.0.0.1:${httpPort}/?candidate=reviewed`);
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=reviewed]')?.getAttribute('aria-pressed')"), "true");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "reviewed");

@@ -75,6 +75,7 @@ const required = [
   ["Candidate gate explanation", "GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐"],
   ["Candidate entry reason", "큐 진입 신호"],
   ["Candidate CSV entry reason", '"큐 진입 신호"'],
+  ["Candidate CSV scope label", "현재 필터 후보 CSV"],
   ["Candidate recommendation summary", "검토 권고"],
   ["Candidate source link guard", "function candidateSourceUrl"],
   ["Candidate source label", "function candidateSourceLabel"],
