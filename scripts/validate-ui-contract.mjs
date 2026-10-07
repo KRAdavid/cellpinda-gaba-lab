@@ -215,6 +215,7 @@ const required = [
   ,["Intervention classification", "function interventionClass"]
   ,["Intervention classification URL state", "state.intervention"]
   ,["Intervention classification URL restoration", '\"intervention\", \"routeGroup\", \"followup\", \"grade\"']
+  ,["Oral intake quick-filter count", 'data-route-count=\"경구·섭취\"']
   ,["Publication follow-up filter", 'data-followup="signal"']
   ,["Publication follow-up URL state", "state.followup"]
   ,["Link audit transparency", "DB.meta.linkAudit"]

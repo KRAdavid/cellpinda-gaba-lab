@@ -2424,7 +2424,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <button class="quick-button" type="button" data-kind="규제">규제·안전성</button>
           <button class="quick-button" type="button" data-category="안전성">안전성 자료</button>
           <button class="quick-button" type="button" data-intervention="순수 GABA 섭취">순수 GABA <span class="quick-count" data-intervention-count="순수 GABA 섭취">__COUNT_PURE__</span></button>
-          <button class="quick-button" type="button" data-preset="oral">경구·섭취</button>
+          <button class="quick-button" type="button" data-preset="oral">경구·섭취 <span class="quick-count" data-route-count="경구·섭취">__COUNT_ORAL__</span></button>
           <button class="quick-button" type="button" data-effect-category="수면">수면</button>
           <details class="quick-advanced" id="quick-advanced">
             <summary data-quick-advanced-summary>추가 필터</summary>
@@ -5924,6 +5924,11 @@ const MARKETING_COUNTS = DATABASE.records.reduce((counts, record) => {
   counts[label] = (counts[label] || 0) + 1;
   return counts;
 }, {});
+const ROUTE_COUNTS = DATABASE.records.reduce((counts, record) => {
+  const label = String(record.routeGroup || "미기록");
+  counts[label] = (counts[label] || 0) + 1;
+  return counts;
+}, {});
 const DIRECTION_COUNTS = DATABASE.records.reduce((counts, record) => {
   const label = String(record.direction || "");
   counts[label] = (counts[label] || 0) + 1;
@@ -5932,6 +5937,7 @@ const DIRECTION_COUNTS = DATABASE.records.reduce((counts, record) => {
 const PAGE = PAGE_TEMPLATE
   .replace("__EMBEDDED_DATA__", JSON.stringify(DATABASE).replaceAll("<", "\\u003c"))
   .replaceAll("__COUNT_PURE__", String(INTERVENTION_COUNTS["순수 GABA 섭취"] || 0))
+  .replaceAll("__COUNT_ORAL__", String(ROUTE_COUNTS["경구·섭취"] || 0))
   .replaceAll("__COUNT_COMBINATION__", String(INTERVENTION_COUNTS["복합제·복합개입"] || 0))
   .replaceAll("__COUNT_FERMENTED__", String(INTERVENTION_COUNTS["GABA 생성 발효·프로바이오틱"] || 0))
   .replaceAll("__COUNT_RECEPTOR__", String(INTERVENTION_COUNTS["수용체 약물·작용제"] || 0))
