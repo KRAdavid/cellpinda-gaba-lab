@@ -293,6 +293,8 @@ const required = [
   ,["Result view mode toggle", "data-view-mode"]
   ,["Result compact view renderer", "compact-card"]
   ,["Result view URL state", "state.view"]
+  ,["Intervention boundary guide", "순수 GABA와 복합제"]
+  ,["Intervention class boundary guide", "발효·프로바이오틱·수용체 약물"]
   ,["Card study condition summary", 'fact("표본·대조군"']
   ,["Evidence scope selection state", "result-interpretation-stat-action[aria-pressed"]
   ,["Card verification date", "record.checked ? ' · 확인 '"]

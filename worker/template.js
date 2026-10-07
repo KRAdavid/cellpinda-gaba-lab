@@ -2640,6 +2640,14 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <h3>식약처 직접근거 · 해외 규제 참고</h3>
           <p><strong>식약처 직접근거</strong>는 국내 고시·공식 안내서이며, <strong>해외 규제 참고</strong>는 자료 구조와 유사사례를 찾는 용도입니다. 해외 승인만으로 국내 한시적 인정이 보장되지는 않습니다.</p>
         </article>
+        <article class="guide-card">
+          <h3>순수 GABA와 복합제</h3>
+          <p><strong>순수 GABA 섭취</strong>는 GABA 자체의 섭취 조건을 확인하는 자료입니다. <strong>복합제·복합개입</strong>은 다른 원료·제형·개입이 함께 사용되므로 결과를 GABA 단독 효능으로 바로 전환하지 않습니다.</p>
+        </article>
+        <article class="guide-card">
+          <h3>발효·프로바이오틱·수용체 약물</h3>
+          <p><strong>GABA 생성 발효·프로바이오틱</strong>은 균주·발효물의 개입이고, <strong>수용체 약물·작용제</strong>는 약리학적 개입입니다. 둘 다 경구 GABA 섭취 자료와 별도 레인으로 검토합니다.</p>
+        </article>
       </div>
     </section>
 
