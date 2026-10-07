@@ -1764,6 +1764,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .paper-card.compact-card .paper-meta { margin: 5px 0 8px; font-size: 11px; }
     .paper-card.compact-card .finding { margin: 8px 0; }
     .paper-card.compact-card .interpretation-grid { margin-top: 9px; }
+    .compact-facts { margin: 8px 0 0; padding: 7px 9px; border-radius: 7px; background: var(--surface-2); color: var(--muted); font-size: 10px; line-height: 1.45; }
+    .compact-facts strong { color: var(--ink-2); }
     .interpretation-caution {
       display: block;
       margin-top: 7px;
@@ -4618,6 +4620,11 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function fact(label, value) {
         return '<div class="fact"><dt>' + esc(label) + '</dt><dd>' + esc(value || "미보고") + '</dd></div>';
       }
+      function compactFacts(items) {
+        var values = items.filter(function (item) { return String(item[1] || "").trim(); });
+        if (!values.length) return '';
+        return '<p class="compact-facts" aria-label="간결 보기 핵심 조건">' + values.map(function (item) { return '<strong>' + esc(item[0]) + '</strong> ' + esc(item[1]); }).join(' · ') + '</p>';
+      }
       function linkButton(url, label, primary) {
         var safe = safeUrl(url);
         if (!safe) return "";
@@ -4990,6 +4997,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             fact("사용조건 일치", record.useMatch) +
             fact("자료품질", record.quality) +
           '</dl>' +
+          (state.view === "list" ? compactFacts([["안전성 영역", record.safetyArea], ["노출량", record.exposure], ["사용조건", record.useMatch], ["자료품질", record.quality]]) : "") +
           '<p class="regulatory-note">해외 규제자료는 식약처 인정의 자동 대체가 아닙니다. 국내 원료·공정·용도·노출량과 최신 고시를 함께 확인하세요.</p>' +
           '<details class="paper-detail">' +
             '<summary>심사 활용도·안전성 내용 자세히 보기</summary>' +
@@ -5044,6 +5052,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             fact("GABA 용량", record.dose) +
             fact("기간", record.duration) +
           '</dl>' +
+          (state.view === "list" ? compactFacts([["대상", record.population || record.species], ["GABA 용량", record.dose], ["기간", record.duration], ["대조군", record.comparator]]) : "") +
           '<details class="paper-detail">' +
             '<summary>연구조건·안전성·한계 자세히 보기</summary>' +
             '<dl class="detail-grid">' +

@@ -154,6 +154,7 @@ const required = [
   ["Anchor destination focus", "function focusAnchorHeading"],
   ["Mobile portal navigation", 'class="mobile-portal-jump"'],
   ["Mobile Intelligence navigation", 'href="#intelligence">Intelligence'],
+  ["Compact view key facts", "compact-facts"],
   ["Reduced-motion scroll behavior", "function preferredScrollBehavior"],
   ["Exploration presets", "data-preset"],
   ["Detail opener", "function openIntelligenceDetail"],
