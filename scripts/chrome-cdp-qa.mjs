@@ -178,6 +178,8 @@ try {
   assert.equal(await evaluate(client, "[...document.querySelectorAll('.discovery-stat')].some((node) => node.textContent.includes('신규 후보 게이트') && node.textContent.includes('GABA 신호 또는 후속조치 검색 신호'))"), true);
   await waitForExpression(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐')");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐')"), true);
+  await waitForExpression(client, "document.querySelector('.candidate-preview-card .candidate-preview-signal')?.parentElement?.textContent.includes('큐 진입 신호')");
+  assert.equal(await evaluate(client, "document.querySelector('.candidate-preview-card .candidate-preview-signal')?.parentElement?.textContent.includes('큐 진입 신호')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.paper-card .paper-meta')?.textContent.includes('확인')"), true);
   const accessibility = await evaluate(client, `(() => {
     const visible = (node) => !node.hidden && !node.closest('[hidden]') && node.getAttribute('aria-hidden') !== 'true';
