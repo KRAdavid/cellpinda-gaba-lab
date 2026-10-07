@@ -1918,12 +1918,16 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       bottom: 24px;
       z-index: 200;
       transform: translate(-50%, 30px);
+      max-width: calc(100vw - 32px);
       padding: 11px 15px;
       border-radius: 10px;
       background: var(--ink);
       color: #fff;
       font-size: 13px;
       font-weight: 800;
+      line-height: 1.4;
+      text-align: center;
+      overflow-wrap: anywhere;
       opacity: 0;
       pointer-events: none;
       transition: opacity .2s ease, transform .2s ease;

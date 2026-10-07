@@ -219,6 +219,7 @@ const required = [
   ,["Evidence-kind quick-filter counts", "data-kind-count"]
   ,["Quick-filter evidence scope label", "근거 범위"]
   ,["Quick-filter exploration axis label", "탐색 축"]
+  ,["Responsive toast width", "max-width: calc(100vw - 32px)"]
   ,["Quick-filter count scope note", "빠른 필터의 숫자는 전체 검증 인덱스 기준"]
   ,["Quick-filter scope accessibility relation", 'aria-describedby=\"quick-scope-note\"']
   ,["Quick-filter semantic group", 'class=\"quick-filter-group\" role=\"group\" aria-label=\"연구구분 빠른 필터\"']
