@@ -1659,6 +1659,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       gap: 6px;
       margin-bottom: 10px;
     }
+    .paper-badges-more { flex: 0 0 auto; }
+    .paper-badges-more > summary { display: inline-flex; align-items: center; min-height: 26px; padding: 3px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface-2); color: var(--teal-dark); font-size: 11px; font-weight: 800; cursor: pointer; list-style: none; }
+    .paper-badges-more > summary::-webkit-details-marker { display: none; }
+    .paper-badges-more > summary::after { content: "＋"; margin-left: 4px; color: var(--muted); }
+    .paper-badges-more[open] > summary { border-color: rgba(15,118,110,.3); background: var(--teal-soft); }
+    .paper-badges-more[open] > summary::after { content: "－"; }
+    .paper-badges-more-list { display: flex; flex: 1 0 100%; flex-wrap: wrap; gap: 6px; }
     .badge {
       display: inline-flex;
       align-items: center;
@@ -3650,6 +3657,9 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var label = bucket === "stale" ? "재확인 권고" : "확인일 미상";
         return '<span class="badge freshness-badge" title="' + esc(label + '은 확인일 상태이며 근거의 질·효능·규제 승인을 평가하지 않습니다.') + '">' + label + '</span>';
       }
+      function paperSecondaryBadges(record, identifierLabel) {
+        return '<details class="paper-badges-more"><summary>서지·추출 정보</summary><div class="paper-badges-more-list" aria-label="서지·추출 보조 정보"><span class="badge ' + badgeClass("sci", record.sciGroup) + '">' + esc(record.sciGroup || "SCI 미분류") + '</span><span class="badge ' + badgeClass("extraction", record.extraction) + '">추출 ' + esc(record.extraction || "미분류") + '</span><span class="badge">' + esc(identifierLabel) + '</span></div></details>';
+      }
 
       function recordDoseValues(record) {
         return [record.dose, record.exposure].join(" ")
@@ -5051,10 +5061,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             (publicationFollowupLabel(record) ? '<span class="badge followup-badge" title="철회·정정·우려표명 등 출판 후속조치 신호입니다. 원문 공지를 확인하세요.">' + esc(publicationFollowupLabel(record)) + '</span>' : '') +
             marketingFilterBadge(record) +
             '<button class="badge intervention intervention-filter-badge" type="button" data-intervention="' + esc(interventionClass(record)) + '" aria-label="' + esc(interventionClass(record) + ' 자료로 필터') + '">개입 · ' + esc(interventionShortLabel(record)) + '</button>' +
-            '<span class="badge ' + badgeClass("sci", record.sciGroup) + '">' + esc(record.sciGroup) + '</span>' +
-            '<span class="badge ' + badgeClass("extraction", record.extraction) + '">추출 ' + esc(record.extraction) + '</span>' +
-            '<span class="badge">' + esc(identifierLabel) + '</span>' +
             (record.direction ? '<span class="badge ' + badgeClass("direction", record.direction) + '">' + esc(record.direction) + '</span>' : "") +
+            paperSecondaryBadges(record, identifierLabel) +
           '</div>' +
           '<h3 class="paper-title"><span class="title-label">' + esc(koreanTitleLabel(record)) + '</span><span class="paper-title-korean">' + esc(koreanTitle(record)) + '</span></h3>' +
           '<p class="original-title" lang="en"><span class="title-label">영문 원제</span>' + esc(record.title) + '</p>' +

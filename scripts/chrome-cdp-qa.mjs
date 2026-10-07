@@ -577,6 +577,8 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#freshness-label')?.tagName"), "BUTTON");
   assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-copy-record-link]'))"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-copy-record-link]')?.textContent.includes('사이트 상세 링크')"), true);
+  assert.equal(await evaluate(client, "Boolean(document.querySelector('.paper-badges-more'))"), true);
+  assert.equal(await evaluate(client, "document.querySelector('.paper-badges-more > summary')?.textContent.includes('서지·추출 정보')"), true);
   await evaluate(client, "window.__qaRecordLink = ''; Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async function (value) { window.__qaRecordLink = value; } } }); window.__qaRecordLinkOriginal = location.href; history.replaceState({}, '', '?q=현수교%20스트레스&candidateId=CANDIDATE-1&candidate=priority&compare=H-1976-026&read=H-1980-001&review=H-1982-041&reviewFilter=freshness')");
   await evaluate(client, "document.querySelector('[data-copy-record-link]').click()");
   await sleep(80);
