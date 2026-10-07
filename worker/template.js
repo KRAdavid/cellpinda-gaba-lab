@@ -4235,9 +4235,9 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var link = location.origin + location.pathname + "?" + params.toString();
         try {
           await navigator.clipboard.writeText(link);
-          toast("자료 링크를 복사했습니다");
+          toast("사이트 상세 링크를 복사했습니다");
         } catch (_) {
-          openCopyDialog("자료 링크", "클립보드 권한이 없으면 아래 링크를 선택해 직접 복사하세요.", link, "자료 링크를 복사했습니다");
+          openCopyDialog("사이트 상세 링크", "클립보드 권한이 없으면 아래 링크를 선택해 직접 복사하세요.", link, "사이트 상세 링크를 복사했습니다");
         }
       }
       async function copyCandidateLink(candidateId) {
@@ -4605,7 +4605,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             linkButton(sourcePrimary, primarySourceLabel(record), true) +
           (record.doiUrl && record.doiUrl !== sourcePrimary ? linkButton(record.doiUrl, "DOI 원문", false) : "") +
           (record.pubmedUrl && record.pubmedUrl !== sourcePrimary ? linkButton(record.pubmedUrl, "PubMed 원문", false) : "") +
-          '<button type="button" data-copy-record-link="' + esc(record.id) + '">자료 링크 복사</button>' +
+          '<button type="button" data-copy-record-link="' + esc(record.id) + '">사이트 상세 링크 복사</button>' +
           '<button type="button" data-copy-citation="' + esc(record.id) + '">인용 정보 복사</button>' +
           '<button type="button" data-copy-brief="' + esc(record.id) + '">근거 브리프 복사</button>' +
           '<button type="button" data-compare-toggle="' + esc(record.id) + '" aria-pressed="false">비교에 추가</button>' +
@@ -5029,7 +5029,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             '</dl>' +
           '</details>' +
           '<div class="paper-footer">' +
-            linkButton(sourcePrimary, primarySourceLabel(record), true) + decisionExtra + '<button class="paper-review" type="button" data-intelligence-id="' + esc(record.id) + '">상세 검토</button><button class="paper-citation" type="button" data-copy-record-link="' + esc(record.id) + '">상세 링크 복사</button><button class="paper-citation" type="button" data-copy-citation="' + esc(record.id) + '">인용 복사</button><button class="paper-compare" type="button" data-compare-toggle="' + esc(record.id) + '" aria-pressed="false">비교에 추가</button>' +
+            linkButton(sourcePrimary, primarySourceLabel(record), true) + decisionExtra + '<button class="paper-review" type="button" data-intelligence-id="' + esc(record.id) + '">상세 검토</button><button class="paper-citation" type="button" data-copy-record-link="' + esc(record.id) + '">사이트 상세 링크 복사</button><button class="paper-citation" type="button" data-copy-citation="' + esc(record.id) + '">인용 복사</button><button class="paper-compare" type="button" data-compare-toggle="' + esc(record.id) + '" aria-pressed="false">비교에 추가</button>' +
             '<span class="record-id">' + esc(record.id) + '</span>' +
           '</div>' +
         '</article>';
@@ -5088,7 +5088,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             '</dl>' +
           '</details>' +
           '<div class="paper-footer">' +
-            linkButton(sourcePrimary, sourceLabel, true) + pubmedExtra + doiExtra + '<button class="paper-review" type="button" data-intelligence-id="' + esc(record.id) + '">상세 검토</button><button class="paper-citation" type="button" data-copy-record-link="' + esc(record.id) + '">상세 링크 복사</button><button class="paper-citation" type="button" data-copy-citation="' + esc(record.id) + '">인용 복사</button><button class="paper-compare" type="button" data-compare-toggle="' + esc(record.id) + '" aria-pressed="false">비교에 추가</button><button class="paper-read-later" type="button" data-reading-toggle="' + esc(record.id) + '" aria-pressed="false">읽기 목록에 저장</button>' +
+            linkButton(sourcePrimary, sourceLabel, true) + pubmedExtra + doiExtra + '<button class="paper-review" type="button" data-intelligence-id="' + esc(record.id) + '">상세 검토</button><button class="paper-citation" type="button" data-copy-record-link="' + esc(record.id) + '">사이트 상세 링크 복사</button><button class="paper-citation" type="button" data-copy-citation="' + esc(record.id) + '">인용 복사</button><button class="paper-compare" type="button" data-compare-toggle="' + esc(record.id) + '" aria-pressed="false">비교에 추가</button><button class="paper-read-later" type="button" data-reading-toggle="' + esc(record.id) + '" aria-pressed="false">읽기 목록에 저장</button>' +
             '<span class="record-id">' + esc(record.id) + '</span>' +
           '</div>' +
         '</article>';
