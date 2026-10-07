@@ -40523,10 +40523,10 @@
       "publishedAt": "2026-10-07T20:56:23.126685Z",
       "verification": "Sites v803 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
       "currentCodeDeployment": {
-        "siteVersion": 818,
-        "sourceCommit": "8d78ec87ad6c0fb49aaed13b3e354ffb7c3d8eec",
-        "publicMirrorCommit": "390abf8e65d35d320cef9ebe2bfeba86755b3ead",
-        "publishedAt": "2026-10-07T22:12:20.630294Z"
+        "siteVersion": 821,
+        "sourceCommit": "feb9707238567b0b2f76c04c7f1e9a68a34d82fe",
+        "publicMirrorCommit": "7e1aeddf2f317e3b918a9e4e995c73b874f88a13",
+        "publishedAt": "2026-10-07T22:29:33.723891Z"
       },
       "currentMetadataDeployment": {
         "siteVersion": 819,
