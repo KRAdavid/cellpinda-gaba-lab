@@ -27,11 +27,19 @@ const openAlexAccessMode = String(summary.openAlex?.accessMode || "unknown");
 const hasOpenAlexError = failedSources.includes("OpenAlex");
 const openAlexErrors = errors.filter((entry) => String(entry?.source || "").startsWith("OpenAlex:"));
 const hasOpenAlexRateLimit = openAlexErrors.some((entry) => /\b429\b|rate limit/i.test(String(entry?.error || "")));
+const openAlexRetryAfterSeconds = Math.max(0, ...openAlexErrors.map((entry) => Number(String(entry?.error || "").match(/retryAfter=(\d+)s/i)?.[1] || 0)));
+const formatRetryAfter = (seconds) => {
+  if (!seconds) return "";
+  const minutes = Math.max(1, Math.round(seconds / 60));
+  if (minutes >= 60) return `약 ${Math.floor(minutes / 60)}시간 ${minutes % 60}분 후`;
+  return `약 ${minutes}분 후`;
+};
+const retryAfterNote = formatRetryAfter(openAlexRetryAfterSeconds);
 const recoveryHint = hasOpenAlexError
   ? openAlexAccessMode === "anonymous"
     ? "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 예약 실행 환경에 설정한 뒤 재실행"
     : hasOpenAlexRateLimit
-      ? "운영자 조치: OpenAlex rate limit 재설정 후 재실행"
+      ? `운영자 조치: OpenAlex rate limit 재설정${retryAfterNote ? `(${retryAfterNote})` : ""} 후 재실행`
       : openAlexAccessMode === "unknown"
         ? "운영자 조치: OpenAlex 인증·응답 상태를 확인한 뒤 재실행"
         : "운영자 조치: OpenAlex 응답 상태를 확인한 뒤 재실행"
@@ -46,6 +54,7 @@ const attempt = {
   failedSources: failedSources.slice(0, 8),
   openAlexAccessMode,
   openAlexRateLimited: hasOpenAlexRateLimit,
+  openAlexRetryAfterSeconds,
   recoveryHint,
   message: errors.length
     ? "일부 원천 응답 오류로 공개 인덱스 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다."

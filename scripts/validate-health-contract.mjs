@@ -19,6 +19,7 @@ if (discovery?.lastAttempt) {
   if (!Number.isInteger(Number(discovery.lastAttempt.sourceErrorCount)) || Number(discovery.lastAttempt.sourceErrorCount) < 0) invalid.push("lastAttempt.sourceErrorCount");
   if (!String(discovery.lastAttempt.recoveryHint || "").trim()) invalid.push("lastAttempt.recoveryHint");
   if (typeof discovery.lastAttempt.openAlexRateLimited !== "boolean") invalid.push("lastAttempt.openAlexRateLimited");
+  if (!Number.isInteger(Number(discovery.lastAttempt.openAlexRetryAfterSeconds)) || Number(discovery.lastAttempt.openAlexRetryAfterSeconds) < 0) invalid.push("lastAttempt.openAlexRetryAfterSeconds");
 }
 if (!Array.isArray(discovery?.candidateExport) || discovery.candidateExport.length < Number(discovery?.stagedCandidates || 0)) invalid.push("candidateExport");
 if (!discovery?.screeningCounts || !Number.isFinite(Number(discovery?.manualDecisionsPreserved)) || !Number.isFinite(Number(discovery?.manualDecisionsMatched))) invalid.push("screeningCounts/manualDecisions");
