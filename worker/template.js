@@ -5111,8 +5111,11 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var clinical = list.filter(function (record) { return record.kind === "임상"; }).length;
         var animal = list.filter(function (record) { return record.kind === "동물"; }).length;
         var regulatory = list.filter(function (record) { return record.kind === "규제"; }).length;
-        var review = list.filter(function (record) { return record.status === "후보" || record.status === "보류" || record.extraction === "부분"; }).length;
+        var reviewQueueIds = new Set(buildReviewQueue().map(function (item) { return item.record.id; }));
+        var review = list.filter(function (record) { return reviewQueueIds.has(record.id); }).length;
         var oral = list.filter(function (record) { return record.routeGroup === "경구·섭취"; }).length;
+        var humanDirect = list.filter(function (record) { return record.kind === "임상" && record.status === "포함" && record.intervention === "순수 GABA 섭취"; }).length;
+        var sourceAvailable = list.filter(function (record) { return Boolean(primarySourceUrl(record)); }).length;
         var auditOk = list.filter(function (record) { var audit = sourceAuditRecord(record); return audit && audit.status === "ok"; }).length;
         var auditUnavailable = list.filter(function (record) { var audit = sourceAuditRecord(record); return audit && audit.status === "unavailable"; }).length;
         var clinicalAction = clinical ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="clinical" aria-pressed="' + String(state.kind === "임상") + '" aria-label="인체 연구 ' + clinical.toLocaleString("ko-KR") + '건만 보기">인체 연구 <strong>' + clinical.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">인체 연구 <strong>0</strong></span>';
@@ -5137,7 +5140,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             '<span class="result-interpretation-stat">추가 확인 <strong>' + review.toLocaleString("ko-KR") + '</strong></span>' +
           '</div>' +
           '<p class="result-interpretation-note">인체·동물·규제 자료는 근거의 범위가 다릅니다. <strong>' + list.length.toLocaleString("ko-KR") + '건</strong>을 확인할 때 인체 연구와 원문 상태를 먼저 비교하세요.</p>' +
-          '<div class="result-interpretation-actions" aria-label="현재 결과에서 다음 행동"><span class="result-interpretation-actions-label">다음 행동</span><button class="result-interpretation-route" type="button" data-result-preset="human-direct">인체 직접근거만 보기</button>' + oralAction + '<button class="result-interpretation-route" type="button" data-result-preset="source">원문 연결 자료만 보기</button>' + (review ? '<button class="result-interpretation-route" type="button" data-result-preset="review">추가 검토 큐 보기</button>' : '') + '</div>' +
+          '<div class="result-interpretation-actions" aria-label="현재 결과에서 다음 행동"><span class="result-interpretation-actions-label">다음 행동</span><button class="result-interpretation-route" type="button" data-result-preset="human-direct">인체 직접근거만 보기 · ' + humanDirect.toLocaleString("ko-KR") + '건</button>' + oralAction + '<button class="result-interpretation-route" type="button" data-result-preset="source">원문 연결 자료만 보기 · ' + sourceAvailable.toLocaleString("ko-KR") + '건</button>' + (review ? '<button class="result-interpretation-route" type="button" data-result-preset="review">추가 검토 큐 보기 · ' + review.toLocaleString("ko-KR") + '건</button>' : '') + '</div>' +
           '<p class="result-interpretation-guard"><strong>해석 경계</strong> ' + esc(guard) + '</p>' +
           (review ? '<button class="result-interpretation-action" id="result-review-jump" type="button">추가 확인 큐 보기 · ' + review.toLocaleString("ko-KR") + '건</button>' : '');
       }
