@@ -724,6 +724,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .candidate-preview-meta span { padding: 3px 6px; border-radius: 6px; background: #fff; color: var(--muted); font-size: 10px; font-weight: 800; }
     .candidate-preview-signal { margin-top: 9px !important; color: var(--ink-2) !important; }
     .candidate-preview-card a { display: inline-flex; margin-top: 10px; color: var(--teal-dark); font-size: 11px; font-weight: 900; text-decoration: none; }
+    .candidate-preview-empty { grid-column: 1 / -1; margin: 14px 0 0; padding: 16px; border: 1px dashed rgba(180,132,35,.34); border-radius: 10px; background: var(--amber-soft); color: var(--ink-2); font-size: 11px; line-height: 1.55; }
     .candidate-preview-detail { display: inline-flex; margin-top: 10px; margin-right: 8px; min-height: 29px; padding: 5px 8px; border: 1px solid var(--teal); border-radius: 8px; background: var(--teal); color: #fff; font-size: 10px; font-weight: 900; cursor: pointer; }
     .candidate-preview-more { display: inline-flex; margin-top: 14px; min-height: 34px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--teal-dark); font-size: 11px; font-weight: 900; cursor: pointer; }
     .candidate-detail-dialog { width: min(760px, calc(100% - 28px)); max-height: min(780px, calc(100vh - 36px)); margin: auto; padding: 0; border: 0; border-radius: 18px; background: #fff; color: var(--ink); box-shadow: 0 24px 80px rgba(19,43,58,.24); }
@@ -3046,8 +3047,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function candidateSourceLabel(candidate) {
         if (candidate.pmid) return "PubMed 원문";
         if (candidate.doi) return "DOI 원문";
-        if (candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov")) return "ClinicalTrials.gov 등록시험";
-        if ((candidate.source || []).includes("preprint")) return "preprint 원문";
+        if (candidate.sourceLane === "registry" || candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov")) return "ClinicalTrials.gov 등록시험";
+        if (candidate.sourceLane === "preprint" || (candidate.source || []).includes("preprint")) return "preprint 원문";
         return "원문 식별자";
       }
       function candidateReviewStatus(candidate) {
@@ -3071,8 +3072,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           if (activeFilter === "entry-direct") return candidate.candidateEntryReason === "제목·초록 GABA 신호";
           if (activeFilter === "entry-followup") return candidate.candidateEntryReason === "GABA 후속조치 검색 신호";
           if (activeFilter === "followup") return (candidate.exclusionSignals || []).length > 0 || /출판 후속조치|철회|정정|우려표명/.test(candidate.screeningRecommendation || "");
-          if (activeFilter === "registry") return Boolean(candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov"));
-          if (activeFilter === "preprint") return (candidate.source || []).includes("preprint") || (candidate.publicationTypes || []).some(function (type) { return /preprint/i.test(type); });
+          if (activeFilter === "registry") return candidate.sourceLane === "registry" || Boolean(candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov"));
+          if (activeFilter === "preprint") return candidate.sourceLane === "preprint" || (candidate.source || []).includes("preprint") || (candidate.publicationTypes || []).some(function (type) { return /preprint/i.test(type); });
           if (activeFilter === "reviewed") return candidateReviewStatus(candidate) !== "미검토";
           if (activeFilter === "unreviewed") return candidateReviewStatus(candidate) === "미검토";
           return true;
@@ -3142,6 +3143,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           setActiveToggle(button, active);
         });
         var expanded = section.dataset.expanded === "true";
+        if (!filtered.length) {
+          var emptyLabel = candidateFilterLabels[activeFilter] || "현재 조건";
+          list.innerHTML = '<div class="candidate-preview-empty" role="status"><strong>' + esc(emptyLabel) + ' 후보가 현재 미리보기에 없습니다.</strong><br>최신 탐색 원천에서 수집된 자료도 OpenAlex·다른 원천의 완전성, 원문·섭취 경로·시험 상태 확인을 통과하기 전에는 확정 인덱스에 자동 반영하지 않습니다. 전체 후보로 돌아가거나 다음 탐색 실행 후 다시 확인하세요.</div>';
+          if (more) more.hidden = true;
+          return;
+        }
         list.innerHTML = filtered.slice(0, expanded ? 24 : 6).map(function (candidate) {
           var sourceUrl = candidateSourceUrl(candidate);
           var signals = candidateHumanSignals(candidate);
