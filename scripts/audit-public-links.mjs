@@ -60,10 +60,11 @@ await Promise.all(Array.from({ length: Math.min(8, records.length) }, worker));
 
 const failed = recordResults.filter((item) => item.status === "failed");
 const blocked = recordResults.filter((item) => item.status === "unavailable");
+const rateLimited = recordResults.filter((item) => item.failures.some((failure) => Number(failure) === 429 || String(failure) === "429"));
 recordResults.sort((a, b) => String(a.id).localeCompare(String(b.id)));
 const redirects = linkResults.filter((item) => item.finalUrl && item.finalUrl !== item.url);
 const statusCounts = linkResults.reduce((counts, item) => { const key = String(item.status || "fetch_failed"); counts[key] = (counts[key] || 0) + 1; return counts; }, {});
-const summary = { valid: failed.length === 0, checkedAt: new Date().toISOString(), records: records.length, recordsWithLinks: recordResults.filter((item) => item.attempts > 0).length, resolved: recordResults.filter((item) => item.status === "ok").length, blockedCount: blocked.length, failed: failed.length, redirects: redirects.length, attempts: linkResults.length, statusCounts, failures: failed.slice(0, 25), recordStatuses: recordResults };
+const summary = { valid: failed.length === 0, checkedAt: new Date().toISOString(), records: records.length, recordsWithLinks: recordResults.filter((item) => item.attempts > 0).length, resolved: recordResults.filter((item) => item.status === "ok").length, blockedCount: blocked.length, rateLimitedCount: rateLimited.length, failed: failed.length, redirects: redirects.length, attempts: linkResults.length, statusCounts, failures: failed.slice(0, 25), recordStatuses: recordResults };
 if (writeMeta) {
   const dataPath = resolve(publicRoot, "worker", "data.json");
   const database = JSON.parse(await readFile(dataPath, "utf8"));
@@ -74,6 +75,7 @@ if (writeMeta) {
     recordsWithLinks: summary.recordsWithLinks,
     resolved: summary.resolved,
     blockedCount: summary.blockedCount,
+    rateLimitedCount: summary.rateLimitedCount,
     failed: summary.failed,
     redirects: summary.redirects,
     attempts: summary.attempts,

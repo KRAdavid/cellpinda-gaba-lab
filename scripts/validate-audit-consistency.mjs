@@ -11,9 +11,12 @@ const publicMode = process.argv.includes("--public");
 const resolved = Number(linkAudit.resolved || 0);
 const blocked = Number(linkAudit.blockedCount || 0);
 const failed = Number(linkAudit.failed || 0);
+const rateLimited = Number(linkAudit.rateLimitedCount || 0);
 if (linkAudit.recordStatuses != null) {
   assert.equal(Array.isArray(linkAudit.recordStatuses), true, "record-level link audit statuses must be an array");
   assert.equal(linkAudit.recordStatuses.length, Number(linkAudit.records || 0), "record-level link audit statuses must cover every record");
+  const derivedRateLimited = linkAudit.recordStatuses.filter((item) => Array.isArray(item.failures) && item.failures.some((failure) => Number(failure) === 429 || String(failure) === "429")).length;
+  assert.equal(rateLimited, derivedRateLimited, "link-audit rate-limit count must match record-level statuses");
 }
 assert.equal(failed, 0, `worker/data.json reports ${failed} failed link-audit checks`);
 
