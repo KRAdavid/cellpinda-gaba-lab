@@ -39728,10 +39728,10 @@
       "publishedAt": "2026-10-06T17:34:22.042242Z",
       "verification": "Sites v485 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
       "currentCodeDeployment": {
-        "siteVersion": 659,
-        "sourceCommit": "795c48e3e784c6e25dd800063808c1ef18440404",
-        "publicMirrorCommit": "3666530823a375420abc8984c398aeb1fa77121e",
-        "publishedAt": "2026-10-07T07:48:30.000Z"
+        "siteVersion": 660,
+        "sourceCommit": "0f8df47906d193a0bc0c9122abfe66484aa8e578",
+        "publicMirrorCommit": "14dd96801b8d457880c02f7afb964709ce974613",
+        "publishedAt": "2026-10-07T07:54:30.000Z"
       }
     },
     "notice": "이 웹 인덱스는 배포 시점의 읽기 전용 스냅샷입니다."
