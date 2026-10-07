@@ -1572,6 +1572,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .result-interpretation-action { justify-self: start; min-height: 30px; padding: 5px 9px; border: 1px solid rgba(15,118,110,.3); border-radius: 8px; background: #fff; color: var(--teal-dark); font-size: 11px; font-weight: 900; cursor: pointer; }
     .result-interpretation-action:hover, .result-interpretation-action:focus-visible { border-color: var(--teal); background: var(--teal-soft); }
     .result-interpretation-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; grid-column: 1 / -1; }
+    .result-interpretation-action-group { display: flex; flex: 1 1 100%; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .result-interpretation-action-group + .result-interpretation-action-group { border-top: 1px solid rgba(15,118,110,.12); padding-top: 6px; }
     .result-interpretation-actions-label { color: var(--muted); font-size: 10px; font-weight: 900; }
     .result-interpretation-route { min-height: 28px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink-2); font-size: 10px; font-weight: 850; cursor: pointer; }
     .result-interpretation-route:hover, .result-interpretation-route:focus-visible { border-color: var(--teal); background: var(--teal-soft); color: var(--teal-dark); }
@@ -5303,7 +5305,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             '<span class="result-interpretation-stat">추가 확인 <strong>' + review.toLocaleString("ko-KR") + '</strong></span>' +
           '</div>' +
           '<p class="result-interpretation-note">인체·동물·규제 자료는 근거의 범위가 다릅니다. <strong>' + list.length.toLocaleString("ko-KR") + '건</strong>을 확인할 때 인체 연구와 원문 상태를 먼저 비교하세요.</p>' +
-          '<div class="result-interpretation-actions" role="group" aria-label="현재 결과에서 권장 검토 순서"><span class="result-interpretation-actions-label">권장 첫 단계</span>' + firstAction + '<span class="result-interpretation-actions-label">다른 경로</span>' + secondaryHumanAction + secondaryOralAction + sourceAction + reviewAction + '</div>' +
+          '<div class="result-interpretation-actions" role="group" aria-label="현재 결과에서 권장 검토 순서"><div class="result-interpretation-action-group" role="group" aria-label="권장 첫 검토 단계"><span class="result-interpretation-actions-label">권장 첫 단계</span>' + firstAction + '</div><div class="result-interpretation-action-group" role="group" aria-label="다른 검토 경로"><span class="result-interpretation-actions-label">다른 경로</span>' + secondaryHumanAction + secondaryOralAction + sourceAction + reviewAction + '</div></div>' +
           marketingActions +
           '<p class="result-interpretation-guard"><strong>해석 경계</strong> ' + esc(guard) + '</p>' +
           (review ? '<button class="result-interpretation-action" id="result-review-jump" type="button">추가 확인 큐 보기 · ' + review.toLocaleString("ko-KR") + '건</button>' : '');

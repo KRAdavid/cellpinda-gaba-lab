@@ -275,6 +275,8 @@ try {
   assert.equal(await evaluate(client, "parseFloat(getComputedStyle(document.querySelector('#toast')).maxWidth) <= window.innerWidth - 32"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-stats')?.getAttribute('role')"), "group");
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-actions')?.getAttribute('role')"), "group");
+  assert.equal(await evaluate(client, "document.querySelectorAll('.result-interpretation-action-group').length"), 2);
+  assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-action-group[aria-label=\"권장 첫 검토 단계\"]')?.textContent.includes('권장 첫 단계')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#result-interpretation')?.getAttribute('role')"), "region");
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-marketing')?.getAttribute('aria-label')"), "현재 결과의 마케팅 활용 검토 범위");
   assert.equal(await evaluate(client, "document.querySelector('#result-marketing-disclosure')?.open"), false);
