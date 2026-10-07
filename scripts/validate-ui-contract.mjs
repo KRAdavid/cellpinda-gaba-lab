@@ -114,6 +114,8 @@ const required = [
   ["Candidate direct-signal filter", 'data-candidate-filter="entry-direct"'],
   ["Candidate text-signal wording", "GABA 언급 신호"],
   ["Candidate follow-up-signal filter", 'data-candidate-filter="entry-followup"'],
+  ["Candidate registry filter", 'data-candidate-filter="registry"'],
+  ["Candidate preprint filter", 'data-candidate-filter="preprint"'],
   ["Immunity search suggestions", "면역 타액 IgA"],
   ["Canada monograph search suggestion", "캐나다 모노그래프"],
   ["Progressive search suggestions", "search-suggestions-more"],

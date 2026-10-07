@@ -2249,6 +2249,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             <button class="candidate-preview-filter" type="button" data-candidate-filter="entry-followup" aria-pressed="false">후속조치 신호</button>
             <button class="candidate-preview-filter" type="button" data-candidate-filter="priority" aria-pressed="false">자동 우선검토</button>
             <button class="candidate-preview-filter" type="button" data-candidate-filter="followup" aria-pressed="false">출판 후속조치</button>
+            <button class="candidate-preview-filter" type="button" data-candidate-filter="registry" aria-pressed="false">등록시험</button>
+            <button class="candidate-preview-filter" type="button" data-candidate-filter="preprint" aria-pressed="false">preprint</button>
             <button class="candidate-preview-filter review" type="button" data-candidate-filter="reviewed" aria-pressed="false">수동 검토됨</button>
             <button class="candidate-preview-filter review" type="button" data-candidate-filter="unreviewed" aria-pressed="false">미검토</button>
           </div>
@@ -3039,11 +3041,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function candidateSourceUrl(candidate) {
         if (candidate.pmid) return "https://pubmed.ncbi.nlm.nih.gov/" + encodeURIComponent(candidate.pmid) + "/";
         if (candidate.doi) return "https://doi.org/" + encodeURIComponent(candidate.doi);
-        return "";
+        return candidate.sourceUrl || (candidate.registryId ? "https://clinicaltrials.gov/study/" + encodeURIComponent(candidate.registryId) : "");
       }
       function candidateSourceLabel(candidate) {
         if (candidate.pmid) return "PubMed 원문";
         if (candidate.doi) return "DOI 원문";
+        if (candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov")) return "ClinicalTrials.gov 등록시험";
+        if ((candidate.source || []).includes("preprint")) return "preprint 원문";
         return "원문 식별자";
       }
       function candidateReviewStatus(candidate) {
@@ -3067,6 +3071,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           if (activeFilter === "entry-direct") return candidate.candidateEntryReason === "제목·초록 GABA 신호";
           if (activeFilter === "entry-followup") return candidate.candidateEntryReason === "GABA 후속조치 검색 신호";
           if (activeFilter === "followup") return (candidate.exclusionSignals || []).length > 0 || /출판 후속조치|철회|정정|우려표명/.test(candidate.screeningRecommendation || "");
+          if (activeFilter === "registry") return Boolean(candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov"));
+          if (activeFilter === "preprint") return (candidate.source || []).includes("preprint") || (candidate.publicationTypes || []).some(function (type) { return /preprint/i.test(type); });
           if (activeFilter === "reviewed") return candidateReviewStatus(candidate) !== "미검토";
           if (activeFilter === "unreviewed") return candidateReviewStatus(candidate) === "미검토";
           return true;
@@ -3119,7 +3125,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (progress) {
           progress.textContent = "현재 미리보기 " + candidates.length.toLocaleString("ko-KR") + "건 중 개인 검토 " + reviewedCount.toLocaleString("ko-KR") + "건 · 미검토 " + Math.max(0, candidates.length - reviewedCount).toLocaleString("ko-KR") + "건 · 원본·Sheets 미변경";
         }
-        var candidateFilterLabels = { all: "전체", "entry-direct": "GABA 언급 신호", "entry-followup": "후속조치 신호", priority: "자동 우선검토", followup: "출판 후속조치", reviewed: "수동 검토됨", unreviewed: "미검토" };
+        var candidateFilterLabels = { all: "전체", "entry-direct": "GABA 언급 신호", "entry-followup": "후속조치 신호", priority: "자동 우선검토", followup: "출판 후속조치", registry: "등록시험", preprint: "preprint", reviewed: "수동 검토됨", unreviewed: "미검토" };
         document.querySelectorAll("[data-candidate-filter]").forEach(function (button) {
           var filterKey = button.dataset.candidateFilter || "all";
           var filterCount = filterCandidatePreviewRecords(candidates, filterKey).length;

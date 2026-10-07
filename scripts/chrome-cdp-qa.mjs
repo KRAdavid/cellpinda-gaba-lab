@@ -456,6 +456,8 @@ try {
   assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length"), 6);
   await evaluate(client, "document.querySelector('[data-candidate-filter=followup]').click()");
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=followup]')?.getAttribute('aria-pressed')"), "true");
+  assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=registry]')?.textContent.includes('등록시험')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=preprint]')?.textContent.includes('preprint')"), true);
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "followup");
   assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length > 0"), true);
   assert.equal(await evaluate(client, "document.querySelector('.candidate-preview-note')?.textContent.includes('전체 후보 1,000건')"), true);
