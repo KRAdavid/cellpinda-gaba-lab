@@ -6381,6 +6381,21 @@ const PUBLIC_ORIGIN = "https://gaba-evidence-index-kr.dubaissday.chatgpt.site";
 const ROBOTS = `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${PUBLIC_ORIGIN}/sitemap.xml\n`;
 const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${PUBLIC_ORIGIN}/</loc></url></urlset>`;
 
+function candidateSourceLaneCounts(discovery) {
+  const counts = { literature: 0, registry: 0, preprint: 0 };
+  const candidates = Array.isArray(discovery?.candidateExport) ? discovery.candidateExport : [];
+  for (const candidate of candidates) {
+    const sources = Array.isArray(candidate?.source) ? candidate.source : [];
+    const lane = candidate?.sourceLane === "registry" || candidate?.registryId || sources.includes("ClinicalTrials.gov")
+      ? "registry"
+      : candidate?.sourceLane === "preprint" || sources.includes("preprint") || (candidate?.publicationTypes || []).some((type) => /preprint/i.test(String(type)))
+        ? "preprint"
+        : "literature";
+    counts[lane] += 1;
+  }
+  return counts;
+}
+
 export default {
   async fetch(request) {
     const url = new URL(request.url);
@@ -6420,6 +6435,7 @@ export default {
          stagedCandidates: Number(discovery.stagedCandidates || 0),
          candidatePreviewCount: Array.isArray(discovery.candidatePreview) ? discovery.candidatePreview.length : 0,
          candidateExportCount: Array.isArray(discovery.candidateExport) ? discovery.candidateExport.length : 0,
+         candidateSourceLaneCounts: candidateSourceLaneCounts(discovery),
          candidatePreviewSnapshotDate: discovery.snapshotDate || null,
          linkAudit: DATABASE.meta.linkAudit || null,
          publicRelease: DATABASE.meta.publicRelease === true,

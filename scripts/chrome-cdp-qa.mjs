@@ -238,6 +238,8 @@ try {
   assert.match(health.release?.currentMetadataDeployment?.publicMirrorCommit || "", /^[0-9a-f]{40}$/);
   assert.ok(health.stagedCandidates >= health.candidatePreviewCount);
   assert.ok(health.candidateExportCount >= health.stagedCandidates);
+  assert.deepEqual(Object.keys(health.candidateSourceLaneCounts || {}).sort(), ["literature", "preprint", "registry"]);
+  assert.equal(Object.values(health.candidateSourceLaneCounts || {}).reduce((sum, value) => sum + Number(value || 0), 0), health.candidateExportCount);
   assert.ok(health.candidatePreviewCount > 0);
   await evaluate(client, "document.dispatchEvent(new KeyboardEvent('keydown', { key: '/', bubbles: true }))");
   assert.equal(await evaluate(client, "document.activeElement?.id"), "search");

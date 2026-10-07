@@ -99,6 +99,7 @@ const required = [
   ["Candidate queue scope", "전체 큐:"],
   ["Candidate full export", "candidateExport"],
   ["Candidate export health", "candidateExportCount"],
+  ["Candidate source-lane health", "candidateSourceLaneCounts"],
   ["Candidate screening signals", "routeSignals"],
   ["Candidate human signal labels", "candidateHumanSignals"],
   ["Candidate review URL regression", 'requestedCandidateFilter'],
