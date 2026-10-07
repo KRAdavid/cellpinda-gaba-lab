@@ -216,6 +216,9 @@ try {
   await evaluate(client, "document.dispatchEvent(new KeyboardEvent('keydown', { key: '/', bubbles: true }))");
   assert.equal(await evaluate(client, "document.activeElement?.id"), "search");
   const speciesDistributionTotal = await evaluate(client, "document.querySelectorAll('#species-distribution [data-distribution-field=species]').length");
+  assert.equal(await evaluate(client, "document.querySelector('#distribution-disclosure')?.open"), false);
+  await evaluate(client, "document.querySelector('#distribution-disclosure summary').click()");
+  assert.equal(await evaluate(client, "document.querySelector('#distribution-disclosure')?.open"), true);
   const speciesDistributionHidden = await evaluate(client, "document.querySelectorAll('#species-distribution .distribution-item-extra[hidden]').length");
   assert.ok(speciesDistributionTotal > 8, `Expected all species distribution items, got ${speciesDistributionTotal}`);
   assert.ok(speciesDistributionHidden > 0, "Expected lower-ranked distribution items to start collapsed");

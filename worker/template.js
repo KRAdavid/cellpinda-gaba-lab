@@ -755,6 +755,26 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       color: var(--muted);
       font-size: 13px;
     }
+    .distribution-disclosure > summary {
+      list-style: none;
+      cursor: pointer;
+    }
+    .distribution-disclosure > summary::-webkit-details-marker { display: none; }
+    .distribution-summary::after {
+      content: "분포 열기 ＋";
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--surface-2);
+      color: var(--teal-dark);
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .distribution-disclosure[open] .distribution-summary::after { content: "분포 접기 －"; background: var(--teal-soft); }
+    .distribution-summary:hover::after, .distribution-summary:focus-visible::after { border-color: var(--teal); }
+    .distribution-summary:focus-visible { outline: 3px solid rgba(15,118,110,.22); outline-offset: -3px; }
     .distribution-grid {
       display: grid;
       grid-template-columns: 1.1fr .9fr;
@@ -2322,26 +2342,28 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     </dialog>
 
     <section class="section" aria-labelledby="distribution-title">
-      <div class="section-head">
-        <div>
-          <h2 id="distribution-title">근거 분포</h2>
-          <p>상위 항목을 선택해 결과를 좁힐 수 있습니다. 나머지 항목은 전체 분포에서 확인합니다.</p>
+      <details class="distribution-disclosure" id="distribution-disclosure">
+        <summary class="section-head distribution-summary">
+          <div>
+            <h2 id="distribution-title">근거 분포</h2>
+            <p>상위 항목을 선택해 결과를 좁힐 수 있습니다. 필요할 때 열어 전체 분포를 확인합니다.</p>
+          </div>
+        </summary>
+        <div class="distribution-context" role="note" aria-label="근거 분포 사용 안내">
+          <strong id="distribution-scope">전체 검증 인덱스 기준</strong>
+          <span>카드를 누르면 해당 조건으로 검색합니다. 분포 비율은 탐색용 요약이며 근거의 질·효능·규제 적합성 순위가 아닙니다.</span>
         </div>
-      </div>
-      <div class="distribution-context" role="note" aria-label="근거 분포 사용 안내">
-        <strong id="distribution-scope">전체 검증 인덱스 기준</strong>
-        <span>카드를 누르면 해당 조건으로 검색합니다. 분포 비율은 탐색용 요약이며 근거의 질·효능·규제 적합성 순위가 아닙니다.</span>
-      </div>
-      <div class="distribution-grid">
-        <div class="distribution">
-          <h3>대상 종 그룹</h3>
-          <div class="distribution-list" id="species-distribution"></div>
+        <div class="distribution-grid">
+          <div class="distribution">
+            <h3>대상 종 그룹</h3>
+            <div class="distribution-list" id="species-distribution"></div>
+          </div>
+          <div class="distribution">
+            <h3>결과 방향</h3>
+            <div class="distribution-list" id="direction-distribution"></div>
+          </div>
         </div>
-        <div class="distribution">
-          <h3>결과 방향</h3>
-          <div class="distribution-list" id="direction-distribution"></div>
-        </div>
-      </div>
+      </details>
     </section>
 
     <section class="explorer" aria-labelledby="explorer-title">

@@ -258,6 +258,8 @@ const required = [
   ,["Review queue filter counts", "reviewFilterCounts"]
   ,["Result review queue alignment", "reviewQueueIds"]
   ,["Result candidate action alignment", "candidateResultCount"]
+  ,["Distribution progressive disclosure", "id=\"distribution-disclosure\""]
+  ,["Distribution disclosure label", "분포 열기 ＋"]
   ,["Copy dialog accessible name", 'id="copy-dialog-value" aria-labelledby="copy-dialog-title"']
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']
