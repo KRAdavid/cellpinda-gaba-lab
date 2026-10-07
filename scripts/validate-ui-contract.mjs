@@ -294,6 +294,7 @@ const required = [
   ,["Empty result recovery", "data-empty-reset"]
   ,["Empty result condition context", "data-empty-context"]
   ,["Empty result condition status", 'data-empty-context role="status" aria-live="polite"']
+  ,["Empty result interpretation", "result-interpretation-empty"]
   ,["Visible filter status", 'id="filter-status-strip"']
   ,["Filter status summary", 'id="filter-status-text"']
   ,["Filter status reset", 'id="filter-status-reset"']

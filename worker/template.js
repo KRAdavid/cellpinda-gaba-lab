@@ -5206,6 +5206,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           : state.freshness === "stale" || state.freshness === "unknown"
             ? "확인일 경과·미상은 근거 약함을 뜻하지 않습니다. 최신 원문과 출판 후속 공지를 다시 확인하세요."
           : "검색 결과 요약은 효능 등급·규제 승인·광고 허가를 뜻하지 않습니다. 원문에서 대상·용량·기간·대조군을 확인하세요.";
+        if (!list.length) {
+          target.innerHTML = '<div class="result-interpretation-head"><span class="result-interpretation-label">현재 탐색</span><strong class="result-interpretation-query" title="' + esc(query) + '">' + esc(query) + '</strong></div>' +
+            '<p class="result-interpretation-note result-interpretation-empty">현재 조건과 일치하는 자료가 <strong>0건</strong>입니다. 아래 결과 영역에서 검색어를 지우거나 조건을 초기화해 다시 탐색하세요.</p>' +
+            '<p class="result-interpretation-guard"><strong>해석 경계</strong> ' + esc(guard) + '</p>';
+          return;
+        }
         target.innerHTML = '<div class="result-interpretation-head"><span class="result-interpretation-label">현재 탐색</span><strong class="result-interpretation-query" title="' + esc(query) + '">' + esc(query) + '</strong></div>' +
           '<div class="result-interpretation-stats" role="group" aria-label="현재 결과의 근거 구성">' +
             clinicalAction +

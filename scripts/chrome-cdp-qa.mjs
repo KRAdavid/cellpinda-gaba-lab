@@ -291,6 +291,8 @@ try {
   assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-empty-reset]'))"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-empty-context]')?.textContent.includes('검색: 존재하지 않는 GABA 자료 검색어')"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-empty-context]')?.getAttribute('role')"), "status");
+  assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-empty')?.textContent.includes('0건')"), true);
+  assert.equal(await evaluate(client, "document.querySelectorAll('#result-interpretation [data-result-preset]').length"), 0);
   assert.equal(await evaluate(client, "document.querySelector('[data-empty-query=수면]')?.textContent"), "수면");
   await evaluate(client, "document.querySelector('[data-empty-query=수면]').click()");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('q')"), "수면");
