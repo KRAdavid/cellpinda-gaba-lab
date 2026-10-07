@@ -692,6 +692,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .candidate-preview-note { max-width: 560px; color: var(--amber); font-size: 11px; font-weight: 800; line-height: 1.45; text-align: right; }
     .candidate-preview-export { min-height: 30px; padding: 5px 9px; border: 1px solid var(--teal); border-radius: 8px; background: #fff; color: var(--teal-dark); font-size: 10px; font-weight: 900; cursor: pointer; }
     .candidate-preview-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 13px; }
+    .candidate-preview-disclosure { margin-top: 14px; border-top: 1px solid rgba(180, 132, 35, .22); }
+    .candidate-preview-disclosure > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 38px; color: var(--amber); font-size: 11px; font-weight: 900; cursor: pointer; list-style: none; }
+    .candidate-preview-disclosure > summary::-webkit-details-marker { display: none; }
+    .candidate-preview-disclosure > summary::after { content: "후보 목록 열기 ＋"; flex: 0 0 auto; padding: 5px 8px; border: 1px solid rgba(180,132,35,.28); border-radius: 8px; background: var(--amber-soft); color: var(--amber); font-size: 10px; }
+    .candidate-preview-disclosure[open] > summary::after { content: "후보 목록 접기 －"; }
+    .candidate-preview-disclosure > summary:focus-visible { outline: 3px solid rgba(180,132,35,.24); outline-offset: -3px; border-radius: 7px; }
+    .candidate-preview-content { padding-bottom: 2px; }
     .candidate-preview-filter { min-height: 30px; padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--muted); font-size: 11px; font-weight: 800; cursor: pointer; }
     .candidate-preview-filter.active { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); }
     .candidate-preview-filter.review { border-color: var(--teal); }
@@ -2116,17 +2123,22 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         <div><h2 id="candidate-preview-title">최근 자동 탐색 후보 미리보기</h2><p>신규 후보는 제목·초록의 GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐에 들어옵니다. 그래도 공개 근거로 승격된 것은 아니므로 원문·섭취 경로·철회·정정 상태를 확인한 뒤 별도 판정합니다.</p><p class="candidate-review-progress" id="candidate-review-progress" role="status" aria-live="polite"></p></div>
         <div class="candidate-preview-head-actions"><span class="candidate-preview-note">확정 근거 아님</span><button class="candidate-preview-export" id="candidate-preview-export" type="button">전체 후보 CSV</button></div>
       </div>
-      <div class="candidate-preview-filters" aria-label="후보 유형 필터">
-        <button class="candidate-preview-filter active" type="button" data-candidate-filter="all" aria-pressed="true">전체</button>
-        <button class="candidate-preview-filter" type="button" data-candidate-filter="entry-direct" aria-pressed="false">GABA 언급 신호</button>
-        <button class="candidate-preview-filter" type="button" data-candidate-filter="entry-followup" aria-pressed="false">후속조치 신호</button>
-        <button class="candidate-preview-filter" type="button" data-candidate-filter="priority" aria-pressed="false">자동 우선검토</button>
-        <button class="candidate-preview-filter" type="button" data-candidate-filter="followup" aria-pressed="false">출판 후속조치</button>
-        <button class="candidate-preview-filter review" type="button" data-candidate-filter="reviewed" aria-pressed="false">수동 검토됨</button>
-        <button class="candidate-preview-filter review" type="button" data-candidate-filter="unreviewed" aria-pressed="false">미검토</button>
-      </div>
-      <div class="candidate-preview-list" id="candidate-preview-list"></div>
-      <button class="candidate-preview-more" id="candidate-preview-more" type="button" hidden>후보 더 보기</button>
+      <details class="candidate-preview-disclosure" id="candidate-preview-disclosure">
+        <summary aria-label="자동 탐색 후보 목록 열기">자동 탐색 후보 목록 <span>검증 근거와 별도 관리</span></summary>
+        <div class="candidate-preview-content">
+          <div class="candidate-preview-filters" aria-label="후보 유형 필터">
+            <button class="candidate-preview-filter active" type="button" data-candidate-filter="all" aria-pressed="true">전체</button>
+            <button class="candidate-preview-filter" type="button" data-candidate-filter="entry-direct" aria-pressed="false">GABA 언급 신호</button>
+            <button class="candidate-preview-filter" type="button" data-candidate-filter="entry-followup" aria-pressed="false">후속조치 신호</button>
+            <button class="candidate-preview-filter" type="button" data-candidate-filter="priority" aria-pressed="false">자동 우선검토</button>
+            <button class="candidate-preview-filter" type="button" data-candidate-filter="followup" aria-pressed="false">출판 후속조치</button>
+            <button class="candidate-preview-filter review" type="button" data-candidate-filter="reviewed" aria-pressed="false">수동 검토됨</button>
+            <button class="candidate-preview-filter review" type="button" data-candidate-filter="unreviewed" aria-pressed="false">미검토</button>
+          </div>
+          <div class="candidate-preview-list" id="candidate-preview-list"></div>
+          <button class="candidate-preview-more" id="candidate-preview-more" type="button" hidden>후보 더 보기</button>
+        </div>
+      </details>
     </section>
     <dialog class="candidate-detail-dialog" id="candidate-detail-dialog" aria-labelledby="candidate-detail-title">
       <div class="candidate-detail-inner">
@@ -2931,6 +2943,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         section.hidden = false;
         var activeFilter = candidatePreviewFilter;
         section.dataset.filter = activeFilter;
+        var candidateDisclosure = el("candidate-preview-disclosure");
+        if (candidateDisclosure && activeFilter !== "all") candidateDisclosure.open = true;
         var filtered = filterCandidatePreviewRecords(candidates, activeFilter);
         var candidateExportButton = el("candidate-preview-export");
         if (candidateExportButton) {
