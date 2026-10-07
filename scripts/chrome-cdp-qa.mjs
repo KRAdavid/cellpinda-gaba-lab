@@ -283,6 +283,10 @@ try {
   await evaluate(client, "document.querySelector('#result-marketing-disclosure summary').click()");
   assert.equal(await evaluate(client, "document.querySelector('#result-marketing-disclosure')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-marketing-note')?.textContent.includes('광고 허가·효능 입증·규제 승인을 뜻하지 않습니다')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-stats')?.textContent.includes('후속조치 신호')"), true);
+  assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-result-preset=followup]'))"), true);
+  await evaluate(client, "document.querySelector('[data-result-preset=followup]').click()");
+  assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('followup')"), "signal");
   await evaluate(client, "document.querySelector('[data-result-preset=marketing-conditional]').click()");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('marketing')"), "조건부 검토");
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=marketing-conditional]')?.getAttribute('aria-pressed')"), "true");
