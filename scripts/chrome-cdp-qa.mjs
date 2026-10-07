@@ -225,6 +225,11 @@ try {
   assert.equal(health.release?.siteVersion, 803);
   assert.equal(health.release?.sourceCommit, "9848dddbf2356510ad85a893cb864a6210f44394");
   assert.equal(health.release?.publicMirrorCommit, "0a76f06a5fc17d5f46c31379c62aed2e48dbde58");
+  assert.equal(health.discoveryLastAttempt?.status, "PARTIAL_NOT_PROMOTED");
+  assert.equal(health.discoveryLastAttempt?.sourceErrorCount, 1);
+  assert.equal(health.discoveryLastAttempt?.openAlexRateLimited, true);
+  assert.equal(health.discoveryLastAttempt?.clinicalTrialsRetrieved, 200);
+  assert.equal(health.discoveryLastAttempt?.preprintsRetrieved, 200);
   assert.ok(Number.isInteger(health.release?.currentCodeDeployment?.siteVersion));
   assert.match(health.release?.currentCodeDeployment?.sourceCommit || "", /^[0-9a-f]{40}$/);
   assert.match(health.release?.currentCodeDeployment?.publicMirrorCommit || "", /^[0-9a-f]{40}$/);

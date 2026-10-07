@@ -279,6 +279,7 @@ const required = [
   ,["Snapshot provenance", "검증 스냅샷"]
   ,["Release traceability", "현재 운영 코드 기준(런타임)"]
   ,["Current code deployment provenance", "release.currentCodeDeployment"]
+  ,["Health latest attempt provenance", "discoveryLastAttempt"]
   ,["Release provenance distinction note", 'id="release-provenance-note"']
   ,["Per-record audit filter", 'id="audit"']
   ,["Audit filter counts", "function syncAuditFilterOptions"]
