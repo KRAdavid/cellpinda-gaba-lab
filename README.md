@@ -15,7 +15,7 @@ Google Sheet로 관리되는 GABA 섭취 임상·동물시험 문헌을 한국�
 - 저장 검색: 자주 쓰는 검색 조건을 최대 10개까지 브라우저에 저장·불러오기·삭제할 수 있으며 원본 Sheets와 공개 인덱스는 변경하지 않습니다.
 - 검토 큐 공유 링크는 대상 ID와 선택한 큐 필터를 함께 전달하며, 개인 메모·완료 상태·Sheets 데이터는 공유하지 않습니다.
 - 문헌 상세의 연구 의미·마케팅 활용 방안은 원본 검토 메모의 라벨 구간을 우선 표시하고, 해당 메모가 없을 때만 안전한 자동 설명으로 보완합니다.
-- 후보 큐: `?candidate=priority`, `?candidate=followup`, `?candidate=reviewed`, `?candidate=unreviewed` 링크로 같은 검토 범위를 공유
+- 후보 큐: `?candidate=priority`, `?candidate=followup`, `?candidate=registry`, `?candidate=preprint`, `?candidate=reviewed`, `?candidate=unreviewed` 링크로 같은 검토 범위를 공유
 - 후보 URL은 브라우저 QA에서 필터 상태·주소·포커스 복원을 함께 확인합니다.
 - 후보 상세: `?candidateId=<Candidate_ID>` 링크로 특정 자동 탐색 후보의 원문 확인 체크리스트를 공유
 - 후보 상세의 `후보 검토 링크 복사`는 클립보드가 제한돼도 수동 복사 패널로 전환됩니다.
