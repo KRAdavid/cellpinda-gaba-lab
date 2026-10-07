@@ -71,7 +71,7 @@ data-quality → build → built-provenance → validate → build-pending-sheet
 
 ### OpenAlex 복구 실행
 
-OpenAlex가 익명 요청에서 429를 반환하면 저장소나 공개 사이트에 자격증명을 넣지 말고, 운영 실행 환경에서만 `OPENALEX_MAILTO` 또는 `OPENALEX_API_KEY`를 설정한 뒤 `pnpm daily:refresh`를 한 번 실행합니다. `OPENALEX_RETRIES=1`은 복구 확인용 단일 시도에 사용할 수 있습니다. 결과가 `PARTIAL_NOT_PROMOTED`이면 현재 검증 스냅샷을 유지하고, `READY_FOR_VALIDATION`일 때만 `build → preflight → 브라우저 QA` 후 공개 배포를 진행합니다.
+OpenAlex가 익명 요청에서 429를 반환하면 저장소나 공개 사이트에 자격증명을 넣지 말고, 운영 실행 환경에서만 `OPENALEX_MAILTO` 또는 `OPENALEX_API_KEY`를 설정한 뒤 `pnpm daily:refresh`를 한 번 실행합니다. `OPENALEX_RETRIES=1`은 복구 확인용 단일 시도에 사용할 수 있습니다. 결과가 `PARTIAL_NOT_PROMOTED`이면 현재 검증 스냅샷을 유지합니다. 원천 탐색 기록의 `READY_FOR_PROMOTION`과 일일 실행 결과의 `READY_FOR_VALIDATION`은 모두 다음 `build → preflight → 브라우저 QA` 단계로 넘어갈 수 있는 정상 대기 상태이며, QA 후에만 공개 배포를 진행합니다.
 
 PowerShell 예시:
 

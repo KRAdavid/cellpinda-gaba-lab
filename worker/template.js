@@ -3373,7 +3373,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           discoveryAttemptNote.textContent = "최근 자동 탐색 시도 " + koreanDate(discovery.lastAttempt.snapshotDate) + "는 원천 오류 " + Number(discovery.lastAttempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건으로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." + failedSources + queryGuard + recoveryHint;
           discoveryAttemptNote.hidden = false;
           if (discoveryNextAction) {
-            discoveryNextAction.textContent = "다음 조치: " + (discovery.lastAttempt.recoveryHint || "운영 환경에서 원천 오류를 확인한 뒤 한 번 재실행하고, READY_FOR_PROMOTION일 때만 검증·QA 후 배포합니다.");
+            discoveryNextAction.textContent = "다음 조치: " + (discovery.lastAttempt.recoveryHint || "READY_FOR_PROMOTION 또는 READY_FOR_VALIDATION 상태에서 build·preflight·브라우저 QA를 통과한 경우에만 공개 배포합니다.");
             discoveryNextAction.hidden = false;
           }
         } else if (discoveryNextAction) {
@@ -5367,6 +5367,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (!attempt) return "상태 확인 필요";
         if (attempt.status === "PARTIAL_NOT_PROMOTED") return "반영 보류 · 원천 오류 " + Number(attempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건";
         if (attempt.status === "READY_FOR_PROMOTION") return "검증 대기";
+        if (attempt.status === "READY_FOR_VALIDATION") return "검증·QA 대기";
         return "상태 확인 필요";
       }
       function syncDiscoveryStateBadge() {
@@ -5375,11 +5376,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var attempt = DB.meta.discovery && DB.meta.discovery.lastAttempt;
         var status = attempt && attempt.status;
         badge.classList.toggle("is-partial", status === "PARTIAL_NOT_PROMOTED");
-        badge.classList.toggle("is-unknown", !status || !["PARTIAL_NOT_PROMOTED", "READY_FOR_PROMOTION"].includes(status));
+        badge.classList.toggle("is-unknown", !status || !["PARTIAL_NOT_PROMOTED", "READY_FOR_PROMOTION", "READY_FOR_VALIDATION"].includes(status));
         badge.textContent = status === "PARTIAL_NOT_PROMOTED"
           ? "부분 탐색 · 공개 반영 보류"
           : status === "READY_FOR_PROMOTION"
             ? "검증 대기"
+            : status === "READY_FOR_VALIDATION"
+              ? "검증·QA 대기"
             : status
               ? "탐색 상태 확인"
               : "탐색 상태 확인 필요";
