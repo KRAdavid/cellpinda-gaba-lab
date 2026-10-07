@@ -824,10 +824,22 @@ const reviewed = mergedRecords.map((record) => {
 const hasPublicationFollowup = (record) => record.queryLabels?.includes("publication_followup")
   && (/\bretract(?:ed|ion)?\b|\bexpression of concern\b|\bcorrection\b/i.test(record.title)
     || (record.publicationTypes ?? []).some((type) => /retract|correct/i.test(type)));
+const sourceLaneFor = (record) => {
+  if (record.registryId || record.source?.some((value) => /ClinicalTrials\.gov/i.test(value))) return "registry";
+  if (record.source?.some((value) => /preprint/i.test(value))
+    || record.publicationTypes?.some((value) => /preprint/i.test(value))) return "preprint";
+  return "literature";
+};
 const candidateEntrySignal = (record) => record.gabaSignal || hasPublicationFollowup(record);
+const candidateLaneSignal = (record) => {
+  const lane = sourceLaneFor(record);
+  return lane !== "literature" && record.gabaSignal;
+};
 
 const candidates = reviewed
-  .filter((record) => candidateEntrySignal(record) && !record.existingRecordId && (record.score >= 25 || hasPublicationFollowup(record)))
+  .filter((record) => (candidateEntrySignal(record) || candidateLaneSignal(record))
+    && !record.existingRecordId
+    && (record.score >= 25 || hasPublicationFollowup(record) || candidateLaneSignal(record)))
   .sort((a, b) => {
     const aFollowup = hasPublicationFollowup(a) ? 1 : 0;
     const bFollowup = hasPublicationFollowup(b) ? 1 : 0;
@@ -837,8 +849,13 @@ const candidates = reviewed
   .map((record, index) => ({
     candidateId: `C-${snapshotDate.replaceAll("-", "")}-${String(index + 1).padStart(4, "0")}`,
     collectedDate: snapshotDate,
+    sourceLane: sourceLaneFor(record),
     screeningRecommendation: hasPublicationFollowup(record)
       ? "출판 후속조치 우선확인: 철회·정정·우려표명 원문과 원 논문 연결 확인"
+      : sourceLaneFor(record) === "registry"
+        ? "등록시험 후보: 시험 상태·중재·섭취 여부와 결과 공개 상태 확인"
+        : sourceLaneFor(record) === "preprint"
+          ? "preprint 후보: 출판·동료심사 상태와 원문 조건 확인"
       : record.exclusionSignals.length
       ? "경계자료: GABA성 의약품·수용체 연구 또는 비경구/비보충제 가능성 확인"
       : record.indirectTitleSignals.length || record.productionSignals.length
@@ -848,7 +865,13 @@ const candidates = reviewed
           : "일반 원문검토",
     ...record,
     candidateEntrySignal: true,
-    candidateEntryReason: record.gabaSignal ? "제목·초록 GABA 신호" : "GABA 후속조치 검색 신호"
+    candidateEntryReason: hasPublicationFollowup(record)
+      ? "GABA 후속조치 검색 신호"
+      : sourceLaneFor(record) === "registry"
+        ? "등록시험 원천의 GABA 신호"
+        : sourceLaneFor(record) === "preprint"
+          ? "preprint 원천의 GABA 신호"
+          : "제목·초록 GABA 신호"
   }));
 
 const summary = {
