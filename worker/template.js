@@ -1096,6 +1096,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       font-weight: 900;
     }
     .quick-spacer { flex: 1; }
+    .quick-scope-note {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
     .quick-more {
       position: relative;
     }
@@ -2492,6 +2498,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             <option value="100">100개씩</option>
           </select>
         </div>
+        <p class="quick-scope-note">빠른 필터의 숫자는 전체 검증 인덱스 기준입니다. 실제 결과 건수는 아래 ‘현재 조건’에서 갱신됩니다.</p>
         <div class="filter-status-strip" id="filter-status-strip" role="status" aria-live="polite">
           <span class="filter-status-label">현재 조건</span>
           <span class="filter-status-text" id="filter-status-text">전체 검증 근거</span>

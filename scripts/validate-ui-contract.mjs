@@ -216,6 +216,7 @@ const required = [
   ,["Intervention classification URL state", "state.intervention"]
   ,["Intervention classification URL restoration", '\"intervention\", \"routeGroup\", \"followup\", \"grade\"']
   ,["Oral intake quick-filter count", 'data-route-count=\"경구·섭취\"']
+  ,["Quick-filter count scope note", "빠른 필터의 숫자는 전체 검증 인덱스 기준"]
   ,["Publication follow-up filter", 'data-followup="signal"']
   ,["Publication follow-up URL state", "state.followup"]
   ,["Link audit transparency", "DB.meta.linkAudit"]
