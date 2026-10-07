@@ -23,12 +23,23 @@ const summaryPath = dated[0].path;
 const summary = JSON.parse(await readFile(summaryPath, "utf8"));
 const errors = Array.isArray(summary.sourceErrors) ? summary.sourceErrors : [];
 const failedSources = [...new Set(errors.map((entry) => String(entry?.source || "unknown").split(":")[0]))];
+const openAlexAccessMode = String(summary.openAlex?.accessMode || "unknown");
+const hasOpenAlexError = failedSources.includes("OpenAlex");
+const recoveryHint = hasOpenAlexError
+  ? openAlexAccessMode === "anonymous"
+    ? "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 예약 실행 환경에 설정한 뒤 재실행"
+    : "운영자 조치: OpenAlex rate limit 재설정 후 재실행"
+  : errors.length
+    ? "운영자 조치: 실패 원천의 응답 상태를 확인한 뒤 재실행"
+    : "운영자 조치: build·preflight·브라우저 QA 후 공개 반영 검토";
 const attempt = {
   snapshotDate: String(summary.snapshotDate || ""),
   generatedAt: String(summary.generatedAt || ""),
   status: errors.length ? "PARTIAL_NOT_PROMOTED" : "READY_FOR_PROMOTION",
   sourceErrorCount: errors.length,
   failedSources: failedSources.slice(0, 8),
+  openAlexAccessMode,
+  recoveryHint,
   message: errors.length
     ? "일부 원천 응답 오류로 공개 인덱스 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다."
     : "원천 오류 없이 탐색 산출물이 생성되어 검증 대기 중입니다."

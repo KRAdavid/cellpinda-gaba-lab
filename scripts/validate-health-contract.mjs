@@ -17,6 +17,7 @@ if (discovery?.lastAttempt) {
   if (!/^(PARTIAL_NOT_PROMOTED|READY_FOR_PROMOTION)$/.test(String(discovery.lastAttempt.status || ""))) invalid.push("lastAttempt.status");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(discovery.lastAttempt.snapshotDate || ""))) invalid.push("lastAttempt.snapshotDate");
   if (!Number.isInteger(Number(discovery.lastAttempt.sourceErrorCount)) || Number(discovery.lastAttempt.sourceErrorCount) < 0) invalid.push("lastAttempt.sourceErrorCount");
+  if (!String(discovery.lastAttempt.recoveryHint || "").trim()) invalid.push("lastAttempt.recoveryHint");
 }
 if (!Array.isArray(discovery?.candidateExport) || discovery.candidateExport.length < Number(discovery?.stagedCandidates || 0)) invalid.push("candidateExport");
 if (!discovery?.screeningCounts || !Number.isFinite(Number(discovery?.manualDecisionsPreserved)) || !Number.isFinite(Number(discovery?.manualDecisionsMatched))) invalid.push("screeningCounts/manualDecisions");

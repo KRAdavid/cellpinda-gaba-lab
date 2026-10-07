@@ -3305,7 +3305,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           var failedSources = Array.isArray(discovery.lastAttempt.failedSources) && discovery.lastAttempt.failedSources.length
             ? " 실패 원천: " + discovery.lastAttempt.failedSources.join(", ") + "."
             : "";
-          discoveryAttemptNote.textContent = "최근 자동 탐색 시도 " + koreanDate(discovery.lastAttempt.snapshotDate) + "는 원천 오류 " + Number(discovery.lastAttempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건으로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." + failedSources;
+          var recoveryHint = discovery.lastAttempt.recoveryHint ? " " + discovery.lastAttempt.recoveryHint + "." : "";
+          discoveryAttemptNote.textContent = "최근 자동 탐색 시도 " + koreanDate(discovery.lastAttempt.snapshotDate) + "는 원천 오류 " + Number(discovery.lastAttempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건으로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." + failedSources + recoveryHint;
           discoveryAttemptNote.hidden = false;
         }
         el("discovery-stats").innerHTML = [
