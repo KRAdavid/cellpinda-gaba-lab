@@ -2081,6 +2081,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         </div>
         <div class="data-boundary" aria-label="데이터 운영 경계">
           <span>공개면: 읽기 전용 검증 스냅샷</span>
+          <span>신규 후보: 제목·초록 GABA 신호 확인 후 큐 진입</span>
           <span>후보: 자동 승격하지 않음</span>
           <span>운영 원본·Sheets: 별도 관리</span>
         </div>
@@ -2089,7 +2090,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     </section>
     <section class="candidate-preview" id="candidate-preview" aria-labelledby="candidate-preview-title" hidden>
       <div class="candidate-preview-head">
-        <div><h2 id="candidate-preview-title">최근 자동 탐색 후보 미리보기</h2><p>아직 공개 근거로 승격되지 않은 후보입니다. 원문·섭취 경로·철회·정정 상태를 확인한 뒤 별도 판정합니다.</p><p class="candidate-review-progress" id="candidate-review-progress" role="status" aria-live="polite"></p></div>
+        <div><h2 id="candidate-preview-title">최근 자동 탐색 후보 미리보기</h2><p>신규 후보는 제목·초록에서 GABA 신호가 확인된 자료만 큐에 들어옵니다. 그래도 공개 근거로 승격된 것은 아니므로 원문·섭취 경로·철회·정정 상태를 확인한 뒤 별도 판정합니다.</p><p class="candidate-review-progress" id="candidate-review-progress" role="status" aria-live="polite"></p></div>
         <div class="candidate-preview-head-actions"><span class="candidate-preview-note">확정 근거 아님</span><button class="candidate-preview-export" id="candidate-preview-export" type="button">전체 후보 CSV</button></div>
       </div>
       <div class="candidate-preview-filters" aria-label="후보 유형 필터">
@@ -3083,6 +3084,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ["OpenAlex", Number(discovery.openAlexRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["Crossref", Number(discovery.crossrefRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["통합 고유", Number(discovery.mergedUnique || 0).toLocaleString("ko-KR") + "건"],
+          ["신규 후보 게이트", "제목·초록 GABA 신호 확인"],
           ["이번 갱신 변화", discoveryDeltaLabel(discovery.delta) + " (총량 변화 · 확정 인덱스 아님)"],
           ["자동 우선검토", Number(discovery.priority || 0).toLocaleString("ko-KR") + "건"],
           ["수동 검토 상태", discovery.screeningCounts ? screeningSummary : "확인 필요"],

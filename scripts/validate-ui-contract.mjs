@@ -71,6 +71,8 @@ const required = [
   ["Candidate preview", 'id="candidate-preview"'],
   ["Candidate preview renderer", "function renderCandidatePreview"],
   ["Candidate preview scope", "전체 후보"],
+  ["Candidate GABA signal gate", "신규 후보 게이트"],
+  ["Candidate gate explanation", "제목·초록에서 GABA 신호가 확인된 자료만 큐"],
   ["Candidate recommendation summary", "검토 권고"],
   ["Candidate source link guard", "function candidateSourceUrl"],
   ["Candidate source label", "function candidateSourceLabel"],
