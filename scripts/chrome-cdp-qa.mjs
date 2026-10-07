@@ -265,6 +265,7 @@ try {
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('routeGroup')"), "경구·섭취");
   assert.equal(await evaluate(client, "document.querySelector('.quick-row [data-preset=oral]')?.classList.contains('active')"), true);
   assert.equal(await evaluate(client, "/^경구·섭취 \\d+$/.test(document.querySelector('.quick-row [data-preset=oral]')?.textContent.trim() || '')"), true);
+  assert.equal(await evaluate(client, "Array.from(document.querySelectorAll('.quick-filter-group [data-kind-count]')).every((node) => /^\\d+$/.test(node.textContent.trim()))"), true);
   assert.equal(await evaluate(client, "document.querySelector('.quick-scope-note')?.textContent.includes('전체 검증 인덱스 기준')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('aria-describedby')"), "quick-scope-note");
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('role')"), "group");

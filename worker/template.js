@@ -2434,9 +2434,9 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         <div class="quick-row">
           <div class="quick-filter-group" role="group" aria-label="연구구분 빠른 필터" aria-describedby="quick-scope-note">
           <button class="quick-button active" type="button" data-kind="">전체</button>
-          <button class="quick-button" type="button" data-kind="임상">인체 임상</button>
-          <button class="quick-button" type="button" data-kind="동물">동물시험</button>
-          <button class="quick-button" type="button" data-kind="규제">규제·안전성</button>
+          <button class="quick-button" type="button" data-kind="임상">인체 임상 <span class="quick-count" data-kind-count="임상">__COUNT_KIND_CLINICAL__</span></button>
+          <button class="quick-button" type="button" data-kind="동물">동물시험 <span class="quick-count" data-kind-count="동물">__COUNT_KIND_ANIMAL__</span></button>
+          <button class="quick-button" type="button" data-kind="규제">규제·안전성 <span class="quick-count" data-kind-count="규제">__COUNT_KIND_REGULATORY__</span></button>
           <button class="quick-button" type="button" data-category="안전성">안전성 자료</button>
           <button class="quick-button" type="button" data-intervention="순수 GABA 섭취">순수 GABA <span class="quick-count" data-intervention-count="순수 GABA 섭취">__COUNT_PURE__</span></button>
           <button class="quick-button" type="button" data-preset="oral">경구·섭취 <span class="quick-count" data-route-count="경구·섭취">__COUNT_ORAL__</span></button>
@@ -5941,6 +5941,11 @@ const MARKETING_COUNTS = DATABASE.records.reduce((counts, record) => {
   counts[label] = (counts[label] || 0) + 1;
   return counts;
 }, {});
+const KIND_COUNTS = DATABASE.records.reduce((counts, record) => {
+  const label = String(record.kind || "미분류");
+  counts[label] = (counts[label] || 0) + 1;
+  return counts;
+}, {});
 const ROUTE_COUNTS = DATABASE.records.reduce((counts, record) => {
   const label = String(record.routeGroup || "미기록");
   counts[label] = (counts[label] || 0) + 1;
@@ -5954,6 +5959,9 @@ const DIRECTION_COUNTS = DATABASE.records.reduce((counts, record) => {
 const PAGE = PAGE_TEMPLATE
   .replace("__EMBEDDED_DATA__", JSON.stringify(DATABASE).replaceAll("<", "\\u003c"))
   .replaceAll("__COUNT_PURE__", String(INTERVENTION_COUNTS["순수 GABA 섭취"] || 0))
+  .replaceAll("__COUNT_KIND_CLINICAL__", String(KIND_COUNTS["임상"] || 0))
+  .replaceAll("__COUNT_KIND_ANIMAL__", String(KIND_COUNTS["동물"] || 0))
+  .replaceAll("__COUNT_KIND_REGULATORY__", String(KIND_COUNTS["규제"] || 0))
   .replaceAll("__COUNT_ORAL__", String(ROUTE_COUNTS["경구·섭취"] || 0))
   .replaceAll("__COUNT_COMBINATION__", String(INTERVENTION_COUNTS["복합제·복합개입"] || 0))
   .replaceAll("__COUNT_FERMENTED__", String(INTERVENTION_COUNTS["GABA 생성 발효·프로바이오틱"] || 0))
