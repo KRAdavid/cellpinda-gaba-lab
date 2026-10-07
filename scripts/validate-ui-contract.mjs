@@ -155,6 +155,7 @@ const required = [
   ["Mobile portal navigation", 'class="mobile-portal-jump"'],
   ["Mobile Intelligence navigation", 'href="#intelligence">Intelligence'],
   ["Compact view key facts", "compact-facts"],
+  ["Brief marketing distribution", "활용 검토: 직접 근거 검토"],
   ["Reduced-motion scroll behavior", "function preferredScrollBehavior"],
   ["Exploration presets", "data-preset"],
   ["Detail opener", "function openIntelligenceDetail"],
