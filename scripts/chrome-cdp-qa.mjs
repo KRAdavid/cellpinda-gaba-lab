@@ -297,6 +297,14 @@ try {
   await evaluate(client, "document.querySelector('#result-marketing-disclosure summary').click()");
   assert.equal(await evaluate(client, "document.querySelector('#result-marketing-disclosure')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-marketing-note')?.textContent.includes('광고 허가·효능 입증·규제 승인을 뜻하지 않습니다')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#result-intervention-disclosure')?.open"), false);
+  await evaluate(client, "document.querySelector('#result-intervention-disclosure summary').click()");
+  assert.equal(await evaluate(client, "document.querySelector('#result-intervention-disclosure')?.open"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#result-intervention-disclosure')?.textContent.includes('순수 GABA')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-intervention')?.getAttribute('role')"), "group");
+  await evaluate(client, "document.querySelector('[data-result-preset=intervention-pure]').click()");
+  assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('intervention')"), "순수 GABA 섭취");
+  await navigate(`http://127.0.0.1:${httpPort}/`);
   assert.equal(await evaluate(client, "document.querySelector('#external-review-gate')?.getAttribute('role')"), "note");
   assert.equal(await evaluate(client, "document.querySelector('#external-review-gate')?.textContent.includes('독립 외부 검토 전 확정하지 않습니다')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#focus-mode-toggle')?.getAttribute('aria-pressed')"), "false");

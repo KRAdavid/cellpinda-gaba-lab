@@ -3531,6 +3531,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (name === "audit-unavailable") state.audit = "unavailable";
         if (name === "followup") state.followup = "signal";
         if (name === "review") state.status = "후보";
+        if (name === "intervention-pure") state.intervention = "순수 GABA 섭취";
+        if (name === "intervention-combination") state.intervention = "복합제·복합개입";
+        if (name === "intervention-fermented") state.intervention = "GABA 생성 발효·프로바이오틱";
+        if (name === "intervention-receptor") state.intervention = "수용체 약물·작용제";
         if (name === "marketing-direct") state.marketing = "직접 근거 검토";
         if (name === "marketing-conditional") state.marketing = "조건부 검토";
         if (name === "marketing-exclude") state.marketing = "마케팅 사용 금지";
@@ -5355,6 +5359,16 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var marketingDirect = list.filter(function (record) { return marketingLabel(record) === "직접 근거 검토"; }).length;
         var marketingConditional = list.filter(function (record) { return marketingLabel(record) === "조건부 검토"; }).length;
         var marketingExclude = list.filter(function (record) { return marketingLabel(record) === "마케팅 사용 금지"; }).length;
+        var interventionTypes = [
+          { key: "intervention-pure", value: "순수 GABA 섭취", label: "순수 GABA" },
+          { key: "intervention-combination", value: "복합제·복합개입", label: "복합제·복합개입" },
+          { key: "intervention-fermented", value: "GABA 생성 발효·프로바이오틱", label: "발효·프로바이오틱" },
+          { key: "intervention-receptor", value: "수용체 약물·작용제", label: "수용체 약물" }
+        ];
+        var interventionActions = interventionTypes.map(function (item) {
+          var count = list.filter(function (record) { return interventionClass(record) === item.value; }).length;
+          return '<button class="result-interpretation-route" type="button" data-result-preset="' + item.key + '" aria-pressed="' + String(state.intervention === item.value) + '"' + (count ? '' : ' disabled') + '>' + item.label + ' · ' + count.toLocaleString("ko-KR") + '건</button>';
+        }).join("");
         var clinicalAction = clinical ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="clinical" aria-pressed="' + String(state.kind === "임상") + '" aria-label="인체 연구 ' + clinical.toLocaleString("ko-KR") + '건만 보기">인체 연구 <strong>' + clinical.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">인체 연구 <strong>0</strong></span>';
         var animalAction = animal ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="animal" aria-pressed="' + String(state.kind === "동물") + '" aria-label="동물·전임상 ' + animal.toLocaleString("ko-KR") + '건만 보기">동물·전임상 <strong>' + animal.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">동물·전임상 <strong>0</strong></span>';
         var regulatoryAction = regulatory ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="regulatory" aria-pressed="' + String(state.kind === "규제") + '" aria-label="규제·안전성 ' + regulatory.toLocaleString("ko-KR") + '건만 보기">규제·안전성 <strong>' + regulatory.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">규제·안전성 <strong>0</strong></span>';
@@ -5377,6 +5391,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var sourceAction = sourceAvailable && firstActionPreset !== "source" ? '<button class="result-interpretation-route" type="button" data-result-preset="source">원문 연결 자료만 보기 · ' + sourceAvailable.toLocaleString("ko-KR") + '건</button>' : '';
         var reviewAction = candidateResultCount && firstActionPreset !== "review" ? '<button class="result-interpretation-route" type="button" data-result-preset="review">후보 자료만 보기 · ' + candidateResultCount.toLocaleString("ko-KR") + '건</button>' : '';
         var followupRoute = followup && firstActionPreset !== "followup" ? '<button class="result-interpretation-route" type="button" data-result-preset="followup">출판 후속조치 신호만 보기 · ' + followup.toLocaleString("ko-KR") + '건</button>' : '';
+        var interventionDisclosure = '<details class="result-interpretation-disclosure" id="result-intervention-disclosure"><summary>GABA 개입 유형 <span>순수·복합·발효·수용체를 분리해 보기</span></summary><div class="result-interpretation-actions result-interpretation-intervention" role="group" aria-label="현재 결과의 GABA 개입 유형"><span class="result-interpretation-actions-label">분류별 바로 보기</span>' + interventionActions + '</div><p class="result-interpretation-note">개입 유형은 연구 대상과 제품·약물 구성을 구분하기 위한 탐색 분류이며, 효능·안전성·규제 적합성의 우열을 뜻하지 않습니다.</p></details>';
         var marketingActions = '<details class="result-interpretation-disclosure" id="result-marketing-disclosure"><summary>활용 검토 범위 <span>직접 ' + marketingDirect.toLocaleString("ko-KR") + ' · 조건부 ' + marketingConditional.toLocaleString("ko-KR") + ' · 사용 금지 ' + marketingExclude.toLocaleString("ko-KR") + '</span></summary><div class="result-interpretation-actions result-interpretation-marketing" role="group" aria-label="현재 결과의 마케팅 활용 검토 범위"><span class="result-interpretation-actions-label">필터로 좁히기</span><button class="result-interpretation-route" type="button" data-result-preset="marketing-direct" aria-pressed="' + String(state.marketing === "직접 근거 검토") + '">직접 근거 검토 · ' + marketingDirect.toLocaleString("ko-KR") + '건</button><button class="result-interpretation-route" type="button" data-result-preset="marketing-conditional" aria-pressed="' + String(state.marketing === "조건부 검토") + '">조건부 검토 · ' + marketingConditional.toLocaleString("ko-KR") + '건</button><button class="result-interpretation-route" type="button" data-result-preset="marketing-exclude" aria-pressed="' + String(state.marketing === "마케팅 사용 금지") + '">사용 금지 · ' + marketingExclude.toLocaleString("ko-KR") + '건</button></div><p class="result-interpretation-note result-interpretation-marketing-note">활용 검토 분류는 연구조건·대상·안전성·원문 확인을 위한 작업 범위이며, 광고 허가·효능 입증·규제 승인을 뜻하지 않습니다.</p></details>';
         var query = state.q ? state.q.trim() : "전체 근거";
         var guard = state.audit === "unavailable"
@@ -5402,6 +5417,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           '</div>' +
           '<p class="result-interpretation-note">인체·동물·규제 자료는 근거의 범위가 다릅니다. <strong>' + list.length.toLocaleString("ko-KR") + '건</strong>을 확인할 때 인체 연구와 원문 상태를 먼저 비교하세요.</p>' +
           '<div class="result-interpretation-actions" role="group" aria-label="현재 결과에서 권장 검토 순서"><div class="result-interpretation-action-group" role="group" aria-label="권장 첫 검토 단계"><span class="result-interpretation-actions-label">권장 첫 단계</span>' + firstAction + '</div><div class="result-interpretation-action-group" role="group" aria-label="다른 검토 경로"><span class="result-interpretation-actions-label">다른 경로</span>' + secondaryHumanAction + secondaryOralAction + sourceAction + reviewAction + followupRoute + '</div></div>' +
+          interventionDisclosure +
           marketingActions +
           '<p class="result-interpretation-guard"><strong>해석 경계</strong> ' + esc(guard) + '</p>' +
           (review ? '<button class="result-interpretation-action" id="result-review-jump" type="button">추가 확인 큐 보기 · ' + review.toLocaleString("ko-KR") + '건</button>' : '');
