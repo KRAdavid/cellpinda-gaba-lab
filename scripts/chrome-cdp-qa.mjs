@@ -222,9 +222,9 @@ try {
   assert.equal(health.ok, true);
   assert.equal(health.records, 392);
   assert.equal(health.release?.snapshotVersion, 457);
-  assert.equal(health.release?.siteVersion, 800);
-  assert.equal(health.release?.sourceCommit, "56e774877b8fc6e3492a26bb338ab2ffb94399c6");
-  assert.equal(health.release?.publicMirrorCommit, "f6373f4aeaec06364312fdf82f85a8f420c5ea85");
+  assert.equal(health.release?.siteVersion, 803);
+  assert.equal(health.release?.sourceCommit, "9848dddbf2356510ad85a893cb864a6210f44394");
+  assert.equal(health.release?.publicMirrorCommit, "0a76f06a5fc17d5f46c31379c62aed2e48dbde58");
   assert.ok(Number.isInteger(health.release?.currentCodeDeployment?.siteVersion));
   assert.match(health.release?.currentCodeDeployment?.sourceCommit || "", /^[0-9a-f]{40}$/);
   assert.match(health.release?.currentCodeDeployment?.publicMirrorCommit || "", /^[0-9a-f]{40}$/);
