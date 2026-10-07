@@ -488,6 +488,8 @@ try {
   const candidateCsv = await readFile(candidateCsvPath, "utf8");
   assert.equal(candidateCsv.includes("개인 검토 확인 시각"), true);
   assert.equal(candidateCsv.includes("수동 검토 상태"), true);
+  assert.equal(candidateCsv.includes("출처 레인"), true);
+  assert.equal(candidateCsv.includes("출처 라벨"), true);
   await evaluate(client, "document.querySelector('[data-candidate-detail]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-dialog')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-checklist')?.textContent.includes('경구·섭취 여부')"), true);
