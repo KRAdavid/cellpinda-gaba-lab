@@ -2423,7 +2423,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <button class="intent-button" type="button" data-preset="audit-unavailable">접근 제한 후속검토</button>
           <button class="intent-button" type="button" data-preset="review">추가 검토</button>
         </div>
-        <div class="quick-row" aria-label="연구구분 빠른 필터">
+        <div class="quick-row" aria-label="연구구분 빠른 필터" aria-describedby="quick-scope-note">
           <button class="quick-button active" type="button" data-kind="">전체</button>
           <button class="quick-button" type="button" data-kind="임상">인체 임상</button>
           <button class="quick-button" type="button" data-kind="동물">동물시험</button>
@@ -2498,7 +2498,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             <option value="100">100개씩</option>
           </select>
         </div>
-        <p class="quick-scope-note">빠른 필터의 숫자는 전체 검증 인덱스 기준입니다. 실제 결과 건수는 아래 ‘현재 조건’에서 갱신됩니다.</p>
+        <p class="quick-scope-note" id="quick-scope-note">빠른 필터의 숫자는 전체 검증 인덱스 기준입니다. 실제 결과 건수는 아래 ‘현재 조건’에서 갱신됩니다.</p>
         <div class="filter-status-strip" id="filter-status-strip" role="status" aria-live="polite">
           <span class="filter-status-label">현재 조건</span>
           <span class="filter-status-text" id="filter-status-text">전체 검증 근거</span>
