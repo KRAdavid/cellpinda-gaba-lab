@@ -257,6 +257,7 @@ const required = [
   ,["Result review queue route", 'data-result-preset="review"']
   ,["Review queue filter counts", "reviewFilterCounts"]
   ,["Result review queue alignment", "reviewQueueIds"]
+  ,["Result candidate action alignment", "candidateResultCount"]
   ,["Copy dialog accessible name", 'id="copy-dialog-value" aria-labelledby="copy-dialog-title"']
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']
