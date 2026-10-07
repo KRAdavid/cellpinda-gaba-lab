@@ -894,6 +894,9 @@ try {
   await evaluate(client, "document.querySelector('#filter-mobile-apply').click()");
   assert.equal(await evaluate(client, "document.body.classList.contains('filter-open')"), false);
   assert.equal(await evaluate(client, "document.activeElement?.id"), "result-count");
+  if (process.env.GABA_QA_URL) {
+    assert.equal(await evaluate(client, "document.querySelector('#sheet-link')?.hidden"), true);
+  }
   console.log(JSON.stringify({ browserQa: true, browser: version.Browser, target: qaOrigin, desktop: true, mobile: true, horizontalOverflow: false, screenshots: ["qa/cdp-desktop-top.png", "qa/cdp-mobile-top.png"] }));
 } finally {
   client?.close();

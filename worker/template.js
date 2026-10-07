@@ -3169,7 +3169,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           return record.kind !== "규제" && (record.pmid || record.doi);
         }).length;
         var sheetLink = el("sheet-link");
-        if (DB.meta.sourceSheet) {
+        if (DB.meta.sourceSheet && !DB.meta.publicRelease) {
           sheetLink.href = DB.meta.sourceSheet;
           sheetLink.hidden = false;
         }
