@@ -2005,7 +2005,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
               <a href="#results">근거 인덱스</a>
               <a href="#market-use">시장·활용</a>
               <a href="#distribution-title">규제·안전</a>
-              <a href="#review-queue">추가 검토</a>
+              <a href="#review-queue" id="mobile-review-link" aria-label="추가 검토 큐, 대기 건수 확인 중">추가 검토 <span class="portal-nav-count" id="mobile-review-count" aria-live="polite">-</span></a>
             </div>
           </details>
         </div>
@@ -3981,6 +3981,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var portalReviewCount = el("portal-review-count");
         if (portalReviewCount) portalReviewCount.textContent = baseQueue.length.toLocaleString("ko-KR");
         if (portalReviewLink) portalReviewLink.setAttribute("aria-label", "추가 검토 큐, " + baseQueue.length.toLocaleString("ko-KR") + "건 대기");
+        var mobileReviewLink = el("mobile-review-link");
+        var mobileReviewCount = el("mobile-review-count");
+        if (mobileReviewCount) mobileReviewCount.textContent = baseQueue.length.toLocaleString("ko-KR");
+        if (mobileReviewLink) mobileReviewLink.setAttribute("aria-label", "추가 검토 큐, " + baseQueue.length.toLocaleString("ko-KR") + "건 대기");
         var doneCount = baseQueue.filter(function (item) { return reviewDecisionState(item.record.id).status === "done"; }).length;
         var holdCount = baseQueue.filter(function (item) { return reviewDecisionState(item.record.id).status === "hold"; }).length;
         var completionRate = baseQueue.length ? Math.round(doneCount / baseQueue.length * 100) : 0;

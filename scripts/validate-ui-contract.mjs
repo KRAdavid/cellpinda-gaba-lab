@@ -253,6 +253,7 @@ const required = [
   ,["Orientation review step", "다음 검토를 기록하세요"]
   ,["Portal review navigation", 'href="#review-queue"']
   ,["Portal review queue count", 'id="portal-review-count"']
+  ,["Mobile review queue count", 'id="mobile-review-count"']
   ,["Copy dialog accessible name", 'id="copy-dialog-value" aria-labelledby="copy-dialog-title"']
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']

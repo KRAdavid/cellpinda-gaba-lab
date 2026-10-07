@@ -783,6 +783,8 @@ try {
   await evaluate(client, "document.querySelector('.mobile-portal-jump summary').click()");
   assert.equal(await evaluate(client, "document.querySelector('.mobile-portal-jump')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector(\".mobile-portal-jump-links a[href='#market-use']\")?.textContent"), "시장·활용");
+  assert.equal(await evaluate(client, "/^\\d[\\d,]*$/.test(document.querySelector('#mobile-review-count')?.textContent.trim() || '')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#mobile-review-link')?.getAttribute('aria-label')?.includes('건 대기')"), true);
   await navigate(`http://127.0.0.1:${httpPort}/`);
   assert.equal(await evaluate(client, "document.documentElement.scrollWidth <= document.documentElement.clientWidth"), true);
   assert.match(String(await evaluate(client, "document.querySelector('#result-interpretation')?.textContent")), /해석 경계/);
