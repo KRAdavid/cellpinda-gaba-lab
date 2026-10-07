@@ -179,6 +179,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .intelligence-intro h2, .intelligence-card h3 { margin: 0; letter-spacing: -.03em; }
     .intelligence-intro h2 { font-size: 19px; }
     .intelligence-intro p { margin: 8px 0 0; color: rgba(255,255,255,.72); font-size: 12px; line-height: 1.55; }
+    .intelligence-gate-note { display: block; margin-top: 12px; padding: 8px 10px; border: 1px solid rgba(183,243,231,.28); border-radius: 9px; background: rgba(183,243,231,.08); color: #d9fff6; font-size: 11px; line-height: 1.5; }
+    .intelligence-gate-note strong { color: #fff; }
     .intelligence-card { display: grid; align-content: space-between; gap: 16px; min-height: 138px; }
     .intelligence-card h3 { font-size: 14px; }
     .intelligence-card p { margin: 6px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
@@ -2238,6 +2240,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       <div class="intelligence-intro">
         <h2 id="intelligence-title">오늘의 검토 신호</h2>
         <p>인덱스에 확인된 자료를 연구·규제·활용 관점으로 나누어 보여줍니다. 해석은 원문 확인과 승인 후에만 사업 자료로 사용합니다.</p>
+        <span class="intelligence-gate-note" id="external-review-gate" role="note"><strong>외부 검토 게이트</strong> · 규제·안전·마케팅 결론은 독립 외부 검토 전 확정하지 않습니다.</span>
         <a class="intelligence-link" href="#results" style="color:#b7f3e7">근거부터 확인하기 →</a>
       </div>
       <article class="intelligence-card">

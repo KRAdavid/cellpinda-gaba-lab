@@ -218,6 +218,8 @@ const required = [
   ,["Curated research meaning priority", 'var curated = labeledNote(record, "연구의 의미", "마케팅 활용 방안")']
   ,["Curated marketing direction priority", 'var curated = labeledNote(record, "마케팅 활용 방안")']
   ,["Marketing boundary note", "활용 방향 제시 · 광고 허가·효능 입증 아님 · 외부 검토 필요"]
+  ,["External review gate", 'id="external-review-gate" role="note"']
+  ,["External review gate copy", "독립 외부 검토 전 확정하지 않습니다"]
   ,["Review share dialog", "review-share-dialog"]
   ,["Review share copy action", "copyReviewShareUrl"]
   ,["Shared queue exit", "clearSharedReviewQueue"]

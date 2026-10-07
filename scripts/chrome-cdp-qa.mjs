@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
-import { access, mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { access, mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawn } from "node:child_process";
@@ -23,6 +23,17 @@ function freePort() {
 }
 
 function sleep(ms) { return new Promise((resolveSleep) => setTimeout(resolveSleep, ms)); }
+
+async function waitForDownload(directory, timeoutMs = 5000) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const names = await readdir(directory);
+    const completed = names.find((name) => !name.endsWith(".crdownload"));
+    if (completed) return join(directory, completed);
+    await sleep(100);
+  }
+  throw new Error(`Timed out waiting for download in ${directory}`);
+}
 
 async function waitForJson(url, timeoutMs = 8000) {
   const deadline = Date.now() + timeoutMs;
@@ -113,6 +124,8 @@ const localQaOrigin = `http://127.0.0.1:${httpPort}`;
 const qaOrigin = (process.env.GABA_QA_URL || localQaOrigin).replace(/\/+$/, "");
 
 const profile = await mkdtemp(join(tmpdir(), "gaba-chrome-qa-"));
+const downloadDir = join(profile, "downloads");
+await mkdir(downloadDir, { recursive: true });
 const chrome = spawn(chromePath, [
   "--headless=new", "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
   `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`, "about:blank"
@@ -125,6 +138,7 @@ try {
   if (!pageTarget) throw new Error("No page target exposed by Chrome DevTools Protocol");
   client = new CdpClient(pageTarget.webSocketDebuggerUrl);
   await client.connect();
+  await client.call("Browser.setDownloadBehavior", { behavior: "allow", downloadPath: downloadDir });
   await client.call("Page.enable");
   await client.call("Runtime.enable");
   client.events.set("Runtime.exceptionThrown", [...(client.events.get("Runtime.exceptionThrown") || []), (params) => {
@@ -283,6 +297,8 @@ try {
   await evaluate(client, "document.querySelector('#result-marketing-disclosure summary').click()");
   assert.equal(await evaluate(client, "document.querySelector('#result-marketing-disclosure')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-marketing-note')?.textContent.includes('광고 허가·효능 입증·규제 승인을 뜻하지 않습니다')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#external-review-gate')?.getAttribute('role')"), "note");
+  assert.equal(await evaluate(client, "document.querySelector('#external-review-gate')?.textContent.includes('독립 외부 검토 전 확정하지 않습니다')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-stats')?.textContent.includes('후속조치 신호')"), true);
   assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-result-preset=followup]'))"), true);
   await evaluate(client, "document.querySelector('[data-result-preset=followup]').click()");
@@ -425,6 +441,11 @@ try {
   assert.equal(await evaluate(client, "/PubMed 원문|DOI 원문/.test(document.querySelector('#candidate-preview-list a')?.textContent || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-list')?.textContent.includes('경로·섭취 표현')"), true);
   assert.equal(await waitForExpression(client, "document.querySelector('#candidate-preview-export')?.textContent.includes('현재 필터 후보 CSV')"), true);
+  await evaluate(client, "document.querySelector('#candidate-preview-export').click()");
+  const candidateCsvPath = await waitForDownload(downloadDir);
+  const candidateCsv = await readFile(candidateCsvPath, "utf8");
+  assert.equal(candidateCsv.includes("개인 검토 확인 시각"), true);
+  assert.equal(candidateCsv.includes("수동 검토 상태"), true);
   await evaluate(client, "document.querySelector('[data-candidate-detail]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-dialog')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-checklist')?.textContent.includes('경구·섭취 여부')"), true);
