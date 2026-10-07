@@ -271,6 +271,7 @@ try {
   assert.equal(await evaluate(client, "parseFloat(getComputedStyle(document.querySelector('#toast')).maxWidth) <= window.innerWidth - 32"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-stats')?.getAttribute('role')"), "group");
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-actions')?.getAttribute('role')"), "group");
+  assert.equal(await evaluate(client, "document.querySelector('#result-interpretation')?.getAttribute('role')"), "region");
   assert.equal(await evaluate(client, "document.querySelector('.quick-scope-note')?.textContent.includes('전체 검증 인덱스 기준')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('aria-describedby')"), "quick-scope-note");
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.getAttribute('role')"), "group");

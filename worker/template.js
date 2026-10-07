@@ -2678,7 +2678,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           </div>
           <p class="compare-shared-note" id="compare-shared-note" role="status" hidden></p>
           <div class="active-filters" id="active-filters" aria-label="적용된 필터"></div>
-          <div class="result-interpretation" id="result-interpretation" aria-live="polite"></div>
+          <div class="result-interpretation" id="result-interpretation" role="region" aria-label="현재 검색 결과 해석 및 다음 행동" aria-live="polite"></div>
           <div class="papers" id="papers"></div>
           <nav class="pagination" id="pagination" aria-label="검색 결과 페이지">
             <button class="page-button" id="prev" type="button" aria-label="이전 페이지">←</button>
