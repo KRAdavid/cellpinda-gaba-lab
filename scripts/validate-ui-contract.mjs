@@ -52,6 +52,8 @@ const required = [
   ["Personal workspace reset", 'id="personal-workspace-clear"'],
   ["Result next-action routes", "data-result-preset"],
   ["Result next-action renderer", "result-interpretation-actions"],
+  ["Result recommended first step", "권장 첫 단계"],
+  ["Result primary next-action style", "result-interpretation-route-primary"],
   ["Result marketing-use scope", "result-interpretation-marketing"],
   ["Result marketing-use guard", "광고 허가·효능 입증·규제 승인을 뜻하지 않습니다"],
   ["Result marketing-use disclosure", 'id="result-marketing-disclosure"'],
