@@ -153,6 +153,7 @@ const required = [
   ["Anchor offset for sticky header", "scroll-margin-top: 84px"],
   ["Anchor destination focus", "function focusAnchorHeading"],
   ["Mobile portal navigation", 'class="mobile-portal-jump"'],
+  ["Mobile Intelligence navigation", 'href="#intelligence">Intelligence'],
   ["Reduced-motion scroll behavior", "function preferredScrollBehavior"],
   ["Exploration presets", "data-preset"],
   ["Detail opener", "function openIntelligenceDetail"],

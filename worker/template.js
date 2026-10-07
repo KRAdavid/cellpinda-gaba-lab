@@ -2081,6 +2081,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             <summary>포털 둘러보기</summary>
             <div class="mobile-portal-jump-links" aria-label="모바일 주요 영역">
               <a href="#results">근거 인덱스</a>
+              <a href="#intelligence">Intelligence</a>
               <a href="#market-use">시장·활용</a>
               <a href="#distribution-title">규제·안전</a>
               <a href="#review-queue" id="mobile-review-link" aria-label="추가 검토 큐, 대기 건수 확인 중">추가 검토 <span class="portal-nav-count" id="mobile-review-count" aria-live="polite">-</span></a>
