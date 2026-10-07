@@ -3307,7 +3307,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             ? " 실패 원천: " + discovery.lastAttempt.failedSources.join(", ") + "."
             : "";
           var recoveryHint = discovery.lastAttempt.recoveryHint ? " " + discovery.lastAttempt.recoveryHint + "." : "";
-          discoveryAttemptNote.textContent = "최근 자동 탐색 시도 " + koreanDate(discovery.lastAttempt.snapshotDate) + "는 원천 오류 " + Number(discovery.lastAttempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건으로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." + failedSources + recoveryHint;
+          var openAlexAttempt = Number(discovery.lastAttempt.openAlexAttemptedQueries || 0);
+          var openAlexSkipped = Number(discovery.lastAttempt.openAlexSkippedQueries || 0);
+          var queryGuard = openAlexSkipped ? " OpenAlex는 " + openAlexAttempt.toLocaleString("ko-KR") + "회 시도 후 남은 " + openAlexSkipped.toLocaleString("ko-KR") + "회 질의를 중단했습니다." : "";
+          discoveryAttemptNote.textContent = "최근 자동 탐색 시도 " + koreanDate(discovery.lastAttempt.snapshotDate) + "는 원천 오류 " + Number(discovery.lastAttempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건으로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." + failedSources + queryGuard + recoveryHint;
           discoveryAttemptNote.hidden = false;
         }
         el("discovery-stats").innerHTML = [
@@ -3316,6 +3319,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ["마지막 완전 검증 릴리스", release.snapshotVersion ? "데이터 v" + Number(release.snapshotVersion) + " · Sites v" + Number(release.siteVersion || 0) + (release.publicMirrorCommit ? " · GitHub " + String(release.publicMirrorCommit).slice(0, 7) : "") : "확인 필요"],
           ["PubMed", Number(discovery.pubmedUnique || 0).toLocaleString("ko-KR") + "건"],
           ["OpenAlex", Number(discovery.openAlexRetrieved || 0).toLocaleString("ko-KR") + "건"],
+          ["최근 OpenAlex 요청", discovery.lastAttempt ? Number(discovery.lastAttempt.openAlexAttemptedQueries || 0).toLocaleString("ko-KR") + "회 시도 · " + Number(discovery.lastAttempt.openAlexSkippedQueries || 0).toLocaleString("ko-KR") + "회 중단" : "확인 필요"],
           ["Crossref", Number(discovery.crossrefRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["통합 고유", Number(discovery.mergedUnique || 0).toLocaleString("ko-KR") + "건"],
           ["신규 후보 게이트", "GABA 신호 또는 후속조치 검색 신호"],

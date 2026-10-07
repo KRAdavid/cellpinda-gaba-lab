@@ -55,6 +55,8 @@ const attempt = {
   sourceErrorCount: errors.length,
   failedSources: failedSources.slice(0, 8),
   openAlexAccessMode,
+  openAlexAttemptedQueries: Number(summary.openAlex?.attemptedQueries || 0),
+  openAlexSkippedQueries: Number(summary.openAlex?.skippedQueries || 0),
   openAlexRateLimited: hasOpenAlexRateLimit,
   openAlexRetryAfterSeconds,
   recoveryHint,

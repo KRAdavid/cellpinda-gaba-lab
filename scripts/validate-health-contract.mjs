@@ -20,6 +20,8 @@ if (discovery?.lastAttempt) {
   if (!String(discovery.lastAttempt.recoveryHint || "").trim()) invalid.push("lastAttempt.recoveryHint");
   if (typeof discovery.lastAttempt.openAlexRateLimited !== "boolean") invalid.push("lastAttempt.openAlexRateLimited");
   if (!Number.isInteger(Number(discovery.lastAttempt.openAlexRetryAfterSeconds)) || Number(discovery.lastAttempt.openAlexRetryAfterSeconds) < 0) invalid.push("lastAttempt.openAlexRetryAfterSeconds");
+  if (!Number.isInteger(Number(discovery.lastAttempt.openAlexAttemptedQueries)) || Number(discovery.lastAttempt.openAlexAttemptedQueries) < 0) invalid.push("lastAttempt.openAlexAttemptedQueries");
+  if (!Number.isInteger(Number(discovery.lastAttempt.openAlexSkippedQueries)) || Number(discovery.lastAttempt.openAlexSkippedQueries) < 0) invalid.push("lastAttempt.openAlexSkippedQueries");
 }
 if (!Array.isArray(discovery?.candidateExport) || discovery.candidateExport.length < Number(discovery?.stagedCandidates || 0)) invalid.push("candidateExport");
 if (!discovery?.screeningCounts || !Number.isFinite(Number(discovery?.manualDecisionsPreserved)) || !Number.isFinite(Number(discovery?.manualDecisionsMatched))) invalid.push("screeningCounts/manualDecisions");

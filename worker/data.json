@@ -37118,6 +37118,8 @@
           "OpenAlex"
         ],
         "openAlexAccessMode": "anonymous",
+        "openAlexAttemptedQueries": 1,
+        "openAlexSkippedQueries": 13,
         "openAlexRateLimited": true,
         "openAlexRetryAfterSeconds": 15697,
         "recoveryHint": "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 설정하거나 OpenAlex rate limit 재설정(약 4시간 22분 후) 후 재실행",

@@ -438,6 +438,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#freshness-label')?.textContent.includes('탐색')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-attempt-note')?.textContent.includes('최근 자동 탐색 시도')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-attempt-note')?.textContent.includes('재실행')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#discovery-attempt-note')?.textContent.includes('남은 13회 질의를 중단')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview')?.hidden"), false);
   assert.equal(await evaluate(client, "document.querySelector('#sheet-link')?.hidden"), true);
   assert.equal(await evaluate(client, "getComputedStyle(document.querySelector('#sheet-link')).display"), "none");
@@ -582,6 +583,7 @@ try {
   await evaluate(client, "document.querySelector('#result-review-jump').click()");
   assert.equal(await waitForExpression(client, "document.activeElement?.id === 'review-queue-title'"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('Crossref')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('최근 OpenAlex 요청') && document.querySelector('#discovery-stats')?.textContent.includes('1회 시도 · 13회 중단')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('이번 갱신 변화')"), true);
   assert.equal(await evaluate(client, "document.querySelector(\".portal-nav a[href='#market-use']\")?.textContent.includes('시장·활용')"), true);
   assert.equal(await evaluate(client, "document.querySelector(\".portal-nav a[href='#review-queue']\")?.textContent.includes('추가 검토')"), true);
