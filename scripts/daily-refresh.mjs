@@ -18,6 +18,9 @@ function run(label, script, args = []) {
 if (!skipDiscovery) run("discover-literature", "scripts/discover-literature.mjs", ["--max-candidates=1000"]);
 const attemptCode = run("record-discovery-attempt", "scripts/record-discovery-attempt.mjs");
 const promotionCode = run("generate-data", "scripts/generate-data.mjs");
+const validationReadyCode = promotionCode === 0
+  ? run("record-discovery-validation-ready", "scripts/record-discovery-attempt.mjs", ["--ready-for-validation"])
+  : 0;
 const pendingBuildCode = run("build-pending-sheet-sync", "scripts/build-pending-sheet-sync.mjs");
 const pendingCheckCode = run("validate-pending-sheet-sync", "scripts/validate-pending-sheet-sync.mjs");
 
@@ -27,6 +30,7 @@ console.log(JSON.stringify({
   status,
   skipDiscovery,
   promotionCode,
+  validationReadyCode,
   attemptCode,
   pendingBuildCode,
   pendingCheckCode,
@@ -36,5 +40,5 @@ console.log(JSON.stringify({
   results
 }, null, 2));
 
-if (attemptCode !== 0 || pendingBuildCode !== 0 || pendingCheckCode !== 0) process.exitCode = 1;
+if (attemptCode !== 0 || validationReadyCode !== 0 || pendingBuildCode !== 0 || pendingCheckCode !== 0) process.exitCode = 1;
 else if (partial) process.exitCode = 2;

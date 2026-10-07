@@ -25,6 +25,7 @@ const dated = await Promise.all(paths.map(async (path) => {
 dated.sort((left, right) => String(right.generatedAt).localeCompare(String(left.generatedAt)) || right.mtime - left.mtime);
 const summaryPath = dated[0].path;
 const summary = dated[0].summary;
+const readyForValidation = process.argv.includes("--ready-for-validation");
 const errors = Array.isArray(summary.sourceErrors) ? summary.sourceErrors : [];
 const failedSources = [...new Set(errors.map((entry) => String(entry?.source || "unknown").split(":")[0]))];
 const openAlexAccessMode = String(summary.openAlex?.accessMode || "unknown");
@@ -55,7 +56,7 @@ const recoveryHint = hasOpenAlexError
 const attempt = {
   snapshotDate: String(summary.snapshotDate || ""),
   generatedAt: String(summary.generatedAt || ""),
-  status: errors.length ? "PARTIAL_NOT_PROMOTED" : "READY_FOR_PROMOTION",
+  status: errors.length ? "PARTIAL_NOT_PROMOTED" : readyForValidation ? "READY_FOR_VALIDATION" : "READY_FOR_PROMOTION",
   sourceErrorCount: errors.length,
   failedSources: failedSources.slice(0, 8),
   openAlexAccessMode,
