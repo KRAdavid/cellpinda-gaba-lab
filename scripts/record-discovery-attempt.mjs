@@ -37,7 +37,9 @@ const formatRetryAfter = (seconds) => {
 const retryAfterNote = formatRetryAfter(openAlexRetryAfterSeconds);
 const recoveryHint = hasOpenAlexError
   ? openAlexAccessMode === "anonymous"
-    ? "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 예약 실행 환경에 설정한 뒤 재실행"
+    ? hasOpenAlexRateLimit
+      ? `운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 설정하거나 OpenAlex rate limit 재설정${retryAfterNote ? `(${retryAfterNote})` : ""} 후 재실행`
+      : "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 예약 실행 환경에 설정한 뒤 재실행"
     : hasOpenAlexRateLimit
       ? `운영자 조치: OpenAlex rate limit 재설정${retryAfterNote ? `(${retryAfterNote})` : ""} 후 재실행`
       : openAlexAccessMode === "unknown"

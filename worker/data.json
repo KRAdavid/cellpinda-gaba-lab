@@ -37111,16 +37111,16 @@
       "disclaimer": "자동 탐색 후보는 확정 근거가 아니며 원문·투여경로·SCI/SCIE·중복 검증 후 문헌인덱스로 승격합니다.",
       "lastAttempt": {
         "snapshotDate": "2026-10-08",
-        "generatedAt": "2026-10-07T18:20:04.387Z",
+        "generatedAt": "2026-10-07T19:38:53.967Z",
         "status": "PARTIAL_NOT_PROMOTED",
-        "sourceErrorCount": 14,
+        "sourceErrorCount": 1,
         "failedSources": [
           "OpenAlex"
         ],
-        "openAlexAccessMode": "unknown",
+        "openAlexAccessMode": "anonymous",
         "openAlexRateLimited": true,
-        "openAlexRetryAfterSeconds": 0,
-        "recoveryHint": "운영자 조치: OpenAlex rate limit 재설정 후 재실행",
+        "openAlexRetryAfterSeconds": 15697,
+        "recoveryHint": "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 설정하거나 OpenAlex rate limit 재설정(약 4시간 22분 후) 후 재실행",
         "message": "일부 원천 응답 오류로 공개 인덱스 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다."
       },
       "candidateFile": null

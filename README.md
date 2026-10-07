@@ -65,6 +65,7 @@ data-quality → build → built-provenance → validate → build-pending-sheet
 - 일일 갱신 결과의 `recoveryHint`는 OpenAlex 인증값 누락·rate limit 등 운영자 조치를 구분해 기록하며, 비밀값 자체는 기록하지 않습니다.
 - `lastAttempt.openAlexRateLimited`는 원천 오류 메시지에 429/rate-limit 신호가 실제로 있을 때만 `true`가 됩니다. 접근 모드가 없는 과거 산출물을 임의로 rate limit으로 해석하지 않습니다.
 - `lastAttempt.openAlexRetryAfterSeconds`는 OpenAlex가 제공한 재시도 대기 초를 보존하며, 원천이 값을 주지 않으면 `0`으로 둡니다.
+- OpenAlex가 429/rate limit을 반환하면 남은 질의를 반복 재시도하지 않고 `skippedQueries`로 기록한 뒤 PubMed·Crossref 처리를 계속합니다. 이는 부분 결과의 공개 승격을 허용하지 않습니다.
 - `pnpm validate:ui`: 포털·Intelligence·검토 큐 UI 계약 확인
 - `node scripts/audit-public-links.mjs`: 원문·DOI·PubMed 대체 링크 체인을 검사하고 서버 접근 제한과 실제 실패를 구분
 - 비교 기능 QA: 최소 2건 선택 → 비교 대화상자 → 연구 설계·결과 방향·해석 주의문 표시를 확인
