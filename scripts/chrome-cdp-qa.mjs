@@ -408,6 +408,12 @@ try {
   await evaluate(client, "if (document.querySelector('#copy-dialog')?.open) document.querySelector('#copy-dialog-close')?.click()");
   assert.equal(await evaluate(client, "JSON.parse(document.querySelector('script[type=\"application/ld+json\"]')?.textContent || '{}').potentialAction.target.includes('{search_term_string}')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#result-interpretation')?.textContent.includes('인체 연구')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#result-interpretation')?.textContent.includes('원문 접근 확인')"), true);
+  assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-result-preset=audit-ok]'))"), true);
+  await evaluate(client, "document.querySelector('[data-result-preset=audit-ok]').click()");
+  assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('audit')"), "ok");
+  assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=audit-ok]')?.getAttribute('aria-pressed')"), "true");
+  await navigate(`http://127.0.0.1:${httpPort}/`);
   assert.equal(await evaluate(client, "document.querySelector('#result-review-jump')?.textContent.includes('추가 확인 큐 보기')"), true);
   assert.equal(await evaluate(client, "Boolean(document.querySelector('.review-card-primary'))"), true);
   assert.equal(await evaluate(client, "Boolean(document.querySelector('.review-card-source'))"), true);

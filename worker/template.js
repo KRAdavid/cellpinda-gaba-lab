@@ -3254,6 +3254,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (state.kind === "임상" && !state.status && !state.source) return "clinical";
         if (state.kind === "규제" && !state.status && !state.source) return "regulatory";
         if (state.source === "available" && !state.kind && !state.status) return "source";
+        if (state.audit === "ok" && !state.freshness && !state.kind && !state.status) return "audit-ok";
         if (state.audit === "unavailable" && !state.freshness && !state.kind && !state.status) return "audit-unavailable";
         if (state.status === "후보" && !state.kind && !state.source) return "review";
         return "";
@@ -3279,6 +3280,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (name === "oral") state.routeGroup = "경구·섭취";
         if (name === "regulatory") state.kind = "규제";
         if (name === "source") state.source = "available";
+        if (name === "audit-ok") state.audit = "ok";
         if (name === "audit-unavailable") state.audit = "unavailable";
         if (name === "review") state.status = "후보";
         state.page = 1;
@@ -5042,9 +5044,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var regulatory = list.filter(function (record) { return record.kind === "규제"; }).length;
         var review = list.filter(function (record) { return record.status === "후보" || record.status === "보류" || record.extraction === "부분"; }).length;
         var oral = list.filter(function (record) { return record.routeGroup === "경구·섭취"; }).length;
+        var auditOk = list.filter(function (record) { var audit = sourceAuditRecord(record); return audit && audit.status === "ok"; }).length;
+        var auditUnavailable = list.filter(function (record) { var audit = sourceAuditRecord(record); return audit && audit.status === "unavailable"; }).length;
         var clinicalAction = clinical ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="clinical" aria-pressed="' + String(state.kind === "임상") + '" aria-label="인체 연구 ' + clinical.toLocaleString("ko-KR") + '건만 보기">인체 연구 <strong>' + clinical.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">인체 연구 <strong>0</strong></span>';
         var animalAction = animal ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="animal" aria-pressed="' + String(state.kind === "동물") + '" aria-label="동물·전임상 ' + animal.toLocaleString("ko-KR") + '건만 보기">동물·전임상 <strong>' + animal.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">동물·전임상 <strong>0</strong></span>';
         var regulatoryAction = regulatory ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="regulatory" aria-pressed="' + String(state.kind === "규제") + '" aria-label="규제·안전성 ' + regulatory.toLocaleString("ko-KR") + '건만 보기">규제·안전성 <strong>' + regulatory.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">규제·안전성 <strong>0</strong></span>';
+        var auditOkAction = auditOk ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="audit-ok" aria-pressed="' + String(state.audit === "ok") + '" aria-label="감사 시점 접근 확인 ' + auditOk.toLocaleString("ko-KR") + '건만 보기">원문 접근 확인 <strong>' + auditOk.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">원문 접근 확인 <strong>0</strong></span>';
+        var auditUnavailableAction = auditUnavailable ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="audit-unavailable" aria-pressed="' + String(state.audit === "unavailable") + '" aria-label="원문 접근 후속 검토 ' + auditUnavailable.toLocaleString("ko-KR") + '건만 보기">접근 후속 검토 <strong>' + auditUnavailable.toLocaleString("ko-KR") + '</strong></button>' : '';
         var oralAction = oral ? '<button class="result-interpretation-route" type="button" data-result-preset="oral">경구·섭취만 보기 · ' + oral.toLocaleString("ko-KR") + '건</button>' : '';
         var query = state.q ? state.q.trim() : "전체 근거";
         var guard = state.audit === "unavailable"
@@ -5057,6 +5063,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             clinicalAction +
             animalAction +
             regulatoryAction +
+            auditOkAction +
+            auditUnavailableAction +
             '<span class="result-interpretation-stat">추가 확인 <strong>' + review.toLocaleString("ko-KR") + '</strong></span>' +
           '</div>' +
           '<p class="result-interpretation-note">인체·동물·규제 자료는 근거의 범위가 다릅니다. <strong>' + list.length.toLocaleString("ko-KR") + '건</strong>을 확인할 때 인체 연구와 원문 상태를 먼저 비교하세요.</p>' +
