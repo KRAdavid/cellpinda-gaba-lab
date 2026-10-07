@@ -74,6 +74,8 @@ const required = [
   ["Review queue import renderer", "function importReviewQueue"],
   ["Freshness indicator", 'id="freshness-label"'],
   ["Discovery attempt status", 'id="discovery-attempt-note"'],
+  ["Discovery next action", 'id="discovery-next-action"'],
+  ["Discovery next action renderer", "다음 조치:"],
   ["Discovery state badge", 'id="discovery-state-badge"'],
   ["Discovery state badge sync", "function syncDiscoveryStateBadge"],
   ["Discovery freshness distinction", "자동 탐색"],

@@ -663,6 +663,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       color: #76520e !important;
       font-weight: 800;
     }
+    .discovery-next-action {
+      padding: 8px 10px;
+      border-left: 3px solid var(--teal);
+      background: rgba(255,255,255,.68);
+      color: var(--ink-2) !important;
+      font-size: 12px !important;
+    }
     .discovery-stats {
       display: flex;
       flex-wrap: wrap;
@@ -2247,6 +2254,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         <h2 id="discovery-title" tabindex="-1">검증 인덱스와 자동 탐색 후보를 분리해 관리합니다 <span class="discovery-state-badge is-unknown" id="discovery-state-badge" role="status" aria-live="polite">탐색 상태 확인 중</span></h2>
         <p id="discovery-copy">대량 탐색 현황을 불러오는 중입니다.</p>
         <p class="discovery-attempt-note" id="discovery-attempt-note" role="status" aria-live="polite" hidden></p>
+        <p class="discovery-next-action" id="discovery-next-action" role="note" hidden></p>
         <div class="discovery-stats" id="discovery-stats" aria-label="대량 탐색 통계"></div>
         <p class="release-provenance-note" id="release-provenance-note" role="note">운영 코드 버전과 완전 검증 데이터 스냅샷 버전은 추적 목적이 달라 다를 수 있습니다. 버전 차이는 근거의 질·효능·규제 적합성을 의미하지 않습니다.</p>
         <div class="link-audit-note-wrap" id="link-audit-note-wrap" hidden>
@@ -3342,6 +3350,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         el("discovery-copy").textContent = discovery.disclaimer
           || "자동 탐색 후보는 검증 자료와 분리하며, 최종 판정 후에만 공개 인덱스로 승격합니다.";
         var discoveryAttemptNote = el("discovery-attempt-note");
+        var discoveryNextAction = el("discovery-next-action");
         if (discoveryAttemptNote && discovery.lastAttempt?.status === "PARTIAL_NOT_PROMOTED") {
           var failedSources = Array.isArray(discovery.lastAttempt.failedSources) && discovery.lastAttempt.failedSources.length
             ? " 실패 원천: " + discovery.lastAttempt.failedSources.join(", ") + "."
@@ -3352,6 +3361,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           var queryGuard = openAlexSkipped ? " OpenAlex는 " + openAlexAttempt.toLocaleString("ko-KR") + "회 시도 후 남은 " + openAlexSkipped.toLocaleString("ko-KR") + "회 질의를 중단했습니다." : "";
           discoveryAttemptNote.textContent = "최근 자동 탐색 시도 " + koreanDate(discovery.lastAttempt.snapshotDate) + "는 원천 오류 " + Number(discovery.lastAttempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건으로 공개 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다." + failedSources + queryGuard + recoveryHint;
           discoveryAttemptNote.hidden = false;
+          if (discoveryNextAction) {
+            discoveryNextAction.textContent = "다음 조치: " + (discovery.lastAttempt.recoveryHint || "운영 환경에서 원천 오류를 확인한 뒤 한 번 재실행하고, READY_FOR_PROMOTION일 때만 검증·QA 후 배포합니다.");
+            discoveryNextAction.hidden = false;
+          }
+        } else if (discoveryNextAction) {
+          discoveryNextAction.hidden = true;
         }
         el("discovery-stats").innerHTML = [
           ["탐색일", koreanDate(discovery.snapshotDate || DB.meta.snapshotDate)],
