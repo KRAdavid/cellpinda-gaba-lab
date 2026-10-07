@@ -252,6 +252,7 @@ const required = [
   ,["Methodology Sheets 403 policy", "403이면 재시도하지 않고 동기화 대기목록"]
   ,["Orientation review step", "다음 검토를 기록하세요"]
   ,["Portal review navigation", 'href="#review-queue"']
+  ,["Portal review queue count", 'id="portal-review-count"']
   ,["Copy dialog accessible name", 'id="copy-dialog-value" aria-labelledby="copy-dialog-title"']
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']

@@ -140,6 +140,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       border-radius: 9px; color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 700;
     }
     .portal-nav a:hover, .portal-nav a:focus-visible { color: var(--ink); background: var(--surface-2); }
+    .portal-nav-count { display: inline-flex; min-width: 18px; height: 18px; align-items: center; justify-content: center; margin-left: 4px; padding: 0 4px; border-radius: 999px; background: var(--teal-soft); color: var(--teal-dark); font-size: 10px; font-weight: 900; }
     .top-link, .share-button {
       min-height: 42px;
       display: inline-flex;
@@ -1978,7 +1979,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         <a href="#intelligence">Intelligence</a>
         <a href="#distribution-title">규제·안전</a>
         <a href="#market-use">시장·활용</a>
-        <a href="#review-queue">추가 검토</a>
+        <a href="#review-queue" id="portal-review-link" aria-label="추가 검토 큐, 대기 건수 확인 중">추가 검토 <span class="portal-nav-count" id="portal-review-count" aria-live="polite">-</span></a>
       </nav>
       <div class="top-actions">
         <a class="top-link" id="sheet-link" hidden target="_blank" rel="noopener noreferrer">관리 원본 Sheet</a>
@@ -3976,6 +3977,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var moreTarget = el("review-queue-more");
         if (!target || !countTarget) return;
         var baseQueue = buildReviewQueue();
+        var portalReviewLink = el("portal-review-link");
+        var portalReviewCount = el("portal-review-count");
+        if (portalReviewCount) portalReviewCount.textContent = baseQueue.length.toLocaleString("ko-KR");
+        if (portalReviewLink) portalReviewLink.setAttribute("aria-label", "추가 검토 큐, " + baseQueue.length.toLocaleString("ko-KR") + "건 대기");
         var doneCount = baseQueue.filter(function (item) { return reviewDecisionState(item.record.id).status === "done"; }).length;
         var holdCount = baseQueue.filter(function (item) { return reviewDecisionState(item.record.id).status === "hold"; }).length;
         var completionRate = baseQueue.length ? Math.round(doneCount / baseQueue.length * 100) : 0;
