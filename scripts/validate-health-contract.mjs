@@ -14,9 +14,15 @@ for (const key of ["pubmedUnique", "openAlexRetrieved", "crossrefRetrieved", "me
 }
 if (!Array.isArray(discovery?.sourceErrors)) invalid.push("sourceErrors[]");
 if (discovery?.lastAttempt) {
-  if (!/^(PARTIAL_NOT_PROMOTED|READY_FOR_PROMOTION)$/.test(String(discovery.lastAttempt.status || ""))) invalid.push("lastAttempt.status");
+  const attemptStatus = String(discovery.lastAttempt.status || "");
+  const attemptErrors = Number(discovery.lastAttempt.sourceErrorCount);
+  if (!/^(PARTIAL_NOT_PROMOTED|READY_FOR_PROMOTION)$/.test(attemptStatus)) invalid.push("lastAttempt.status");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(discovery.lastAttempt.snapshotDate || ""))) invalid.push("lastAttempt.snapshotDate");
-  if (!Number.isInteger(Number(discovery.lastAttempt.sourceErrorCount)) || Number(discovery.lastAttempt.sourceErrorCount) < 0) invalid.push("lastAttempt.sourceErrorCount");
+  if (!Number.isInteger(attemptErrors) || attemptErrors < 0) invalid.push("lastAttempt.sourceErrorCount");
+  if (!Array.isArray(discovery.lastAttempt.failedSources)) invalid.push("lastAttempt.failedSources[]");
+  if (Array.isArray(discovery.lastAttempt.failedSources) && attemptErrors > 0 && discovery.lastAttempt.failedSources.length === 0) invalid.push("lastAttempt.failedSources.required");
+  if (attemptStatus === "PARTIAL_NOT_PROMOTED" && attemptErrors === 0) invalid.push("lastAttempt.partialNeedsError");
+  if (attemptStatus === "READY_FOR_PROMOTION" && attemptErrors !== 0) invalid.push("lastAttempt.readyNeedsZeroErrors");
   if (!String(discovery.lastAttempt.recoveryHint || "").trim()) invalid.push("lastAttempt.recoveryHint");
   if (typeof discovery.lastAttempt.openAlexRateLimited !== "boolean") invalid.push("lastAttempt.openAlexRateLimited");
   if (!Number.isInteger(Number(discovery.lastAttempt.openAlexRetryAfterSeconds)) || Number(discovery.lastAttempt.openAlexRetryAfterSeconds) < 0) invalid.push("lastAttempt.openAlexRetryAfterSeconds");
