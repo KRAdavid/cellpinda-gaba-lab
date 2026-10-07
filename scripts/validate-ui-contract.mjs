@@ -258,6 +258,7 @@ const required = [
   ,["Audit filter counts", "function syncAuditFilterOptions"]
   ,["Freshness filter", 'id="freshness"']
   ,["Freshness filter buckets", "function freshnessBucket"]
+  ,["Freshness filter timezone", "var checked = kstDayStart(record.checked)"]
   ,["Freshness filter interpretation guard", "확인일 경과만 표시하며 근거의 질을 평가하지 않습니다."]
   ,["Freshness result interpretation guard", "최신 원문과 출판 후속 공지를 다시 확인하세요."]
   ,["Freshness review queue filter", 'data-review-filter="freshness"']

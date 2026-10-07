@@ -3615,10 +3615,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         });
       }
       function freshnessBucket(record) {
-        var checked = new Date(String(record.checked || "") + "T00:00:00");
-        if (Number.isNaN(checked.getTime())) return "unknown";
-        var today = new Date();
-        var days = Math.max(0, Math.floor((Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(checked.getFullYear(), checked.getMonth(), checked.getDate())) / 86400000));
+        var checked = kstDayStart(record.checked);
+        var today = kstDayStart(new Date());
+        if (Number.isNaN(checked) || Number.isNaN(today)) return "unknown";
+        var days = Math.max(0, Math.floor((today - checked) / 86400000));
         return days <= 90 ? "recent" : "stale";
       }
       function syncFreshnessFilterOptions() {
