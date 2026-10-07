@@ -4349,7 +4349,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var clinical = list.filter(function (record) { return record.kind === "임상"; }).length;
         var animal = list.filter(function (record) { return record.kind === "동물"; }).length;
         var regulatory = list.filter(function (record) { return record.kind === "규제"; }).length;
-        var review = list.filter(function (record) { return record.status === "후보" || record.status === "보류" || record.extraction === "부분"; }).length;
+        var reviewQueueIds = new Set(buildReviewQueue().map(function (item) { return item.record.id; }));
+        var review = list.filter(function (record) { return reviewQueueIds.has(record.id); }).length;
         var currentLink = location.origin + location.pathname + location.search;
         var lines = [
           "GABA 검색 결과 브리프",

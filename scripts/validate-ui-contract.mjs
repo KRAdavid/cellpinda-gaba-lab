@@ -254,6 +254,7 @@ const required = [
   ,["Portal review navigation", 'href="#review-queue"']
   ,["Portal review queue count", 'id="portal-review-count"']
   ,["Mobile review queue count", 'id="mobile-review-count"']
+  ,["Result review queue route", 'data-result-preset="review"']
   ,["Copy dialog accessible name", 'id="copy-dialog-value" aria-labelledby="copy-dialog-title"']
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']
