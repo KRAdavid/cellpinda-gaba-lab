@@ -1684,6 +1684,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .badge.marketing-filter-badge { border: 0; cursor: pointer; font: inherit; }
     .badge.marketing-filter-badge:hover, .badge.marketing-filter-badge:focus-visible { filter: brightness(.96); outline: 2px solid rgba(15,118,110,.24); outline-offset: 1px; }
     .badge.followup-badge { background: var(--amber-soft); color: #8a5a00; }
+    .badge.freshness-badge { background: var(--amber-soft); color: #8a5a00; }
     .paper-title {
       margin: 0;
       color: var(--ink);
@@ -3643,6 +3644,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (!audit || audit.status === "ok") return "";
         return '<span class="badge source-audit-badge" title="접근 제한·일시 응답·페이지 오류는 근거 약함을 뜻하지 않습니다.">원문 접근 제한</span>';
       }
+      function freshnessBadge(record) {
+        var bucket = freshnessBucket(record);
+        if (bucket === "recent") return "";
+        var label = bucket === "stale" ? "재확인 권고" : "확인일 미상";
+        return '<span class="badge freshness-badge" title="' + esc(label + '은 확인일 상태이며 근거의 질·효능·규제 승인을 평가하지 않습니다.') + '">' + label + '</span>';
+      }
 
       function recordDoseValues(record) {
         return [record.dose, record.exposure].join(" ")
@@ -4986,6 +4993,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             '<span class="badge regulatory">규제·안전성</span>' +
             '<span class="badge ' + badgeClass("status", record.status) + '">' + esc(record.status) + '</span>' +
             sourceAuditBadge(record) +
+            freshnessBadge(record) +
             marketingFilterBadge(record) +
             '<span class="badge">' + esc(record.grade) + '</span>' +
             '<span class="badge">' + esc(record.agency) + '</span>' +
@@ -5038,6 +5046,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             '<span class="badge ' + badgeClass("kind", record.kind) + '">' + esc(record.kind === "임상" ? "인체 임상" : record.kind === "동물" ? "동물시험" : record.kind) + '</span>' +
             '<span class="badge ' + badgeClass("status", record.status) + '">' + esc(record.status) + '</span>' +
             sourceAuditBadge(record) +
+            freshnessBadge(record) +
             (publicationFollowupLabel(record) ? '<span class="badge followup-badge" title="철회·정정·우려표명 등 출판 후속조치 신호입니다. 원문 공지를 확인하세요.">' + esc(publicationFollowupLabel(record)) + '</span>' : '') +
             marketingFilterBadge(record) +
             '<button class="badge intervention intervention-filter-badge" type="button" data-intervention="' + esc(interventionClass(record)) + '" aria-label="' + esc(interventionClass(record) + ' 자료로 필터') + '">개입 · ' + esc(interventionShortLabel(record)) + '</button>' +

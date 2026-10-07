@@ -156,6 +156,8 @@ const required = [
   ["Mobile Intelligence navigation", 'href="#intelligence">Intelligence'],
   ["Compact view key facts", "compact-facts"],
   ["Brief marketing distribution", "활용 검토: 직접 근거 검토"],
+  ["Per-card freshness badge", "function freshnessBadge"],
+  ["Freshness interpretation guard", "근거의 질·효능·규제 승인을 평가하지 않습니다"],
   ["Reduced-motion scroll behavior", "function preferredScrollBehavior"],
   ["Exploration presets", "data-preset"],
   ["Detail opener", "function openIntelligenceDetail"],
