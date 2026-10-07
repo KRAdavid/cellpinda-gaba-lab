@@ -40527,6 +40527,12 @@
         "sourceCommit": "8d78ec87ad6c0fb49aaed13b3e354ffb7c3d8eec",
         "publicMirrorCommit": "390abf8e65d35d320cef9ebe2bfeba86755b3ead",
         "publishedAt": "2026-10-07T22:12:20.630294Z"
+      },
+      "currentMetadataDeployment": {
+        "siteVersion": 819,
+        "sourceCommit": "87a79112f9638d0bde26e1df4c2cef5ff088802c",
+        "publicMirrorCommit": "56ac481652f16b616e8bc77ae90ef278a3713dbd",
+        "publishedAt": "2026-10-07T22:16:00.856172Z"
       }
     },
     "notice": "이 웹 인덱스는 배포 시점의 읽기 전용 스냅샷입니다."

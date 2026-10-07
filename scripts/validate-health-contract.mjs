@@ -42,6 +42,9 @@ if (!release?.publishedAt) invalid.push("release.publishedAt");
 if (!Number.isInteger(Number(release?.currentCodeDeployment?.siteVersion)) || Number(release.currentCodeDeployment.siteVersion) < 1) invalid.push("release.currentCodeDeployment.siteVersion");
 if (!/^[0-9a-f]{40}$/i.test(String(release?.currentCodeDeployment?.sourceCommit || ""))) invalid.push("release.currentCodeDeployment.sourceCommit");
 if (!/^[0-9a-f]{40}$/i.test(String(release?.currentCodeDeployment?.publicMirrorCommit || ""))) invalid.push("release.currentCodeDeployment.publicMirrorCommit");
+if (!Number.isInteger(Number(release?.currentMetadataDeployment?.siteVersion)) || Number(release.currentMetadataDeployment.siteVersion) < 1) invalid.push("release.currentMetadataDeployment.siteVersion");
+if (!/^[0-9a-f]{40}$/i.test(String(release?.currentMetadataDeployment?.sourceCommit || ""))) invalid.push("release.currentMetadataDeployment.sourceCommit");
+if (!/^[0-9a-f]{40}$/i.test(String(release?.currentMetadataDeployment?.publicMirrorCommit || ""))) invalid.push("release.currentMetadataDeployment.publicMirrorCommit");
 if (missing.length || invalid.length) {
   throw new Error(JSON.stringify({ valid: false, missing, invalid }));
 }

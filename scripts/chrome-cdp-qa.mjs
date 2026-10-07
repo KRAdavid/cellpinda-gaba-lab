@@ -233,6 +233,9 @@ try {
   assert.ok(Number.isInteger(health.release?.currentCodeDeployment?.siteVersion));
   assert.match(health.release?.currentCodeDeployment?.sourceCommit || "", /^[0-9a-f]{40}$/);
   assert.match(health.release?.currentCodeDeployment?.publicMirrorCommit || "", /^[0-9a-f]{40}$/);
+  assert.equal(health.release?.currentMetadataDeployment?.siteVersion, 819);
+  assert.match(health.release?.currentMetadataDeployment?.sourceCommit || "", /^[0-9a-f]{40}$/);
+  assert.match(health.release?.currentMetadataDeployment?.publicMirrorCommit || "", /^[0-9a-f]{40}$/);
   assert.ok(health.stagedCandidates >= health.candidatePreviewCount);
   assert.ok(health.candidateExportCount >= health.stagedCandidates);
   assert.ok(health.candidatePreviewCount > 0);
