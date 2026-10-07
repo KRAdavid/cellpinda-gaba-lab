@@ -3176,7 +3176,14 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           sheetLink.hidden = false;
         }
         var publicModeNote = el("public-mode-note");
-        if (publicModeNote) publicModeNote.hidden = !DB.meta.publicRelease;
+        if (publicModeNote) {
+          publicModeNote.hidden = !DB.meta.publicRelease;
+          if (DB.meta.publicRelease) {
+            var publicSnapshotBoundary = "공개 읽기 전용. 검증 스냅샷 " + koreanDate(DB.meta.snapshotDate) + ". 원본 Sheets와 개인 브라우저 작업은 변경하지 않습니다.";
+            publicModeNote.title = publicSnapshotBoundary;
+            publicModeNote.setAttribute("aria-label", publicSnapshotBoundary);
+          }
+        }
         el("snapshot-label").textContent = "검증 스냅샷 " + koreanDate(DB.meta.snapshotDate);
         var distributionScope = el("distribution-scope");
         if (distributionScope) distributionScope.textContent = "전체 검증 인덱스 " + Number(DB.meta.total || 0).toLocaleString("ko-KR") + "건 기준";
