@@ -116,6 +116,7 @@ const required = [
   ["Candidate follow-up-signal filter", 'data-candidate-filter="entry-followup"'],
   ["Candidate registry filter", 'data-candidate-filter="registry"'],
   ["Candidate preprint filter", 'data-candidate-filter="preprint"'],
+  ["Candidate source-lane link priority", "candidate.sourceLane === \"registry\""],
   ["Candidate filtered empty state", "candidate-preview-empty"],
   ["Immunity search suggestions", "면역 타액 IgA"],
   ["Canada monograph search suggestion", "캐나다 모노그래프"],

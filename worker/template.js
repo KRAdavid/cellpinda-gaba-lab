@@ -3045,10 +3045,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         return candidate.sourceUrl || (candidate.registryId ? "https://clinicaltrials.gov/study/" + encodeURIComponent(candidate.registryId) : "");
       }
       function candidateSourceLabel(candidate) {
-        if (candidate.pmid) return "PubMed 원문";
-        if (candidate.doi) return "DOI 원문";
         if (candidate.sourceLane === "registry" || candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov")) return "ClinicalTrials.gov 등록시험";
         if (candidate.sourceLane === "preprint" || (candidate.source || []).includes("preprint")) return "preprint 원문";
+        if (candidate.pmid) return "PubMed 원문";
+        if (candidate.doi) return "DOI 원문";
         return "원문 식별자";
       }
       function candidateReviewStatus(candidate) {

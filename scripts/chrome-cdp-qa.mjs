@@ -458,6 +458,8 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=followup]')?.getAttribute('aria-pressed')"), "true");
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=registry]')?.textContent.includes('등록시험')"), true);
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=preprint]')?.textContent.includes('preprint')"), true);
+  await evaluate(client, "document.querySelector('[data-candidate-filter=preprint]').click()");
+  assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length === 0 || document.querySelector('#candidate-preview-list a')?.textContent.includes('preprint')"), true);
   await evaluate(client, "document.querySelector('[data-candidate-filter=registry]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-list')?.textContent.includes('현재 미리보기에 없습니다') || document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length > 0"), true);
   await evaluate(client, "document.querySelector('[data-candidate-filter=followup]').click()");
