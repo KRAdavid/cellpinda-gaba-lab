@@ -5257,7 +5257,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var start = (state.page - 1) * pageSize;
         var pageRecords = list.slice(start, start + pageSize);
         var elapsed = Math.max(0, performance.now() - renderStarted);
-        el("result-count").innerHTML = '검증 레코드 ' + DB.meta.total.toLocaleString("ko-KR") + '건 중 <strong>' + list.length.toLocaleString("ko-KR") + '건</strong> · ' + elapsed.toFixed(elapsed < 10 ? 1 : 0) + 'ms<small>문헌 ' + Number(DB.meta.literature || 0).toLocaleString("ko-KR") + '편 + 규제·안전성 자료 ' + Number(DB.meta.regulatory || 0).toLocaleString("ko-KR") + '건 · 자동 탐색 후보는 별도 큐</small>';
+        el("result-count").innerHTML = '검증 레코드 ' + DB.meta.total.toLocaleString("ko-KR") + '건 중 <strong>' + list.length.toLocaleString("ko-KR") + '건</strong> · ' + elapsed.toFixed(elapsed < 10 ? 1 : 0) + 'ms<small>문헌 ' + Number(DB.meta.literature || 0).toLocaleString("ko-KR") + '편 + 규제·안전성 자료 ' + Number(DB.meta.regulatory || 0).toLocaleString("ko-KR") + '건 · 검증 스냅샷 ' + esc(String(DB.meta.snapshotDate || "미상")) + ' · 자동 탐색 ' + esc(discoverySnapshotValue()) + ' · 자동 탐색 후보는 별도 큐</small>';
         var emptyConditions = activeConditionLabels();
         var emptyConditionMarkup = emptyConditions.length ? '<p class="empty-condition" data-empty-context role="status" aria-live="polite"><strong>현재 조건</strong> ' + esc(emptyConditions.slice(0, 3).join(" · ") + (emptyConditions.length > 3 ? " · 외 " + (emptyConditions.length - 3) + "개" : "")) + '</p>' : '';
         el("papers").innerHTML = pageRecords.length

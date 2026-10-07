@@ -298,6 +298,7 @@ const required = [
   ,["Desktop filter collapse", 'id="filter-collapse"']
   ,["Desktop filter collapse control", 'aria-controls="filter-panel"']
   ,["Desktop filter reopen", 'id="filter-reopen"']
+  ,["Result snapshot dates", "검증 스냅샷"]
   ,["Visible filter status", 'id="filter-status-strip"']
   ,["Filter status summary", 'id="filter-status-text"']
   ,["Filter status reset", 'id="filter-status-reset"']
