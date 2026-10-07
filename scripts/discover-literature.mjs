@@ -1,5 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { isAbsolute, resolve } from "node:path";
 
 const siteRoot = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 const gabaRoot = resolve(siteRoot, "..");
@@ -12,7 +12,7 @@ const formatKstDate = (date) => new Intl.DateTimeFormat("en-CA", {
 const snapshotDate = formatKstDate(new Date());
 const outputArg = process.argv.find((value) => value.startsWith("--out="));
 const outputDir = outputArg
-  ? resolve(outputArg.slice("--out=".length))
+  ? (isAbsolute(outputArg.slice("--out=".length)) ? resolve(outputArg.slice("--out=".length)) : resolve(gabaRoot, outputArg.slice("--out=".length)))
   : resolve(gabaRoot, "outputs", `literature-search-${snapshotDate}`);
 const maxCandidatesArg = process.argv.find((value) => value.startsWith("--max-candidates="));
 const maxCandidates = Number(maxCandidatesArg?.split("=")[1] || 1000);
@@ -203,6 +203,12 @@ const CROSSREF_QUERIES = [
   "GABA theanine sleep human",
   "GABA fermented food clinical trial"
   ,"GABA cognition memory sleep randomized human"
+];
+
+const CLINICALTRIALS_QUERIES = ["GABA", "gamma-aminobutyric acid"];
+const PREPRINT_QUERIES = [
+  'PUB_TYPE:preprint AND (GABA OR "gamma-aminobutyric acid")',
+  'PUB_TYPE:preprint AND (GABA AND (oral OR supplement OR trial))'
 ];
 
 const pause = (ms) => new Promise((resolvePromise) => setTimeout(resolvePromise, ms));
@@ -460,6 +466,71 @@ async function searchCrossref(query, index) {
   };
 }
 
+async function searchClinicalTrials(query, index) {
+  const params = new URLSearchParams({ "query.term": query, pageSize: "100", format: "json" });
+  const data = await getJson(`https://clinicaltrials.gov/api/v2/studies?${params}`, 3, 30_000);
+  const records = (data.studies ?? []).map((study) => {
+    const protocol = study.protocolSection ?? {};
+    const identification = protocol.identificationModule ?? {};
+    const description = protocol.descriptionModule ?? {};
+    const status = protocol.statusModule ?? {};
+    const nctId = clean(identification.nctId);
+    const title = clean(identification.briefTitle || identification.officialTitle);
+    const abstract = clean(description.briefSummary || description.detailedDescription);
+    const yearText = clean(status.studyFirstPostDateStruct?.date || status.startDateStruct?.date);
+    return {
+      source: ["ClinicalTrials.gov"],
+      registryId: nctId,
+      registryStatus: clean(status.overallStatus),
+      title,
+      abstract,
+      authors: [],
+      author: "",
+      journal: "ClinicalTrials.gov",
+      year: Number(yearText.match(/\d{4}/)?.[0]) || null,
+      publicationTypes: ["ClinicalTrials.gov registry"],
+      sourceUrl: nctId ? `https://clinicaltrials.gov/study/${nctId}` : "",
+      queryLabels: [`clinicaltrials_${String(index + 1).padStart(2, "0")}`]
+    };
+  }).filter((record) => record.title || record.abstract);
+  return {
+    label: `clinicaltrials_${String(index + 1).padStart(2, "0")}`,
+    query,
+    count: Number(data.totalCount || data.studies?.length || 0),
+    records
+  };
+}
+
+async function searchPreprints(query, index) {
+  const params = new URLSearchParams({ query, format: "json", pageSize: "100", resultType: "core" });
+  const data = await getJson(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?${params}`, 3, 30_000);
+  const records = (data.resultList?.result ?? []).filter((item) => item.isPreprint === true || /preprint|biorxiv|medrxiv/i.test(`${item.pubType || ""} ${item.pubTypeList?.pubType || ""} ${item.journalTitle || ""}`)).map((item) => {
+    const doi = normalizeDoi(item.doi || "");
+    const pmid = clean(item.pmid);
+    const authors = clean(item.authorString).split(",").map(clean).filter(Boolean);
+    return {
+      source: ["Europe PMC", "preprint"],
+      pmid,
+      doi,
+      title: clean(item.title),
+      abstract: clean(item.abstractText),
+      authors,
+      author: authors[0] || "",
+      journal: clean(item.journalTitle || item.bookOrReportDetails?.publisher),
+      year: Number(item.pubYear) || Number(String(item.firstPublicationDate || "").slice(0, 4)) || null,
+      publicationTypes: ["preprint", clean(item.pubType), clean(item.pubTypeList?.pubType)].filter(Boolean),
+      sourceUrl: doi ? `https://doi.org/${doi}` : pmid ? `https://pubmed.ncbi.nlm.nih.gov/${pmid}/` : `https://europepmc.org/article/${clean(item.source)}/${clean(item.id)}`,
+      queryLabels: [`preprint_${String(index + 1).padStart(2, "0")}`]
+    };
+  }).filter((record) => record.title);
+  return {
+    label: `preprint_${String(index + 1).padStart(2, "0")}`,
+    query,
+    count: Number(data.hitCount || records.length),
+    records
+  };
+}
+
 function tokenSet(value) {
   return new Set(normalizeTitle(value).split(" ").filter((token) => token.length > 1));
 }
@@ -484,7 +555,8 @@ function mergeRecord(target, incoming) {
   target.queryLabels = [...new Set([...(target.queryLabels ?? []), ...(incoming.queryLabels ?? [])])];
   for (const field of [
     "pmid", "pmcid", "doi", "title", "abstract", "author", "journal",
-    "year", "sourceUrl", "openAlexId"
+  "year", "sourceUrl", "openAlexId"
+    ,"registryId", "registryStatus"
   ]) {
     if (!target[field] && incoming[field]) target[field] = incoming[field];
   }
@@ -694,6 +766,26 @@ for (let index = 0; index < CROSSREF_QUERIES.length; index += 1) {
   await pause(350);
 }
 
+const clinicalTrialsSearches = [];
+for (let index = 0; index < CLINICALTRIALS_QUERIES.length; index += 1) {
+  try {
+    clinicalTrialsSearches.push(await searchClinicalTrials(CLINICALTRIALS_QUERIES[index], index));
+  } catch (error) {
+    sourceErrors.push({ source: `ClinicalTrials.gov:${CLINICALTRIALS_QUERIES[index]}`, error: String(error?.message || error) });
+  }
+  await pause(350);
+}
+
+const preprintSearches = [];
+for (let index = 0; index < PREPRINT_QUERIES.length; index += 1) {
+  try {
+    preprintSearches.push(await searchPreprints(PREPRINT_QUERIES[index], index));
+  } catch (error) {
+    sourceErrors.push({ source: `Europe PMC preprint:${PREPRINT_QUERIES[index]}`, error: String(error?.message || error) });
+  }
+  await pause(350);
+}
+
 const mergedRecords = [];
 const mergedByDoi = new Map();
 const mergedByPmid = new Map();
@@ -701,7 +793,9 @@ const mergedByTitle = new Map();
 for (const record of [
   ...pubmedArticles,
   ...openAlexSearches.flatMap((search) => search.records),
-  ...crossrefSearches.flatMap((search) => search.records)
+  ...crossrefSearches.flatMap((search) => search.records),
+  ...clinicalTrialsSearches.flatMap((search) => search.records),
+  ...preprintSearches.flatMap((search) => search.records)
 ]) {
   if (!record.title) continue;
   const titleKey = normalizeTitle(record.title);
@@ -787,6 +881,14 @@ const summary = {
   crossref: {
     queries: crossrefSearches.map(({ label, query, count, records }) => ({ label, query, count, retrieved: records.length })),
     retrieved: crossrefSearches.reduce((sum, search) => sum + search.records.length, 0)
+  },
+  clinicalTrials: {
+    queries: clinicalTrialsSearches.map(({ label, query, count, records }) => ({ label, query, count, retrieved: records.length })),
+    retrieved: clinicalTrialsSearches.reduce((sum, search) => sum + search.records.length, 0)
+  },
+  preprints: {
+    queries: preprintSearches.map(({ label, query, count, records }) => ({ label, query, count, retrieved: records.length })),
+    retrieved: preprintSearches.reduce((sum, search) => sum + search.records.length, 0)
   },
   mergedUnique: mergedRecords.length,
   existingMatches: reviewed.filter((record) => record.existingRecordId).length,

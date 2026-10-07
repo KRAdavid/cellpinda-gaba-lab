@@ -17,10 +17,14 @@ async function findNamedFiles(dir, fileName) {
 
 const paths = await findNamedFiles(outputsRoot, "search-summary.json");
 if (!paths.length) throw new Error(`No search-summary.json under ${outputsRoot}`);
-const dated = await Promise.all(paths.map(async (path) => ({ path, mtime: (await stat(path)).mtimeMs })));
-dated.sort((left, right) => right.mtime - left.mtime);
+const dated = await Promise.all(paths.map(async (path) => {
+  const [raw, fileStat] = await Promise.all([readFile(path, "utf8"), stat(path)]);
+  const summary = JSON.parse(raw);
+  return { path, mtime: fileStat.mtimeMs, generatedAt: String(summary.generatedAt || ""), summary };
+}));
+dated.sort((left, right) => String(right.generatedAt).localeCompare(String(left.generatedAt)) || right.mtime - left.mtime);
 const summaryPath = dated[0].path;
-const summary = JSON.parse(await readFile(summaryPath, "utf8"));
+const summary = dated[0].summary;
 const errors = Array.isArray(summary.sourceErrors) ? summary.sourceErrors : [];
 const failedSources = [...new Set(errors.map((entry) => String(entry?.source || "unknown").split(":")[0]))];
 const openAlexAccessMode = String(summary.openAlex?.accessMode || "unknown");
@@ -59,6 +63,8 @@ const attempt = {
   openAlexSkippedQueries: Number(summary.openAlex?.skippedQueries || 0),
   openAlexRateLimited: hasOpenAlexRateLimit,
   openAlexRetryAfterSeconds,
+  clinicalTrialsRetrieved: Number(summary.clinicalTrials?.retrieved || 0),
+  preprintsRetrieved: Number(summary.preprints?.retrieved || 0),
   recoveryHint,
   message: errors.length
     ? "일부 원천 응답 오류로 공개 인덱스 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다."

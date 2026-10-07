@@ -66,6 +66,7 @@ data-quality → build → built-provenance → validate → build-pending-sheet
 - `lastAttempt.openAlexRateLimited`는 원천 오류 메시지에 429/rate-limit 신호가 실제로 있을 때만 `true`가 됩니다. 접근 모드가 없는 과거 산출물을 임의로 rate limit으로 해석하지 않습니다.
 - `lastAttempt.openAlexRetryAfterSeconds`는 OpenAlex가 제공한 재시도 대기 초를 보존하며, 원천이 값을 주지 않으면 `0`으로 둡니다.
 - `lastAttempt.openAlexAttemptedQueries`와 `lastAttempt.openAlexSkippedQueries`는 rate limit 단락이 실제로 몇 회 요청을 시도하고 몇 회를 중단했는지 기록해 화면의 부분 탐색 범위를 재현합니다.
+- 최근 탐색 provenance에는 ClinicalTrials.gov 등록시험과 Europe PMC preprint 후보 수를 별도로 기록합니다. 두 원천은 후보 탐색 신호이며 검증 인덱스 승격 전 원문·섭취경로·대조군·후속 공지를 확인합니다.
 - OpenAlex가 429/rate limit을 반환하면 남은 질의를 반복 재시도하지 않고 `skippedQueries`로 기록한 뒤 PubMed·Crossref 처리를 계속합니다. 이는 부분 결과의 공개 승격을 허용하지 않습니다.
 - `pnpm validate:ui`: 포털·Intelligence·검토 큐 UI 계약 확인
 - `node scripts/audit-public-links.mjs`: 원문·DOI·PubMed 대체 링크 체인을 검사하고 서버 접근 제한과 실제 실패를 구분

@@ -3319,6 +3319,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ["PubMed", Number(discovery.pubmedUnique || 0).toLocaleString("ko-KR") + "건"],
           ["OpenAlex", Number(discovery.openAlexRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["최근 OpenAlex 요청", discovery.lastAttempt ? Number(discovery.lastAttempt.openAlexAttemptedQueries || 0).toLocaleString("ko-KR") + "회 시도 · " + Number(discovery.lastAttempt.openAlexSkippedQueries || 0).toLocaleString("ko-KR") + "회 중단" : "확인 필요"],
+          ["최근 탐색 원천", discovery.lastAttempt ? "임상시험 등록 " + Number(discovery.lastAttempt.clinicalTrialsRetrieved || 0).toLocaleString("ko-KR") + "건 · preprint " + Number(discovery.lastAttempt.preprintsRetrieved || 0).toLocaleString("ko-KR") + "건" : "확인 필요"],
           ["Crossref", Number(discovery.crossrefRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["통합 고유", Number(discovery.mergedUnique || 0).toLocaleString("ko-KR") + "건"],
           ["신규 후보 게이트", "GABA 신호 또는 후속조치 검색 신호"],
