@@ -277,6 +277,9 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-actions')?.getAttribute('role')"), "group");
   assert.equal(await evaluate(client, "document.querySelector('#result-interpretation')?.getAttribute('role')"), "region");
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-marketing')?.getAttribute('aria-label')"), "현재 결과의 마케팅 활용 검토 범위");
+  assert.equal(await evaluate(client, "document.querySelector('#result-marketing-disclosure')?.open"), false);
+  await evaluate(client, "document.querySelector('#result-marketing-disclosure summary').click()");
+  assert.equal(await evaluate(client, "document.querySelector('#result-marketing-disclosure')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-marketing-note')?.textContent.includes('광고 허가·효능 입증·규제 승인을 뜻하지 않습니다')"), true);
   await evaluate(client, "document.querySelector('[data-result-preset=marketing-conditional]').click()");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('marketing')"), "조건부 검토");

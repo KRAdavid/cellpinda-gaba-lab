@@ -54,6 +54,7 @@ const required = [
   ["Result next-action renderer", "result-interpretation-actions"],
   ["Result marketing-use scope", "result-interpretation-marketing"],
   ["Result marketing-use guard", "광고 허가·효능 입증·규제 승인을 뜻하지 않습니다"],
+  ["Result marketing-use disclosure", 'id="result-marketing-disclosure"'],
   ["Oral route next action", 'data-result-preset="oral"'],
   ["Review priority rationale", "review-priority-reason"],
   ["Local review decision panel", 'id="review-decision-controls"'],
