@@ -3422,6 +3422,9 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (name === "audit-ok") state.audit = "ok";
         if (name === "audit-unavailable") state.audit = "unavailable";
         if (name === "review") state.status = "후보";
+        if (name === "marketing-direct") state.marketing = "직접 근거 검토";
+        if (name === "marketing-conditional") state.marketing = "조건부 검토";
+        if (name === "marketing-exclude") state.marketing = "마케팅 사용 금지";
         state.page = 1;
         render("push");
         scrollToResults();
@@ -5212,12 +5215,16 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var candidateResultCount = list.filter(function (record) { return record.status === "후보"; }).length;
         var auditOk = list.filter(function (record) { var audit = sourceAuditRecord(record); return audit && audit.status === "ok"; }).length;
         var auditUnavailable = list.filter(function (record) { var audit = sourceAuditRecord(record); return audit && audit.status === "unavailable"; }).length;
+        var marketingDirect = list.filter(function (record) { return marketingLabel(record) === "직접 근거 검토"; }).length;
+        var marketingConditional = list.filter(function (record) { return marketingLabel(record) === "조건부 검토"; }).length;
+        var marketingExclude = list.filter(function (record) { return marketingLabel(record) === "마케팅 사용 금지"; }).length;
         var clinicalAction = clinical ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="clinical" aria-pressed="' + String(state.kind === "임상") + '" aria-label="인체 연구 ' + clinical.toLocaleString("ko-KR") + '건만 보기">인체 연구 <strong>' + clinical.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">인체 연구 <strong>0</strong></span>';
         var animalAction = animal ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="animal" aria-pressed="' + String(state.kind === "동물") + '" aria-label="동물·전임상 ' + animal.toLocaleString("ko-KR") + '건만 보기">동물·전임상 <strong>' + animal.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">동물·전임상 <strong>0</strong></span>';
         var regulatoryAction = regulatory ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="regulatory" aria-pressed="' + String(state.kind === "규제") + '" aria-label="규제·안전성 ' + regulatory.toLocaleString("ko-KR") + '건만 보기">규제·안전성 <strong>' + regulatory.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">규제·안전성 <strong>0</strong></span>';
         var auditOkAction = auditOk ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="audit-ok" aria-pressed="' + String(state.audit === "ok") + '" aria-label="감사 시점 접근 확인 ' + auditOk.toLocaleString("ko-KR") + '건만 보기">원문 접근 확인 <strong>' + auditOk.toLocaleString("ko-KR") + '</strong></button>' : '<span class="result-interpretation-stat">원문 접근 확인 <strong>0</strong></span>';
         var auditUnavailableAction = auditUnavailable ? '<button class="result-interpretation-stat result-interpretation-stat-action" type="button" data-result-preset="audit-unavailable" aria-pressed="' + String(state.audit === "unavailable") + '" aria-label="원문 접근 후속 검토 ' + auditUnavailable.toLocaleString("ko-KR") + '건만 보기">접근 후속 검토 <strong>' + auditUnavailable.toLocaleString("ko-KR") + '</strong></button>' : '';
         var oralAction = oral ? '<button class="result-interpretation-route" type="button" data-result-preset="oral">경구·섭취만 보기 · ' + oral.toLocaleString("ko-KR") + '건</button>' : '';
+        var marketingActions = '<div class="result-interpretation-actions result-interpretation-marketing" role="group" aria-label="현재 결과의 마케팅 활용 검토 범위"><span class="result-interpretation-actions-label">활용 검토</span><button class="result-interpretation-route" type="button" data-result-preset="marketing-direct" aria-pressed="' + String(state.marketing === "직접 근거 검토") + '">직접 근거 검토 · ' + marketingDirect.toLocaleString("ko-KR") + '건</button><button class="result-interpretation-route" type="button" data-result-preset="marketing-conditional" aria-pressed="' + String(state.marketing === "조건부 검토") + '">조건부 검토 · ' + marketingConditional.toLocaleString("ko-KR") + '건</button><button class="result-interpretation-route" type="button" data-result-preset="marketing-exclude" aria-pressed="' + String(state.marketing === "마케팅 사용 금지") + '">사용 금지 · ' + marketingExclude.toLocaleString("ko-KR") + '건</button></div>';
         var query = state.q ? state.q.trim() : "전체 근거";
         var guard = state.audit === "unavailable"
           ? "접근 제한·일시 응답은 근거 약함이 아니라 원문 재확인·대체 경로 검토 대상입니다."
@@ -5241,6 +5248,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           '</div>' +
           '<p class="result-interpretation-note">인체·동물·규제 자료는 근거의 범위가 다릅니다. <strong>' + list.length.toLocaleString("ko-KR") + '건</strong>을 확인할 때 인체 연구와 원문 상태를 먼저 비교하세요.</p>' +
           '<div class="result-interpretation-actions" role="group" aria-label="현재 결과에서 다음 행동"><span class="result-interpretation-actions-label">다음 행동</span><button class="result-interpretation-route" type="button" data-result-preset="human-direct">인체 직접근거만 보기 · ' + humanDirect.toLocaleString("ko-KR") + "건</button>" + oralAction + '<button class="result-interpretation-route" type="button" data-result-preset="source">원문 연결 자료만 보기 · ' + sourceAvailable.toLocaleString("ko-KR") + '건</button>' + (candidateResultCount ? '<button class="result-interpretation-route" type="button" data-result-preset="review">후보 자료만 보기 · ' + candidateResultCount.toLocaleString("ko-KR") + '건</button>' : '') + '</div>' +
+          marketingActions +
+          '<p class="result-interpretation-note result-interpretation-marketing-note">활용 검토 분류는 연구조건·대상·안전성·원문 확인을 위한 작업 범위이며, 광고 허가·효능 입증·규제 승인을 뜻하지 않습니다.</p>' +
           '<p class="result-interpretation-guard"><strong>해석 경계</strong> ' + esc(guard) + '</p>' +
           (review ? '<button class="result-interpretation-action" id="result-review-jump" type="button">추가 확인 큐 보기 · ' + review.toLocaleString("ko-KR") + '건</button>' : '');
       }
