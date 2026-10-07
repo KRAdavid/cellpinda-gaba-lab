@@ -14,6 +14,7 @@ assert.equal(html.includes("docs.google.com/spreadsheets"), false, "public HTML 
 assert.equal(html.includes("관리 원본 Sheet"), true, "management link label may remain in the template but must stay hidden");
 assert.match(html, /<a[^>]*id="sheet-link"[^>]*hidden[^>]*>관리 원본 Sheet<\/a>/, "management link must be hidden in the public template");
 assert.match(html, /<span[^>]*id="public-mode-note"[^>]*hidden[^>]*>공개 읽기 전용<\/span>/, "public read-only note must exist in the public template");
+assert.match(html, /aria-label="공개 읽기 전용\. 원본 Sheets와 개인 브라우저 작업은 변경하지 않습니다\."/, "public read-only note must expose its boundary to assistive technology");
 assert.match(html, /rel="canonical"/);
 const robots = await worker.fetch(new Request("https://public.example/robots.txt"));
 assert.equal(robots.status, 200);

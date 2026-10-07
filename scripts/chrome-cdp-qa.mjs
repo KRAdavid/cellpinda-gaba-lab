@@ -898,6 +898,7 @@ try {
     assert.equal(await evaluate(client, "document.querySelector('#sheet-link')?.hidden"), true);
     assert.equal(await evaluate(client, "document.querySelector('#public-mode-note')?.hidden"), false);
     assert.equal(await evaluate(client, "document.querySelector('#public-mode-note')?.textContent"), "공개 읽기 전용");
+    assert.equal(await evaluate(client, "document.querySelector('#public-mode-note')?.getAttribute('aria-label')?.includes('원본 Sheets와 개인 브라우저 작업은 변경하지 않습니다')"), true);
   }
   console.log(JSON.stringify({ browserQa: true, browser: version.Browser, target: qaOrigin, desktop: true, mobile: true, horizontalOverflow: false, screenshots: ["qa/cdp-desktop-top.png", "qa/cdp-mobile-top.png"] }));
 } finally {

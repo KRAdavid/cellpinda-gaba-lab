@@ -2076,7 +2076,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       </nav>
       <div class="top-actions">
         <a class="top-link" id="sheet-link" hidden target="_blank" rel="noopener noreferrer">관리 원본 Sheet</a>
-        <span class="public-mode-note" id="public-mode-note" hidden>공개 읽기 전용</span>
+        <span class="public-mode-note" id="public-mode-note" hidden title="공개 검증 스냅샷입니다. 원본 Sheets와 개인 브라우저 작업은 변경하지 않습니다." aria-label="공개 읽기 전용. 원본 Sheets와 개인 브라우저 작업은 변경하지 않습니다.">공개 읽기 전용</span>
         <button class="top-link" id="methodology-open" type="button" aria-haspopup="dialog">방법론</button>
         <button class="reading-list-button" id="reading-list-open" type="button" aria-haspopup="dialog" aria-label="읽기 목록, 0개 저장됨">읽기 목록 <span class="reading-list-count" id="reading-list-count" aria-live="polite" aria-atomic="true">0</span></button>
         <button class="share-button" id="share-button" type="button" aria-label="현재 검색 조건 링크 복사">링크 복사</button>
