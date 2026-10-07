@@ -175,9 +175,9 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('.paper-card .fact-grid')?.textContent.includes('표본·대조군')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.paper-card .interpretation-caution')?.textContent.includes('광고 허가·효능 입증 아님')"), true);
   await waitForExpression(client, "[...document.querySelectorAll('.discovery-stat')].some((node) => node.textContent.includes('신규 후보 게이트'))");
-  assert.equal(await evaluate(client, "[...document.querySelectorAll('.discovery-stat')].some((node) => node.textContent.includes('신규 후보 게이트') && node.textContent.includes('제목·초록 GABA 신호 확인'))"), true);
-  await waitForExpression(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('제목·초록에서 GABA 신호가 확인된 자료만 큐')");
-  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('제목·초록에서 GABA 신호가 확인된 자료만 큐')"), true);
+  assert.equal(await evaluate(client, "[...document.querySelectorAll('.discovery-stat')].some((node) => node.textContent.includes('신규 후보 게이트') && node.textContent.includes('GABA 신호 또는 후속조치 검색 신호'))"), true);
+  await waitForExpression(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐')");
+  assert.equal(await evaluate(client, "document.querySelector('#candidate-preview-title')?.parentElement?.textContent.includes('GABA 신호 또는 GABA 후속조치 검색 신호가 확인된 자료만 큐')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.paper-card .paper-meta')?.textContent.includes('확인')"), true);
   const accessibility = await evaluate(client, `(() => {
     const visible = (node) => !node.hidden && !node.closest('[hidden]') && node.getAttribute('aria-hidden') !== 'true';
