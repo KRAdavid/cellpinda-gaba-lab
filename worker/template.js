@@ -632,6 +632,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       gap: 7px;
       margin-top: 10px;
     }
+    .public-mode-note { display: inline-flex; align-items: center; min-height: 30px; padding: 0 9px; border: 1px solid rgba(15,118,110,.22); border-radius: 8px; background: var(--teal-soft); color: var(--teal-dark); font-size: 10px; font-weight: 900; white-space: nowrap; }
     .release-provenance-note {
       margin: 9px 0 0;
       color: var(--muted);
@@ -2075,6 +2076,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       </nav>
       <div class="top-actions">
         <a class="top-link" id="sheet-link" hidden target="_blank" rel="noopener noreferrer">관리 원본 Sheet</a>
+        <span class="public-mode-note" id="public-mode-note" hidden>공개 읽기 전용</span>
         <button class="top-link" id="methodology-open" type="button" aria-haspopup="dialog">방법론</button>
         <button class="reading-list-button" id="reading-list-open" type="button" aria-haspopup="dialog" aria-label="읽기 목록, 0개 저장됨">읽기 목록 <span class="reading-list-count" id="reading-list-count" aria-live="polite" aria-atomic="true">0</span></button>
         <button class="share-button" id="share-button" type="button" aria-label="현재 검색 조건 링크 복사">링크 복사</button>
@@ -3173,6 +3175,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           sheetLink.href = DB.meta.sourceSheet;
           sheetLink.hidden = false;
         }
+        var publicModeNote = el("public-mode-note");
+        if (publicModeNote) publicModeNote.hidden = !DB.meta.publicRelease;
         el("snapshot-label").textContent = "검증 스냅샷 " + koreanDate(DB.meta.snapshotDate);
         var distributionScope = el("distribution-scope");
         if (distributionScope) distributionScope.textContent = "전체 검증 인덱스 " + Number(DB.meta.total || 0).toLocaleString("ko-KR") + "건 기준";
