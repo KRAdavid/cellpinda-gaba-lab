@@ -675,6 +675,7 @@ try {
   assert.equal(await evaluate(client, "String(window.__qaBrief || '').includes('대표 원문:')"), true);
   assert.equal(await evaluate(client, "String(window.__qaBrief || '').includes('현재 조건:')"), true);
   assert.equal(await evaluate(client, "String(window.__qaBrief || '').includes('자동 탐색 기준일:')"), true);
+  assert.equal(await evaluate(client, "String(window.__qaBrief || '').includes('최근 자동 탐색 상태: 반영 보류')"), true);
   assert.equal(await evaluate(client, "String(window.__qaBrief || '').includes('GABA 개입 유형: 순수 GABA')"), true);
   assert.equal(await evaluate(client, "String(window.__qaBrief || '').includes('활용 검토: 직접 근거 검토')"), true);
   assert.equal(await evaluate(client, "String(window.__qaBrief || '').includes('활용 경계:')"), true);

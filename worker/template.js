@@ -4477,6 +4477,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           "- 표시 자료: " + queue.length.toLocaleString("ko-KR") + "건",
           "- 검증 스냅샷: " + String(DB.meta.snapshotDate || "미상"),
           "- 자동 탐색 기준일: " + discoverySnapshotValue(),
+          "- 최근 자동 탐색 상태: " + discoveryAttemptLabel(),
           "- 현재 큐 필터: " + String(reviewQueueFilterLabels[reviewQueueFilter] || "전체"),
           "- 공유 범위: 현재 브라우저의 필터와 공개 레코드만 포함하며 개인 메모는 문서에 포함하지 않습니다.",
           "- 해석 주의: 우선순위는 검토 순서를 돕는 신호이며 근거의 질·효능·규제 적합성 순위가 아닙니다.",
@@ -4518,9 +4519,9 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function exportFilteredResults() {
         var list = filteredRecords();
         if (!list.length) { toast("내보낼 검색 결과가 없습니다"); return; }
-        var headers = ["ID", "검증 스냅샷", "자동 탐색 기준일", "현재 조건", "한국어 제목/분류 요약", "영문 원제", "연구 유형", "개입 구분", "상태", "연도", "저자", "저널", "대상·시험계", "GABA 용량·노출", "기간", "대조군", "핵심 결과", "연구의 의미", "마케팅 활용 방안", "한계", "SCI/SCIE", "추출 상태", "확인일", "DOI", "PMID", "원문 링크"];
+        var headers = ["ID", "검증 스냅샷", "자동 탐색 기준일", "최근 자동 탐색 상태", "현재 조건", "한국어 제목/분류 요약", "영문 원제", "연구 유형", "개입 구분", "상태", "연도", "저자", "저널", "대상·시험계", "GABA 용량·노출", "기간", "대조군", "핵심 결과", "연구의 의미", "마케팅 활용 방안", "한계", "SCI/SCIE", "추출 상태", "확인일", "DOI", "PMID", "원문 링크"];
         var rows = list.map(function (record) {
-          return [record.id, DB.meta.snapshotDate, discoverySnapshotValue(), currentConditionSummary(), koreanTitle(record), record.title, record.kind, interventionClass(record), record.status, record.year, record.author, record.journal, record.population || record.species, record.dose || record.exposure, record.duration, record.comparator, record.finding || record.summaryKo, researchMeaning(record), utilizationDirection(record), record.limitation, record.sciGroup, record.extraction, record.checked, record.doi, record.pmid, primarySourceUrl(record)].map(csvCell);
+          return [record.id, DB.meta.snapshotDate, discoverySnapshotValue(), discoveryAttemptLabel(), currentConditionSummary(), koreanTitle(record), record.title, record.kind, interventionClass(record), record.status, record.year, record.author, record.journal, record.population || record.species, record.dose || record.exposure, record.duration, record.comparator, record.finding || record.summaryKo, researchMeaning(record), utilizationDirection(record), record.limitation, record.sciGroup, record.extraction, record.checked, record.doi, record.pmid, primarySourceUrl(record)].map(csvCell);
         });
         var csv = "\uFEFF" + [headers.map(csvCell).join(",")].concat(rows.map(function (row) { return row.join(","); })).join("\r\n");
         var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
@@ -4620,6 +4621,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           "현재 조건: " + currentConditionSummary(),
           "검증 스냅샷: " + String(DB.meta.snapshotDate || "미상"),
           "자동 탐색 기준일: " + discoverySnapshotValue(),
+          "최근 자동 탐색 상태: " + discoveryAttemptLabel(),
           "결과: " + list.length.toLocaleString("ko-KR") + "건 · 인체 " + clinical + "건 · 동물·전임상 " + animal + "건 · 규제·안전성 " + regulatory + "건 · 추가 확인 " + review + "건",
           "GABA 개입 유형: 순수 GABA " + interventionPure + "건 · 복합제·복합개입 " + interventionCombination + "건 · 발효·프로바이오틱 " + interventionFermented + "건 · 수용체 약물 " + interventionReceptor + "건",
           "활용 검토: 직접 근거 검토 " + marketingDirect + "건 · 조건부 검토 " + marketingConditional + "건 · 사용 금지 " + marketingExclude + "건",
@@ -4866,6 +4868,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           "- 선택 자료: " + selected.length.toLocaleString("ko-KR") + "건",
           "- 검증 스냅샷: " + String(DB.meta.snapshotDate || "미상"),
           "- 자동 탐색 기준일: " + discoverySnapshotValue(),
+          "- 최근 자동 탐색 상태: " + discoveryAttemptLabel(),
           "- 읽기 목록 링크: " + shareUrl.toString(),
           "- 공유 범위: 공개 검증 스냅샷에서 브라우저에 저장한 자료와 현재 읽기 목록 링크만 포함합니다.",
           "- 해석 주의: 인체·동물·규제 자료는 범위가 다르므로 결과를 직접 합산하지 않습니다. 원문·대상·용량·기간·대조군을 먼저 확인하세요.",
@@ -5048,7 +5051,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ["원문 접근 감사", "audit"], ["확인일", "checked"],
           ["연구의 의미", "meaning"], ["마케팅 활용 방안", "marketing"]
         ];
-        return [["검증 스냅샷", DB.meta.snapshotDate], ["자동 탐색 기준일", discoverySnapshotValue()], ["현재 조건", currentConditionSummary()], ["비교 해석", compareSummary(selected)], ["비교 항목"].concat(selected.map(function (record) { return koreanTitle(record); }))]
+        return [["검증 스냅샷", DB.meta.snapshotDate], ["자동 탐색 기준일", discoverySnapshotValue()], ["최근 자동 탐색 상태", discoveryAttemptLabel()], ["현재 조건", currentConditionSummary()], ["비교 해석", compareSummary(selected)], ["비교 항목"].concat(selected.map(function (record) { return koreanTitle(record); }))]
           .concat(rows.map(function (row) { return [row[0]].concat(selected.map(function (record) { return compareValue(record, row[1]); })); }))
           .map(function (row) { return row.join("\t"); }).join("\n");
       }
@@ -5083,7 +5086,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ["관리 상태", "status"], ["근거 등급", "grade"], ["대상·시험계", "population"], ["GABA 용량·노출", "dose"], ["기간", "duration"],
           ["대조군·사용조건", "comparator"], ["핵심 결과", "finding"], ["해석 경계", "boundary"], ["원문 접근 감사", "audit"], ["확인일", "checked"], ["연구의 의미", "meaning"], ["마케팅 활용 방안", "marketing"]
         ];
-        var csvRows = [["검증 스냅샷", DB.meta.snapshotDate], ["자동 탐색 기준일", discoverySnapshotValue()], ["현재 조건", currentConditionSummary()], [], ["비교 항목"].concat(selected.map(function (record) { return koreanTitle(record); }))]
+        var csvRows = [["검증 스냅샷", DB.meta.snapshotDate], ["자동 탐색 기준일", discoverySnapshotValue()], ["최근 자동 탐색 상태", discoveryAttemptLabel()], ["현재 조건", currentConditionSummary()], [], ["비교 항목"].concat(selected.map(function (record) { return koreanTitle(record); }))]
           .concat(rows.map(function (row) { return [row[0]].concat(selected.map(function (record) { return compareValue(record, row[1]); })); }))
           .map(function (row) { return row.map(csvCell).join(","); });
         var blob = new Blob(["\uFEFF" + csvRows.join("\r\n")], { type: "text/csv;charset=utf-8" });
@@ -5283,6 +5286,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       }
       function discoverySnapshotValue() {
         return String((DB.meta.discovery && DB.meta.discovery.snapshotDate) || "미상");
+      }
+      function discoveryAttemptLabel() {
+        var attempt = DB.meta.discovery && DB.meta.discovery.lastAttempt;
+        if (!attempt) return "상태 확인 필요";
+        if (attempt.status === "PARTIAL_NOT_PROMOTED") return "반영 보류 · 원천 오류 " + Number(attempt.sourceErrorCount || 0).toLocaleString("ko-KR") + "건";
+        if (attempt.status === "READY_FOR_PROMOTION") return "검증 대기";
+        return "상태 확인 필요";
       }
       function renderActiveFilters() {
         var chips = [];
