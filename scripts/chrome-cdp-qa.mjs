@@ -434,6 +434,7 @@ try {
   assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-candidate-review-status=\"검토 완료\"]'))"), true);
   await evaluate(client, "document.querySelector('[data-candidate-review-status=\"검토 완료\"]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-screening')?.textContent.includes('검토 완료')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#candidate-detail-screening')?.textContent.includes('확인 시각')"), true);
   await evaluate(client, "Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async function () { throw new Error('candidate clipboard denied'); } } })");
   await evaluate(client, "document.querySelector('[data-copy-candidate-link]').click()");
   await sleep(80);

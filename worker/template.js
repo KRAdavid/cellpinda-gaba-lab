@@ -2972,6 +2972,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var saved = candidateDecisions[String(candidate?.candidateId || "")];
         return saved?.status || "미검토";
       }
+      function candidateReviewUpdatedAt(candidate) {
+        var saved = candidateDecisions[String(candidate?.candidateId || "")];
+        return saved?.updatedAt || null;
+      }
       function candidateScreeningStatus(candidate) {
         return candidate.screeningStatus || "미분류";
       }
@@ -3059,6 +3063,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           var signals = candidateHumanSignals(candidate);
           var recommendation = candidate.screeningRecommendation || "원문·식별자 확인 필요";
           var reviewStatus = candidateReviewStatus(candidate);
+          var reviewUpdatedAt = candidateReviewUpdatedAt(candidate);
           var screeningStatus = candidateScreeningStatus(candidate);
           var score = candidate.score == null ? "" : " · 자동 점수 " + candidate.score;
           var identifiers = [candidate.pmid ? "PMID " + candidate.pmid : "", candidate.doi ? "DOI" : ""].filter(Boolean);
@@ -3069,6 +3074,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             '<p>' + esc([candidate.author, candidate.journal, candidate.year].filter(Boolean).join(" · ") || "서지정보 확인 필요") + '</p>' +
             '<div class="candidate-preview-meta">' + identifiers.concat(types).map(function (item) { return '<span>' + esc(item) + '</span>'; }).join("") + '</div>' +
             '<p class="candidate-preview-signal"><strong>개인 검토 상태</strong> · ' + esc(reviewStatus) + '</p>' +
+            (reviewUpdatedAt ? '<p class="candidate-preview-signal candidate-review-meta"><strong>개인 검토 확인</strong> · ' + esc(koreanDateTime(reviewUpdatedAt)) + '</p>' : '') +
             '<p class="candidate-preview-signal"><strong>자동 선별 상태</strong> · ' + esc(screeningStatus) + (candidate.screeningPriority ? ' · 자동 우선순위 ' + esc(candidate.screeningPriority) : '') + (candidate.screeningNote ? ' <span>· ' + esc(candidate.screeningNote) + '</span>' : '') + '</p>' +
             '<p class="candidate-preview-signal"><strong>큐 진입 신호</strong> · ' + esc(candidate.candidateEntryReason || "GABA 신호 확인 필요") + ' <span>(확정 판정 아님)</span></p>' +
             '<p class="candidate-preview-signal"><strong>검토 권고</strong> · ' + esc(recommendation) + '</p>' +
@@ -3097,7 +3103,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         el("candidate-detail-title").textContent = candidate.title || "후보 상세";
         el("candidate-detail-meta").textContent = [candidate.candidateId, candidate.author, candidate.journal, candidate.year, candidate.pmid ? "PMID " + candidate.pmid : "", candidate.doi ? "DOI " + candidate.doi : ""].filter(Boolean).join(" · ");
         var reviewStatus = candidateReviewStatus(candidate);
-        el("candidate-detail-screening").innerHTML = '<strong>검토 권고</strong> · ' + esc(candidate.screeningRecommendation || "원문·식별자 확인 필요") + '<br><strong>개인 검토 상태</strong> · ' + esc(reviewStatus) + '<br><strong>큐 진입 신호</strong> · ' + esc(candidate.candidateEntryReason || "GABA 신호 확인 필요") + '<br><strong>자동 선별 상태</strong> · ' + esc(candidateScreeningStatus(candidate)) + (candidate.screeningPriority ? " · 자동 우선순위 " + esc(candidate.screeningPriority) : "") + '<br><strong>자동 탐색 우선순위</strong> · ' + esc(candidateBucketLabel(candidate.bucket || "미분류")) + (candidate.score != null ? " · 자동 점수 " + esc(candidate.score) : "") + '<br><strong>자동 신호 요약</strong> · ' + esc(candidateHumanSignals(candidate)) + '<br><strong>탐색 쿼리</strong> · ' + esc((candidate.queryLabels || []).join(" · ") || "자동 탐색") ;
+        var reviewUpdatedAt = candidateReviewUpdatedAt(candidate);
+        el("candidate-detail-screening").innerHTML = '<strong>검토 권고</strong> · ' + esc(candidate.screeningRecommendation || "원문·식별자 확인 필요") + '<br><strong>개인 검토 상태</strong> · ' + esc(reviewStatus) + (reviewUpdatedAt ? ' · <strong>확인 시각</strong> ' + esc(koreanDateTime(reviewUpdatedAt)) : '') + '<br><strong>큐 진입 신호</strong> · ' + esc(candidate.candidateEntryReason || "GABA 신호 확인 필요") + '<br><strong>자동 선별 상태</strong> · ' + esc(candidateScreeningStatus(candidate)) + (candidate.screeningPriority ? " · 자동 우선순위 " + esc(candidate.screeningPriority) : "") + '<br><strong>자동 탐색 우선순위</strong> · ' + esc(candidateBucketLabel(candidate.bucket || "미분류")) + (candidate.score != null ? " · 자동 점수 " + esc(candidate.score) : "") + '<br><strong>자동 신호 요약</strong> · ' + esc(candidateHumanSignals(candidate)) + '<br><strong>탐색 쿼리</strong> · ' + esc((candidate.queryLabels || []).join(" · ") || "자동 탐색") ;
         var followup = (candidate.queryLabels || []).includes("publication_followup") || (candidate.publicationTypes || []).some(function (type) { return /retract|correct/i.test(type); });
         var sourceUrl = candidateSourceUrl(candidate);
         var checklist = [

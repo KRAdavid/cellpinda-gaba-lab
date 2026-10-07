@@ -305,6 +305,8 @@ const required = [
   ,["Empty result recovery suggestions", 'data-empty-query="수면"']
   ,["Pagination status announcement", 'id="page-status" role="status" aria-live="polite"']
   ,["Candidate personal review actions", "data-candidate-review-status=\"검토 완료\""]
+  ,["Candidate review timestamp", "function candidateReviewUpdatedAt"]
+  ,["Candidate review timestamp display", "확인 시각"]
   ,["Candidate review progress summary", 'id="candidate-review-progress"']
   ,["Candidate status separation", "자동 선별 상태"]
   ,["Brief verification status", "원문 접근:"]
