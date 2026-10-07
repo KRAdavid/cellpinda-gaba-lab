@@ -54,6 +54,8 @@ data-quality → build → built-provenance → validate → build-pending-sheet
 - `node scripts/validate.mjs`: 레코드 유형·수량·프로젝트 연결 검증
 - `node scripts/build-pending-sheet-sync.mjs`: Sheets 403 등으로 대기 중인 레코드의 36열 payload 재생성
 - `node scripts/validate-pending-sheet-sync.mjs`: 대기 payload의 36열·Record_ID·중복 상태 검증
+- `pnpm sync:pending`: 위 대기 payload 생성 명령의 짧은 운영 별칭
+- `pnpm sync:pending:check`: 생성된 대기 payload의 스키마·Record_ID 검증 별칭
 - `node scripts/validate-curated-notes.mjs`: 문헌별 연구 의미·마케팅 활용 방안 라벨과 비어 있지 않은 본문 검증
 - `node scripts/release-preflight.mjs [공개 미러 경로]`: 배포 전 대기 payload·데이터·문구·UI·Health·감사·공개면·parity 검사를 한 번에 실행
 - `node scripts/validate-audit-consistency.mjs`: 공개 데이터의 원문 감사 수치와 NAVI 감사 보고서의 정합성 검증
@@ -72,5 +74,5 @@ data-quality → build → built-provenance → validate → build-pending-sheet
 - `pnpm sync:public`: 지정된 공개 릴리스 디렉터리에 운영 template/data/build/validate/hosting과 UI/Chrome QA 검증기를 동기화하고 관리 Sheet URL을 제거
 - `pnpm release:package`: 최신 커밋 기준 Sites용 tar 경로를 출력하고 필수 파일·내부 Sheet URL 비노출을 재검증
 
-Sheets 쓰기 권한이 없을 때는 재시도 루프를 만들지 않고 대기 payload만 갱신합니다.
+Sheets 쓰기 권한이 없을 때는 재시도 루프를 만들지 않고 `pnpm sync:pending`으로 대기 payload만 갱신합니다.
 외부 게시, 규제·안전성·법률·특허·금융 판단은 별도 검증과 승인이 필요합니다.
