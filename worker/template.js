@@ -3398,7 +3398,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           ["수동 판정 연결 / 보존", Number(discovery.manualDecisionsMatched || 0).toLocaleString("ko-KR") + " / " + Number(discovery.manualDecisionsPreserved || 0).toLocaleString("ko-KR") + "건"],
           ["원천 오류", Number((discovery.sourceErrors || []).length).toLocaleString("ko-KR") + "건"],
           ["중복 식별자", Number((quality.duplicateDois || 0) + (quality.duplicatePmids || 0)).toLocaleString("ko-KR") + "건"],
-          ["원문 감사", DB.meta.linkAudit ? "해소 " + Number(DB.meta.linkAudit.resolved || 0).toLocaleString("ko-KR") + "건 · 제한 " + Number(DB.meta.linkAudit.blockedCount || 0).toLocaleString("ko-KR") + "건 · 실패 " + Number(DB.meta.linkAudit.failed || 0).toLocaleString("ko-KR") + "건" : "실행 기록 없음"],
+          ["원문 감사", DB.meta.linkAudit ? "해소 " + Number(DB.meta.linkAudit.resolved || 0).toLocaleString("ko-KR") + "건 · 제한 " + Number(DB.meta.linkAudit.blockedCount || 0).toLocaleString("ko-KR") + "건 · 요청 제한 " + linkAuditRateLimitedCount(DB.meta.linkAudit).toLocaleString("ko-KR") + "건 · 실패 " + Number(DB.meta.linkAudit.failed || 0).toLocaleString("ko-KR") + "건" : "실행 기록 없음"],
           ["감사 시점", DB.meta.linkAudit ? koreanDateTime(DB.meta.linkAudit.checkedAt) : "확인 필요"],
           ["감사 신선도", linkAuditFreshnessLabel(DB.meta.linkAudit)]
         ].map(function (item) {
@@ -3407,7 +3407,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var auditNote = el("link-audit-note");
         var auditNoteWrap = el("link-audit-note-wrap");
         if (auditNote && auditNoteWrap && DB.meta.linkAudit) {
-          auditNote.textContent = DB.meta.linkAudit.note || "원문 감사는 링크 접근성만 점검하며, 접근 제한·일시 응답·페이지 오류는 근거 약함을 뜻하지 않습니다.";
+          auditNote.textContent = (DB.meta.linkAudit.note || "원문 감사는 링크 접근성만 점검하며, 접근 제한·일시 응답·페이지 오류는 근거 약함을 뜻하지 않습니다.") + (linkAuditRateLimitedCount(DB.meta.linkAudit) ? " 이번 감사에는 요청 제한(429) 응답이 " + linkAuditRateLimitedCount(DB.meta.linkAudit).toLocaleString("ko-KR") + "건 포함되어 재감사가 필요합니다." : "");
           auditNoteWrap.hidden = false;
         }
         syncAuditFilterOptions();
@@ -3788,6 +3788,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (Number.isNaN(startToday) || Number.isNaN(startChecked)) return "확인 필요";
         var days = Math.max(0, Math.floor((startToday - startChecked) / 86400000));
         return days <= 7 ? "최근 확인 (" + days.toLocaleString("ko-KR") + "일 전)" : "재감사 권고 (" + days.toLocaleString("ko-KR") + "일 전)";
+      }
+      function linkAuditRateLimitedCount(audit) {
+        if (!audit || !Array.isArray(audit.recordStatuses)) return Number(audit && audit.rateLimitedCount || 0);
+        return audit.recordStatuses.filter(function (item) {
+          return Array.isArray(item.failures) && item.failures.some(function (failure) { return Number(failure) === 429 || String(failure) === "429"; });
+        }).length;
       }
       function syncAuditFilterOptions() {
         var select = el("audit");

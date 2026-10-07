@@ -285,6 +285,8 @@ const required = [
   ,["Link audit freshness", "function linkAuditFreshnessLabel"]
   ,["Link audit freshness timezone", 'timeZone: "Asia/Seoul"']
   ,["Link audit freshness interpretation", "감사 신선도"]
+  ,["Link audit rate-limit transparency", "linkAuditRateLimitedCount"]
+  ,["Link audit rate-limit action", "요청 제한(429) 응답"]
   ,["Snapshot freshness KST", "function updateFreshnessLabel"]
   ,["Comparison sticky context", "position: sticky; left: 0"]
   ,["Discovery delta helper", "function discoveryDeltaLabel"]
