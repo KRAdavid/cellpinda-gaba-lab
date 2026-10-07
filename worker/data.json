@@ -40514,12 +40514,12 @@
     "publicRelease": true,
     "release": {
       "snapshotVersion": 457,
-      "siteVersion": 485,
-      "sourceCommit": "bd958c5faec6c86dda8b99ea5dd09aecf777656a",
-      "siteSourceCommit": "bd958c5faec6c86dda8b99ea5dd09aecf777656a",
-      "publicMirrorCommit": "e60d363a0133da4c59e65f1e1c44296650894d46",
-      "publishedAt": "2026-10-06T17:34:22.042242Z",
-      "verification": "Sites v485 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
+      "siteVersion": 800,
+      "sourceCommit": "56e774877b8fc6e3492a26bb338ab2ffb94399c6",
+      "siteSourceCommit": "56e774877b8fc6e3492a26bb338ab2ffb94399c6",
+      "publicMirrorCommit": "f6373f4aeaec06364312fdf82f85a8f420c5ea85",
+      "publishedAt": "2026-10-07T20:29:39.873135Z",
+      "verification": "Sites v800 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
       "currentCodeDeployment": {
         "siteVersion": 799,
         "sourceCommit": "4efa1658acf14db992d709282e3a380ed2b2e1ac",
