@@ -104,6 +104,7 @@ const required = [
   ["Candidate deep-link focus", "candidatePreviewNeedsFocus"],
   ["Candidate filter counts", "candidateFilterLabels"],
   ["Candidate direct-signal filter", 'data-candidate-filter="entry-direct"'],
+  ["Candidate text-signal wording", "GABA 언급 신호"],
   ["Candidate follow-up-signal filter", 'data-candidate-filter="entry-followup"'],
   ["Immunity search suggestions", "면역 타액 IgA"],
   ["Canada monograph search suggestion", "캐나다 모노그래프"],
