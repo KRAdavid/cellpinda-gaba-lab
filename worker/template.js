@@ -1403,6 +1403,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       margin: 0 2px 12px;
     }
     .result-top-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: 6px; }
+    .view-mode-toggle { display: inline-flex; align-items: center; padding: 2px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface-2); }
+    .view-mode-toggle button { min-height: 32px; padding: 5px 9px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); font-size: 11px; font-weight: 800; cursor: pointer; }
+    .view-mode-toggle button[aria-pressed="true"] { background: #fff; color: var(--teal-dark); box-shadow: 0 1px 4px rgba(25,54,64,.12); }
+    .view-mode-toggle button:hover, .view-mode-toggle button:focus-visible { color: var(--teal-dark); outline: none; }
     .result-export-menu { position: relative; }
     .result-export-menu summary {
       display: inline-flex;
@@ -1678,6 +1682,15 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .interpretation.action {
       background: #f7f8fc;
     }
+    .paper-card.compact-card { padding: 15px 17px; }
+    .paper-card.compact-card .original-title,
+    .paper-card.compact-card .fact-grid,
+    .paper-card.compact-card .paper-detail { display: none; }
+    .paper-card.compact-card .paper-badges { margin-bottom: 7px; }
+    .paper-card.compact-card .paper-title-korean { font-size: 17px; }
+    .paper-card.compact-card .paper-meta { margin: 5px 0 8px; font-size: 11px; }
+    .paper-card.compact-card .finding { margin: 8px 0; }
+    .paper-card.compact-card .interpretation-grid { margin-top: 9px; }
     .interpretation-caution {
       display: block;
       margin-top: 7px;
@@ -2556,6 +2569,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <div class="result-top">
             <p class="result-count" id="result-count" tabindex="-1" aria-live="polite"></p>
             <div class="result-top-actions">
+              <div class="view-mode-toggle" role="group" aria-label="검색 결과 표시 방식">
+                <button type="button" data-view-mode="cards" aria-pressed="true">카드</button>
+                <button type="button" data-view-mode="list" aria-pressed="false">간결</button>
+              </div>
               <button class="result-reset" id="result-reset" type="button">필터 초기화</button>
               <button class="result-reset" id="result-share" type="button">조건 링크 복사</button>
               <details class="result-export-menu saved-search-menu" id="saved-search-menu">
@@ -2697,7 +2714,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       var state = {
          q: "", kind: "", category: "", effectCategory: "", status: "", marketing: "", intervention: "", routeGroup: "", followup: "", sci: "", species: "", topic: "",
         grade: "", agency: "", safetyArea: "", extraction: "", direction: "", source: "", audit: "", freshness: "", from: DB.meta.minYear,
-        to: DB.meta.maxYear, sort: "latest", page: 1
+        to: DB.meta.maxYear, sort: "latest", view: "cards", page: 1
       };
 
       var el = function (id) { return document.getElementById(id); };
@@ -3144,6 +3161,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         ["q", "kind", "category", "effectCategory", "status", "marketing", "intervention", "routeGroup", "followup", "grade", "agency", "safetyArea", "sci", "species", "topic", "extraction", "direction", "source", "audit", "freshness", "sort"].forEach(function (key) {
           if (params.has(key)) state[key] = params.get(key) || "";
         });
+        if (params.get("view") === "list") state.view = "list";
         if (params.has("from")) state.from = Math.max(DB.meta.minYear, Number(params.get("from")) || DB.meta.minYear);
         if (params.has("to")) state.to = Math.min(DB.meta.maxYear, Number(params.get("to")) || DB.meta.maxYear);
         if (state.from > state.to) {
@@ -3224,6 +3242,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         document.querySelectorAll("[data-preset]").forEach(function (button) {
           setActiveToggle(button, button.dataset.preset === activePreset());
         });
+        document.querySelectorAll("[data-view-mode]").forEach(function (button) {
+          var active = button.dataset.viewMode === state.view;
+          button.setAttribute("aria-pressed", String(active));
+        });
         syncQuickDisclosure();
       }
 
@@ -3296,6 +3318,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (state.from !== DB.meta.minYear) params.set("from", state.from);
         if (state.to !== DB.meta.maxYear) params.set("to", state.to);
         if (state.sort !== "latest") params.set("sort", state.sort);
+        if (state.view !== "cards") params.set("view", state.view);
         if (pageSize !== 20) params.set("pageSize", pageSize);
         if (compareIds.length) params.set("compare", compareIds.join(","));
         if (urlReadingIds.length) params.set("read", urlReadingIds.join(","));
@@ -4796,7 +4819,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var originalTitle = record.title && record.title !== record.titleKo
           ? '<p class="original-title" lang="en">' + esc(record.title) + '</p>'
           : "";
-        return '<article class="paper-card regulatory-card">' +
+        return '<article class="paper-card regulatory-card' + (state.view === "list" ? ' compact-card' : '') + '">' +
           '<div class="paper-badges">' +
             '<span class="badge regulatory">규제·안전성</span>' +
             '<span class="badge ' + badgeClass("status", record.status) + '">' + esc(record.status) + '</span>' +
@@ -4847,7 +4870,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var pubmedExtra = record.pubmedUrl && record.pubmedUrl !== sourcePrimary ? linkButton(record.pubmedUrl, "PubMed 원문", false) : "";
         var doiExtra = record.doiUrl && record.doiUrl !== sourcePrimary && record.doiUrl !== record.pubmedUrl ? linkButton(record.doiUrl, "DOI 원문", false) : "";
         var identifierLabel = record.pmid && record.doi ? "PMID·DOI" : record.pmid ? "PMID" : record.doi ? "DOI" : "식별자 미완";
-        return '<article class="paper-card">' +
+        return '<article class="paper-card' + (state.view === "list" ? ' compact-card' : '') + '">' +
           '<div class="paper-badges">' +
             '<span class="badge ' + badgeClass("kind", record.kind) + '">' + esc(record.kind === "임상" ? "인체 임상" : record.kind === "동물" ? "동물시험" : record.kind) + '</span>' +
             '<span class="badge ' + badgeClass("status", record.status) + '">' + esc(record.status) + '</span>' +
@@ -5143,7 +5166,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         state = {
            q: "", kind: "", category: "", effectCategory: "", status: "", marketing: "", intervention: "", routeGroup: "", followup: "", sci: "", species: "", topic: "",
           grade: "", agency: "", safetyArea: "", extraction: "", direction: "", source: "", audit: "", freshness: "", from: DB.meta.minYear,
-          to: DB.meta.maxYear, sort: "latest", page: 1
+          to: DB.meta.maxYear, sort: "latest", view: "cards", page: 1
         };
         render("push");
       }
@@ -5288,6 +5311,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         pageSize = Number(controls.pageSize.value) || 20;
         state.page = 1;
         render("push");
+      });
+      document.querySelectorAll("[data-view-mode]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          state.view = button.dataset.viewMode === "list" ? "list" : "cards";
+          state.page = 1;
+          render("push");
+        });
       });
       controls.from.addEventListener("change", function () {
         state.from = Math.min(Number(controls.to.value), Math.max(DB.meta.minYear, Number(controls.from.value) || DB.meta.minYear));

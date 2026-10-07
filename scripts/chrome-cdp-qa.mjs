@@ -414,6 +414,16 @@ try {
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('audit')"), "ok");
   assert.equal(await evaluate(client, "document.querySelector('[data-result-preset=audit-ok]')?.getAttribute('aria-pressed')"), "true");
   await navigate(`http://127.0.0.1:${httpPort}/`);
+  assert.equal(await evaluate(client, "document.querySelector('[data-view-mode=cards]')?.getAttribute('aria-pressed')"), "true");
+  await evaluate(client, "document.querySelector('[data-view-mode=list]').click()");
+  assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('view')"), "list");
+  assert.equal(await evaluate(client, "document.querySelectorAll('.paper-card.compact-card').length > 0"), true);
+  assert.equal(await evaluate(client, "document.querySelector('[data-view-mode=list]')?.getAttribute('aria-pressed')"), "true");
+  await evaluate(client, "document.querySelector('[data-view-mode=cards]').click()");
+  assert.equal(await evaluate(client, "new URLSearchParams(location.search).has('view')"), false);
+  await navigate(`http://127.0.0.1:${httpPort}/?view=list`);
+  assert.equal(await evaluate(client, "document.querySelectorAll('.paper-card.compact-card').length > 0"), true);
+  await evaluate(client, "document.querySelector('[data-view-mode=cards]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#result-review-jump')?.textContent.includes('추가 확인 큐 보기')"), true);
   assert.equal(await evaluate(client, "Boolean(document.querySelector('.review-card-primary'))"), true);
   assert.equal(await evaluate(client, "Boolean(document.querySelector('.review-card-source'))"), true);
