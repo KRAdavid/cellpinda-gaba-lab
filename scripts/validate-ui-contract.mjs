@@ -273,6 +273,8 @@ const required = [
   ,["Compare share renderer", "function shareCompareSelection"]
   ,["Compare share fallback", 'openCopyDialog("비교 링크"']
   ,["Compare shared-link auto open", "urlCompareRequested && selectedCompareRecords().length >= 2"]
+  ,["Compare shared-link missing note", 'id="compare-shared-note"']
+  ,["Compare missing count boundary", "urlCompareMissingCount"]
   ,["Search slash shortcut", 'event.key !== "/"']
   ,["Search slash shortcut focus", "controls.q.focus();"]
   ,["Result card citation action", 'class="paper-citation" type="button" data-copy-citation=']

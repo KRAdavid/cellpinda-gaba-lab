@@ -314,6 +314,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
     .compare-tray button { min-height: 30px; padding: 5px 9px; border: 1px solid var(--teal); border-radius: 8px; background: var(--teal); color: #fff; font-size: 11px; font-weight: 800; cursor: pointer; }
     .compare-tray button.secondary { border-color: rgba(15,118,110,.28); background: #fff; color: var(--teal-dark); }
     .compare-tray button:disabled { opacity: .48; cursor: not-allowed; }
+    .compare-shared-note { margin: 0 0 10px; padding: 8px 10px; border: 1px solid rgba(183,121,31,.3); border-radius: 9px; background: var(--amber-soft); color: #7a4a08; font-size: 11px; line-height: 1.5; }
+    .compare-shared-note[hidden] { display: none; }
     .paper-compare { display: inline-flex; align-items: center; min-height: 30px; padding: 5px 9px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--teal-dark); font-size: 11px; font-weight: 800; cursor: pointer; }
     .paper-compare[aria-pressed="true"] { border-color: var(--teal); background: var(--teal-soft); }
     .compare-dialog { width: min(1120px, calc(100% - 28px)); max-height: min(820px, calc(100vh - 36px)); margin: auto; padding: 0; border: 0; border-radius: 18px; background: #fff; color: var(--ink); box-shadow: 0 24px 80px rgba(19,43,58,.24); }
@@ -2584,6 +2586,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             <button class="secondary" id="compare-share" type="button">비교 링크 복사</button>
             <button class="secondary" id="compare-clear" type="button">선택 해제</button>
           </div>
+          <p class="compare-shared-note" id="compare-shared-note" role="status" hidden></p>
           <div class="active-filters" id="active-filters" aria-label="적용된 필터"></div>
           <div class="result-interpretation" id="result-interpretation" aria-live="polite"></div>
           <div class="papers" id="papers"></div>
@@ -2687,6 +2690,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       var copyDialogSuccessMessage = "내용을 복사했습니다";
       var urlReadingIds = [];
       var urlCompareRequested = false;
+      var urlCompareMissingCount = 0;
       var reviewDraftStatus = "pending";
       var reviewDraftNote = "";
       var state = {
@@ -3153,8 +3157,12 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           compareIds = requestedCompareIds.filter(function (id, index) {
             return index < 4 && records.some(function (record) { return String(record.id) === id; });
           });
+          urlCompareMissingCount = Math.max(0, requestedCompareIds.length - compareIds.length);
           saveCompareIds();
-        } else urlCompareRequested = false;
+        } else {
+          urlCompareRequested = false;
+          urlCompareMissingCount = 0;
+        }
         if (params.has("read")) {
           urlReadingIds = String(params.get("read") || "").split(",").map(function (id) { return id.trim(); }).filter(Boolean).filter(function (id, index) {
             return index < 50 && records.some(function (record) { return String(record.id) === id; });
@@ -4637,8 +4645,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         var tray = el("compare-tray");
         if (!tray) return;
         var selected = selectedCompareRecords();
+        var sharedNote = el("compare-shared-note");
         compareIds = selected.map(function (record) { return String(record.id); });
         tray.hidden = selected.length === 0;
+        if (sharedNote) {
+          sharedNote.hidden = !(urlCompareRequested && urlCompareMissingCount);
+          if (!sharedNote.hidden) sharedNote.textContent = "공유된 비교 자료 중 " + urlCompareMissingCount.toLocaleString("ko-KR") + "건은 현재 스냅샷에서 찾지 못했습니다. 남은 자료만 표시하며, 최신 원문·식별자를 다시 확인하세요.";
+        }
         var compareSummary = el("compare-summary");
         compareSummary.textContent = selected.length + "개 선택 · 최대 4개까지 비교할 수 있습니다.";
         compareSummary.setAttribute("aria-label", selected.length + "개 선택됨 · " + (selected.length < 2 ? "2개 이상 선택해야 비교할 수 있습니다" : "비교할 수 있습니다"));
