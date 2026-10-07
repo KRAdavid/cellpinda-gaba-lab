@@ -25,12 +25,16 @@ const errors = Array.isArray(summary.sourceErrors) ? summary.sourceErrors : [];
 const failedSources = [...new Set(errors.map((entry) => String(entry?.source || "unknown").split(":")[0]))];
 const openAlexAccessMode = String(summary.openAlex?.accessMode || "unknown");
 const hasOpenAlexError = failedSources.includes("OpenAlex");
+const openAlexErrors = errors.filter((entry) => String(entry?.source || "").startsWith("OpenAlex:"));
+const hasOpenAlexRateLimit = openAlexErrors.some((entry) => /\b429\b|rate limit/i.test(String(entry?.error || "")));
 const recoveryHint = hasOpenAlexError
   ? openAlexAccessMode === "anonymous"
     ? "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 예약 실행 환경에 설정한 뒤 재실행"
-    : openAlexAccessMode === "unknown"
-      ? "운영자 조치: OpenAlex 인증·응답 상태를 확인한 뒤 재실행"
-      : "운영자 조치: OpenAlex rate limit 재설정 후 재실행"
+    : hasOpenAlexRateLimit
+      ? "운영자 조치: OpenAlex rate limit 재설정 후 재실행"
+      : openAlexAccessMode === "unknown"
+        ? "운영자 조치: OpenAlex 인증·응답 상태를 확인한 뒤 재실행"
+        : "운영자 조치: OpenAlex 응답 상태를 확인한 뒤 재실행"
   : errors.length
     ? "운영자 조치: 실패 원천의 응답 상태를 확인한 뒤 재실행"
     : "운영자 조치: build·preflight·브라우저 QA 후 공개 반영 검토";
@@ -41,6 +45,7 @@ const attempt = {
   sourceErrorCount: errors.length,
   failedSources: failedSources.slice(0, 8),
   openAlexAccessMode,
+  openAlexRateLimited: hasOpenAlexRateLimit,
   recoveryHint,
   message: errors.length
     ? "일부 원천 응답 오류로 공개 인덱스 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다."

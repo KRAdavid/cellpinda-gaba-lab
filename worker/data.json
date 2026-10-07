@@ -37118,7 +37118,8 @@
           "OpenAlex"
         ],
         "openAlexAccessMode": "unknown",
-        "recoveryHint": "운영자 조치: OpenAlex 인증·응답 상태를 확인한 뒤 재실행",
+        "openAlexRateLimited": true,
+        "recoveryHint": "운영자 조치: OpenAlex rate limit 재설정 후 재실행",
         "message": "일부 원천 응답 오류로 공개 인덱스 반영을 보류했습니다. 현재 화면은 마지막 완전 검증 스냅샷입니다."
       },
       "candidateFile": null
