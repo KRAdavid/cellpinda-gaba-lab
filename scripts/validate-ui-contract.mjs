@@ -120,6 +120,7 @@ const required = [
   ["Candidate follow-up-signal filter", 'data-candidate-filter="entry-followup"'],
   ["Candidate registry filter", 'data-candidate-filter="registry"'],
   ["Candidate preprint filter", 'data-candidate-filter="preprint"'],
+  ["Candidate shareable source filters", '"registry", "preprint", "reviewed"'],
   ["Candidate source-lane link priority", "candidate.sourceLane === \"registry\""],
   ["Candidate registry URL priority", "candidate.sourceUrl || (candidate.registryId ? \"https://clinicaltrials.gov/study/\""],
   ["Candidate preprint URL priority", "sourceLane === \"preprint\" || sources.includes(\"preprint\")"],

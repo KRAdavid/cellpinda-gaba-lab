@@ -3461,7 +3461,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function loadUrlState() {
         var params = new URLSearchParams(location.search);
         var requestedCandidateFilter = params.get("candidate") || "all";
-        candidatePreviewFilter = ["all", "entry-direct", "entry-followup", "priority", "followup", "reviewed", "unreviewed"].includes(requestedCandidateFilter)
+        candidatePreviewFilter = ["all", "entry-direct", "entry-followup", "priority", "followup", "registry", "preprint", "reviewed", "unreviewed"].includes(requestedCandidateFilter)
           ? requestedCandidateFilter
           : "all";
         candidatePreviewNeedsFocus = candidatePreviewFilter !== "all";
