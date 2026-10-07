@@ -285,6 +285,7 @@ try {
   assert.equal(await evaluate(client, "/^전체 \\d+$/.test(document.querySelector('.quick-filter-group [data-kind=\\\"\\\"]')?.textContent.trim() || '')"), true);
   assert.equal(await evaluate(client, "/^안전성 자료 \\d+$/.test(document.querySelector('.quick-filter-group [data-category=안전성]')?.textContent.trim() || '')"), true);
   assert.equal(await evaluate(client, "document.querySelector('.quick-filter-group')?.textContent.includes('근거 범위') && document.querySelector('.quick-filter-group')?.textContent.includes('탐색 축')"), true);
+  await navigate(`http://127.0.0.1:${httpPort}/`);
   assert.equal(await evaluate(client, "getComputedStyle(document.querySelector('#toast')).pointerEvents"), "none");
   assert.equal(await evaluate(client, "parseFloat(getComputedStyle(document.querySelector('#toast')).maxWidth) <= window.innerWidth - 32"), true);
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-stats')?.getAttribute('role')"), "group");
