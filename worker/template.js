@@ -3316,7 +3316,6 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         el("discovery-stats").innerHTML = [
           ["탐색일", koreanDate(discovery.snapshotDate || DB.meta.snapshotDate)],
           ["현재 운영 코드 기준(런타임)", release.currentCodeDeployment ? "Sites v" + Number(release.currentCodeDeployment.siteVersion || 0) + (release.currentCodeDeployment.publicMirrorCommit ? " · GitHub " + String(release.currentCodeDeployment.publicMirrorCommit).slice(0, 7) : "") : "확인 필요"],
-          ["마지막 완전 검증 릴리스", release.snapshotVersion ? "데이터 v" + Number(release.snapshotVersion) + " · Sites v" + Number(release.siteVersion || 0) + (release.publicMirrorCommit ? " · GitHub " + String(release.publicMirrorCommit).slice(0, 7) : "") : "확인 필요"],
           ["PubMed", Number(discovery.pubmedUnique || 0).toLocaleString("ko-KR") + "건"],
           ["OpenAlex", Number(discovery.openAlexRetrieved || 0).toLocaleString("ko-KR") + "건"],
           ["최근 OpenAlex 요청", discovery.lastAttempt ? Number(discovery.lastAttempt.openAlexAttemptedQueries || 0).toLocaleString("ko-KR") + "회 시도 · " + Number(discovery.lastAttempt.openAlexSkippedQueries || 0).toLocaleString("ko-KR") + "회 중단" : "확인 필요"],

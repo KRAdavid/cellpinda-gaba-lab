@@ -590,7 +590,6 @@ try {
   assert.equal(await evaluate(client, "getComputedStyle(document.querySelector('#market-use')).scrollMarginTop"), "84px");
   const currentDeploymentLabel = "현재 운영 코드 기준(런타임) Sites v" + health.release.currentCodeDeployment.siteVersion + " · GitHub " + health.release.currentCodeDeployment.publicMirrorCommit.slice(0, 7);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes(" + JSON.stringify(currentDeploymentLabel) + ")"), true);
-  assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('마지막 완전 검증 릴리스 데이터 v457 · Sites v485 · GitHub e60d363')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('원천 오류')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('원문 감사')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('감사 신선도')"), true);
