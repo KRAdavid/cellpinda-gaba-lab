@@ -2686,6 +2686,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       var copyDialogReturnFocus = null;
       var copyDialogSuccessMessage = "내용을 복사했습니다";
       var urlReadingIds = [];
+      var urlCompareRequested = false;
       var reviewDraftStatus = "pending";
       var reviewDraftNote = "";
       var state = {
@@ -3147,12 +3148,13 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         }
         if (["20", "50", "100"].includes(params.get("pageSize"))) pageSize = Number(params.get("pageSize"));
         if (params.has("compare")) {
+          urlCompareRequested = true;
           var requestedCompareIds = String(params.get("compare") || "").split(",").map(function (id) { return id.trim(); }).filter(Boolean);
           compareIds = requestedCompareIds.filter(function (id, index) {
             return index < 4 && records.some(function (record) { return String(record.id) === id; });
           });
           saveCompareIds();
-        }
+        } else urlCompareRequested = false;
         if (params.has("read")) {
           urlReadingIds = String(params.get("read") || "").split(",").map(function (id) { return id.trim(); }).filter(Boolean).filter(function (id, index) {
             return index < 50 && records.some(function (record) { return String(record.id) === id; });
@@ -5212,6 +5214,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       render();
       if (urlRecordId) openIntelligenceDetail(urlRecordId, "replace");
       if (urlCandidateId) openCandidateDetail(urlCandidateId, "replace");
+      if (urlCompareRequested && selectedCompareRecords().length >= 2) window.setTimeout(openCompareDialog, 0);
 
       window.addEventListener("popstate", function () {
         var detailWasOpen = el("intelligence-detail").open;
@@ -5220,6 +5223,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         render();
         if (urlRecordId) openIntelligenceDetail(urlRecordId, "replace");
         else if (urlCandidateId) openCandidateDetail(urlCandidateId, "replace");
+        else if (urlCompareRequested && selectedCompareRecords().length >= 2) openCompareDialog();
+        else if (el("compare-dialog")?.open) closeCompareDialog();
         else if (detailWasOpen) closeIntelligenceDetail();
         else if (el("candidate-detail-dialog")?.open) closeCandidateDetail();
       });

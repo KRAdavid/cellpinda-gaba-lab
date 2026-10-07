@@ -591,6 +591,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#compare-open')?.disabled"), false);
   assert.equal(await evaluate(client, "document.querySelector('#compare-open')?.getAttribute('aria-label')"), "선택 자료 비교, 2개 선택됨");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('compare')?.includes(',')"), true);
+  const sharedCompareUrl = await evaluate(client, "location.href");
   await evaluate(client, "document.querySelector('#compare-share').click()");
   await sleep(80);
   assert.equal(await evaluate(client, "document.querySelector('#toast')?.textContent.includes('비교 링크') || document.querySelector('#copy-dialog')?.open"), true);
@@ -622,6 +623,12 @@ try {
   await evaluate(client, "document.querySelector('#compare-clear').click()");
   assert.equal(await evaluate(client, "document.querySelector('#compare-tray')?.hidden"), true);
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).has('compare')"), false);
+  await navigate(sharedCompareUrl);
+  await sleep(120);
+  assert.equal(await evaluate(client, "document.querySelector('#compare-dialog')?.open"), true);
+  await evaluate(client, "document.querySelector('#compare-dialog-close').click()");
+  await evaluate(client, "document.querySelector('#compare-clear').click()");
+  await navigate(`http://127.0.0.1:${httpPort}/?kind=${encodeURIComponent('임상')}`);
   await evaluate(client, "document.querySelector('[data-reading-toggle]').click()");
   assert.equal(await evaluate(client, "document.querySelector('#reading-list-count')?.textContent"), "1");
   assert.equal(await evaluate(client, "document.querySelector('#reading-list-open')?.getAttribute('aria-label')"), "읽기 목록, 1개 저장됨");

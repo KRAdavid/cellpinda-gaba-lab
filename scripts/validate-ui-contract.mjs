@@ -272,6 +272,7 @@ const required = [
   ,["Compare share action", 'id="compare-share"']
   ,["Compare share renderer", "function shareCompareSelection"]
   ,["Compare share fallback", 'openCopyDialog("비교 링크"']
+  ,["Compare shared-link auto open", "urlCompareRequested && selectedCompareRecords().length >= 2"]
   ,["Search slash shortcut", 'event.key !== "/"']
   ,["Search slash shortcut focus", "controls.q.focus();"]
   ,["Result card citation action", 'class="paper-citation" type="button" data-copy-citation=']
