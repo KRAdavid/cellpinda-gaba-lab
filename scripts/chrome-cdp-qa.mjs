@@ -589,6 +589,11 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#compare-open')?.disabled"), false);
   assert.equal(await evaluate(client, "document.querySelector('#compare-open')?.getAttribute('aria-label')"), "선택 자료 비교, 2개 선택됨");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('compare')?.includes(',')"), true);
+  await evaluate(client, "document.querySelector('#compare-share').click()");
+  await sleep(80);
+  assert.equal(await evaluate(client, "document.querySelector('#toast')?.textContent.includes('비교 링크') || document.querySelector('#copy-dialog')?.open"), true);
+  await evaluate(client, "if (document.querySelector('#copy-dialog')?.open) document.querySelector('#copy-dialog-close').click()");
+  await sleep(80);
   await evaluate(client, "document.querySelector('#compare-open').focus(); document.querySelector('#compare-open').click()");
   assert.equal(await evaluate(client, "document.querySelector('#compare-dialog')?.open"), true);
   assert.equal(await evaluate(client, "document.activeElement?.id"), "compare-dialog-close");

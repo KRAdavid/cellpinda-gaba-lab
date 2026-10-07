@@ -2581,6 +2581,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <div class="compare-tray" id="compare-tray" hidden aria-live="polite" aria-atomic="true">
             <span id="compare-summary">비교 자료를 선택하세요.</span>
             <button id="compare-open" type="button" disabled>선택 자료 비교</button>
+            <button class="secondary" id="compare-share" type="button">비교 링크 복사</button>
             <button class="secondary" id="compare-clear" type="button">선택 해제</button>
           </div>
           <div class="active-filters" id="active-filters" aria-label="적용된 필터"></div>
@@ -4699,6 +4700,20 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           openCopyDialog("비교표", "클립보드 권한이 없으면 아래 표를 선택해 직접 복사하세요.", text, "비교표를 복사했습니다");
         }
       }
+      async function shareCompareSelection() {
+        var selected = selectedCompareRecords();
+        if (!selected.length) { toast("비교할 자료를 먼저 선택하세요"); return; }
+        var shareUrl = new URL(location.href);
+        shareUrl.searchParams.set("compare", selected.map(function (record) { return String(record.id); }).join(","));
+        var text = shareUrl.toString();
+        try {
+          await navigator.clipboard.writeText(text);
+          toast("비교 링크를 복사했습니다");
+        } catch (_) {
+          openCopyDialog("비교 링크", "클립보드 권한이 없으면 아래 링크를 선택해 직접 복사하세요.", text, "비교 링크를 복사했습니다");
+        }
+      }
+
       function exportCompareSelection() {
         var selected = selectedCompareRecords();
         if (selected.length < 2) { toast("비교할 자료를 2개 이상 선택하세요"); return; }
@@ -5395,6 +5410,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       el("compare-open").addEventListener("click", openCompareDialog);
       el("compare-copy").addEventListener("click", copyCompareSelection);
       el("compare-export").addEventListener("click", exportCompareSelection);
+      el("compare-share").addEventListener("click", shareCompareSelection);
       el("compare-clear").addEventListener("click", function () {
         compareIds = [];
         saveCompareIds();
