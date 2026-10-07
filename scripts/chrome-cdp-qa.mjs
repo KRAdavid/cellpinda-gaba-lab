@@ -162,7 +162,7 @@ try {
   }
 
   await navigate(`http://127.0.0.1:${httpPort}/`);
-  await evaluate(client, "localStorage.removeItem('gaba-candidate-decisions-v1'); location.reload()");
+  await evaluate(client, "localStorage.removeItem('gaba-candidate-decisions-v1'); localStorage.removeItem('gaba-focus-mode-v1'); location.reload()");
   await waitForExpression(client, "document.documentElement.dataset.gabaReady === 'true'");
   await waitForExpression(client, "document.querySelector('#sort')?.value === 'latest'");
   await evaluate(client, "document.querySelector(\".portal-nav a[href='#market-use']\")?.click()");
@@ -299,6 +299,16 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-marketing-note')?.textContent.includes('광고 허가·효능 입증·규제 승인을 뜻하지 않습니다')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#external-review-gate')?.getAttribute('role')"), "note");
   assert.equal(await evaluate(client, "document.querySelector('#external-review-gate')?.textContent.includes('독립 외부 검토 전 확정하지 않습니다')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#focus-mode-toggle')?.getAttribute('aria-pressed')"), "false");
+  await evaluate(client, "document.querySelector('#focus-mode-toggle').click()");
+  assert.equal(await evaluate(client, "document.body.classList.contains('focus-mode')"), true);
+  assert.equal(await evaluate(client, "document.querySelector('#focus-mode-toggle')?.getAttribute('aria-pressed')"), "true");
+  assert.equal(await evaluate(client, "document.querySelector('#focus-mode-note')?.hidden"), false);
+  assert.equal(await evaluate(client, "getComputedStyle(document.querySelector('#search-suggestions')).display"), "none");
+  assert.equal(await evaluate(client, "localStorage.getItem('gaba-focus-mode-v1')"), "on");
+  await evaluate(client, "document.querySelector('#focus-mode-toggle').click()");
+  assert.equal(await evaluate(client, "document.body.classList.contains('focus-mode')"), false);
+  assert.equal(await evaluate(client, "document.querySelector('#focus-mode-toggle')?.getAttribute('aria-pressed')"), "false");
   assert.equal(await evaluate(client, "document.querySelector('.result-interpretation-stats')?.textContent.includes('후속조치 신호')"), true);
   assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-result-preset=followup]'))"), true);
   await evaluate(client, "document.querySelector('[data-result-preset=followup]').click()");

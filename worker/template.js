@@ -959,6 +959,43 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       font-size: 12px;
       line-height: 1.5;
     }
+    .explorer-preferences {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+    .focus-mode-toggle {
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid #c9d4d1;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink-2);
+      font-size: 11px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+    .focus-mode-toggle:hover,
+    .focus-mode-toggle:focus-visible,
+    .focus-mode-toggle[aria-pressed="true"] {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+    }
+    .focus-mode-note {
+      color: var(--muted);
+      font-size: 11px;
+    }
+    body.focus-mode .search-help,
+    body.focus-mode .search-suggestions,
+    body.focus-mode .explorer-intents,
+    body.focus-mode .distribution-disclosure,
+    body.focus-mode .quick-advanced {
+      display: none;
+    }
+    body.focus-mode .explorer-preferences { margin-top: 8px; }
     .search-suggestions {
       display: flex;
       flex-wrap: wrap;
@@ -2462,7 +2499,11 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <button class="mobile-filter" id="mobile-filter" type="button" aria-controls="filter-panel" aria-expanded="false">필터 <span class="mobile-filter-count" id="mobile-filter-count" hidden></span></button>
         </div>
         <p class="search-help">원문 제목은 그대로 보존하며 한국어 용어 확장을 제목·내용 전체에 적용합니다. 정확한 문구는 “따옴표”, 제외할 말은 -단어로 입력하세요. <kbd>/</kbd> 키로 바로 검색할 수 있습니다.</p>
-        <div class="search-suggestions" aria-label="추천 한글 검색어">
+        <div class="explorer-preferences" aria-label="탐색 화면 설정">
+          <button class="focus-mode-toggle" id="focus-mode-toggle" type="button" aria-pressed="false" aria-controls="distribution-disclosure search-suggestions explorer-intents quick-advanced" title="분포·추천어·추가 빠른 필터를 접고 핵심 검색과 결과에 집중합니다.">집중 탐색</button>
+          <span class="focus-mode-note" id="focus-mode-note" role="status" hidden>핵심 검색·결과 중심 보기 · 개인 브라우저 설정</span>
+        </div>
+        <div class="search-suggestions" id="search-suggestions" aria-label="추천 한글 검색어">
           <button class="suggestion-button" type="button" data-query="수면">수면</button>
           <button class="suggestion-button" type="button" data-query="혈압">혈압</button>
           <button class="suggestion-button" type="button" data-query="불안 스트레스">불안·스트레스</button>
@@ -2479,7 +2520,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
             </div>
           </details>
         </div>
-        <div class="explorer-intents" aria-label="탐색 목적 빠른 선택">
+        <div class="explorer-intents" id="explorer-intents" aria-label="탐색 목적 빠른 선택">
           <span class="explorer-intents-label">탐색 목적</span>
           <button class="intent-button" type="button" data-preset="human-direct">인체 직접근거</button>
           <button class="intent-button" type="button" data-preset="regulatory">안전·규제</button>
@@ -2825,6 +2866,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           .filter(function (item) { return item && item.id && typeof item.search === "string"; })
           .slice(0, 10);
       } catch (_) { savedSearches = []; }
+      var focusMode = false;
+      try { focusMode = localStorage.getItem("gaba-focus-mode-v1") === "on"; } catch (_) { focusMode = false; }
       var currentDetailRecordId = null;
       var urlRecordId = "";
       var detailReturnFocus = null;
@@ -2959,6 +3002,27 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function setActiveToggle(button, active) {
         button.classList.toggle("active", active);
         button.setAttribute("aria-pressed", String(active));
+      }
+      function syncFocusMode(announce) {
+        var button = el("focus-mode-toggle");
+        var note = el("focus-mode-note");
+        document.body.classList.toggle("focus-mode", focusMode);
+        if (button) {
+          button.setAttribute("aria-pressed", String(focusMode));
+          button.textContent = focusMode ? "집중 탐색 켜짐" : "집중 탐색";
+          button.title = focusMode
+            ? "분포·추천어·추가 빠른 필터를 다시 표시합니다."
+            : "분포·추천어·추가 빠른 필터를 접고 핵심 검색과 결과에 집중합니다.";
+        }
+        if (note) note.hidden = !focusMode;
+        if (focusMode) {
+          ["distribution-disclosure", "search-suggestions-more", "quick-advanced"].forEach(function (id) {
+            var target = el(id);
+            if (target && target.tagName === "DETAILS") target.open = false;
+          });
+        }
+        try { localStorage.setItem("gaba-focus-mode-v1", focusMode ? "on" : "off"); } catch (_) {}
+        if (announce) toast(focusMode ? "집중 탐색을 켰습니다" : "전체 탐색 도구를 다시 표시했습니다");
       }
 
       function candidateSourceUrl(candidate) {
@@ -6015,6 +6079,10 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         }
       });
       el("search-clear").addEventListener("click", function () { changeState("q", ""); controls.q.focus(); });
+      el("focus-mode-toggle").addEventListener("click", function () {
+        focusMode = !focusMode;
+        syncFocusMode(true);
+      });
       el("reset").addEventListener("click", resetFilters);
       el("result-reset").addEventListener("click", resetFilters);
       el("filter-collapse").addEventListener("click", function () { setDesktopFiltersHidden(true, true); });
@@ -6039,6 +6107,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         el("results").scrollIntoView({ behavior: preferredScrollBehavior(), block: "start" });
       });
       window.addEventListener("resize", syncDesktopFilterLayout);
+      syncFocusMode(false);
       syncDesktopFilterLayout();
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
