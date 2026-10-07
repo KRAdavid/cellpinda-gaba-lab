@@ -3074,9 +3074,19 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       }
 
       function candidateSourceUrl(candidate) {
+        var sourceLane = candidate.sourceLane || "";
+        var sources = Array.isArray(candidate.source) ? candidate.source : [];
+        if (sourceLane === "registry" || candidate.registryId || sources.includes("ClinicalTrials.gov")) {
+          return candidate.sourceUrl || (candidate.registryId ? "https://clinicaltrials.gov/study/" + encodeURIComponent(candidate.registryId) : "");
+        }
+        if (sourceLane === "preprint" || sources.includes("preprint")) {
+          return candidate.sourceUrl || (candidate.pmid
+            ? "https://pubmed.ncbi.nlm.nih.gov/" + encodeURIComponent(candidate.pmid) + "/"
+            : candidate.doi ? "https://doi.org/" + encodeURIComponent(candidate.doi) : "");
+        }
         if (candidate.pmid) return "https://pubmed.ncbi.nlm.nih.gov/" + encodeURIComponent(candidate.pmid) + "/";
         if (candidate.doi) return "https://doi.org/" + encodeURIComponent(candidate.doi);
-        return candidate.sourceUrl || (candidate.registryId ? "https://clinicaltrials.gov/study/" + encodeURIComponent(candidate.registryId) : "");
+        return candidate.sourceUrl || "";
       }
       function candidateSourceLabel(candidate) {
         if (candidate.sourceLane === "registry" || candidate.registryId || (candidate.source || []).includes("ClinicalTrials.gov")) return "ClinicalTrials.gov 등록시험";

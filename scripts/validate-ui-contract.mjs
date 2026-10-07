@@ -121,6 +121,8 @@ const required = [
   ["Candidate registry filter", 'data-candidate-filter="registry"'],
   ["Candidate preprint filter", 'data-candidate-filter="preprint"'],
   ["Candidate source-lane link priority", "candidate.sourceLane === \"registry\""],
+  ["Candidate registry URL priority", "candidate.sourceUrl || (candidate.registryId ? \"https://clinicaltrials.gov/study/\""],
+  ["Candidate preprint URL priority", "sourceLane === \"preprint\" || sources.includes(\"preprint\")"],
   ["Candidate filtered empty state", "candidate-preview-empty"],
   ["Immunity search suggestions", "면역 타액 IgA"],
   ["Canada monograph search suggestion", "캐나다 모노그래프"],
