@@ -2095,6 +2095,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       </div>
       <div class="candidate-preview-filters" aria-label="후보 유형 필터">
         <button class="candidate-preview-filter active" type="button" data-candidate-filter="all" aria-pressed="true">전체</button>
+        <button class="candidate-preview-filter" type="button" data-candidate-filter="entry-direct" aria-pressed="false">GABA 직접 신호</button>
+        <button class="candidate-preview-filter" type="button" data-candidate-filter="entry-followup" aria-pressed="false">후속조치 신호</button>
         <button class="candidate-preview-filter" type="button" data-candidate-filter="priority" aria-pressed="false">자동 우선검토</button>
         <button class="candidate-preview-filter" type="button" data-candidate-filter="followup" aria-pressed="false">출판 후속조치</button>
         <button class="candidate-preview-filter review" type="button" data-candidate-filter="reviewed" aria-pressed="false">수동 검토됨</button>
@@ -2866,6 +2868,8 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function filterCandidatePreviewRecords(candidates, activeFilter) {
         return (Array.isArray(candidates) ? candidates : []).filter(function (candidate) {
           if (activeFilter === "priority") return candidate.bucket === "우선검토";
+          if (activeFilter === "entry-direct") return candidate.candidateEntryReason === "제목·초록 GABA 신호";
+          if (activeFilter === "entry-followup") return candidate.candidateEntryReason === "GABA 후속조치 검색 신호";
           if (activeFilter === "followup") return (candidate.exclusionSignals || []).length > 0 || /출판 후속조치|철회|정정|우려표명/.test(candidate.screeningRecommendation || "");
           if (activeFilter === "reviewed") return candidateReviewStatus(candidate) !== "미검토";
           if (activeFilter === "unreviewed") return candidateReviewStatus(candidate) === "미검토";
@@ -2908,7 +2912,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         if (progress) {
           progress.textContent = "현재 미리보기 " + candidates.length.toLocaleString("ko-KR") + "건 중 개인 검토 " + reviewedCount.toLocaleString("ko-KR") + "건 · 미검토 " + Math.max(0, candidates.length - reviewedCount).toLocaleString("ko-KR") + "건 · 원본·Sheets 미변경";
         }
-        var candidateFilterLabels = { all: "전체", priority: "자동 우선검토", followup: "출판 후속조치", reviewed: "수동 검토됨", unreviewed: "미검토" };
+        var candidateFilterLabels = { all: "전체", "entry-direct": "GABA 직접 신호", "entry-followup": "후속조치 신호", priority: "자동 우선검토", followup: "출판 후속조치", reviewed: "수동 검토됨", unreviewed: "미검토" };
         document.querySelectorAll("[data-candidate-filter]").forEach(function (button) {
           var filterKey = button.dataset.candidateFilter || "all";
           var filterCount = filterCandidatePreviewRecords(candidates, filterKey).length;
@@ -3159,7 +3163,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
       function loadUrlState() {
         var params = new URLSearchParams(location.search);
         var requestedCandidateFilter = params.get("candidate") || "all";
-        candidatePreviewFilter = ["all", "priority", "followup", "reviewed", "unreviewed"].includes(requestedCandidateFilter)
+        candidatePreviewFilter = ["all", "entry-direct", "entry-followup", "priority", "followup", "reviewed", "unreviewed"].includes(requestedCandidateFilter)
           ? requestedCandidateFilter
           : "all";
         candidatePreviewNeedsFocus = candidatePreviewFilter !== "all";

@@ -102,6 +102,8 @@ const required = [
   ["Candidate link copy fallback", "copyCandidateLink"],
   ["Candidate deep-link focus", "candidatePreviewNeedsFocus"],
   ["Candidate filter counts", "candidateFilterLabels"],
+  ["Candidate direct-signal filter", 'data-candidate-filter="entry-direct"'],
+  ["Candidate follow-up-signal filter", 'data-candidate-filter="entry-followup"'],
   ["Immunity search suggestions", "면역 타액 IgA"],
   ["Canada monograph search suggestion", "캐나다 모노그래프"],
   ["Progressive search suggestions", "search-suggestions-more"],

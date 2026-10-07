@@ -401,6 +401,10 @@ try {
   assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length > 0"), true);
   assert.equal(await evaluate(client, "document.activeElement?.id"), "candidate-preview-title");
   assert.equal(await evaluate(client, "window.scrollY > 0"), true);
+  await navigate(`http://127.0.0.1:${httpPort}/?candidate=entry-followup`);
+  assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=entry-followup]')?.getAttribute('aria-pressed')"), "true");
+  assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "entry-followup");
+  assert.equal(await evaluate(client, "document.querySelectorAll('#candidate-preview-list .candidate-preview-card').length > 0"), true);
   await navigate(`http://127.0.0.1:${httpPort}/?candidate=reviewed`);
   assert.equal(await evaluate(client, "document.querySelector('[data-candidate-filter=reviewed]')?.getAttribute('aria-pressed')"), "true");
   assert.equal(await evaluate(client, "new URLSearchParams(location.search).get('candidate')"), "reviewed");
