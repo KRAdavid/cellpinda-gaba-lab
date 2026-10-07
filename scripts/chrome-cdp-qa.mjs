@@ -575,6 +575,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('.quick-button[data-kind=임상]')?.getAttribute('aria-pressed')"), "true");
   assert.equal(await evaluate(client, "document.querySelector('#snapshot-label')?.textContent.startsWith('검증 스냅샷')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#freshness-label')?.tagName"), "BUTTON");
+  assert.equal(await evaluate(client, "Boolean(document.querySelector('[data-copy-record-link]'))"), true);
   await evaluate(client, "document.querySelector('#methodology-open').click()");
   assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.open"), true);
   assert.equal(await evaluate(client, "document.querySelector('#methodology-dialog')?.textContent.includes('순수 GABA')"), true);
