@@ -21,6 +21,9 @@ const overlapDaysArg = process.argv.find((value) => value.startsWith("--overlap-
 const overlapDays = Number(overlapDaysArg?.split("=")[1] || 60);
 const overlapStart = sinceArg?.split("=")[1]
   || formatKstDate(new Date(Date.now() - overlapDays * 86400000));
+const openAlexApiKey = String(process.env.OPENALEX_API_KEY || "").trim();
+const openAlexMailto = String(process.env.OPENALEX_MAILTO || "").trim();
+const openAlexRetries = Math.min(5, Math.max(1, Number(process.env.OPENALEX_RETRIES || 3)));
 
 const database = JSON.parse(await readFile(resolve(siteRoot, "worker", "data.json"), "utf8"));
 const existing = database.records.filter((record) => record.kind !== "규제");
@@ -232,6 +235,16 @@ const fetchWithTimeout = (url, options = {}, timeoutMs = 30_000) => fetch(url, {
   signal: AbortSignal.timeout(timeoutMs)
 });
 
+function safeUrlForError(url) {
+  try {
+    const parsed = new URL(url);
+    for (const key of ["api_key", "mailto"]) parsed.searchParams.delete(key);
+    return parsed.toString();
+  } catch {
+    return "[redacted-url]";
+  }
+}
+
 async function getJson(url, retries = 6, timeoutMs = 30_000) {
   let error;
   for (let attempt = 1; attempt <= retries; attempt += 1) {
@@ -245,9 +258,18 @@ async function getJson(url, retries = 6, timeoutMs = 30_000) {
       // Await body decoding inside the retry boundary. A dropped connection can
       // fail while the response body is streaming even after headers succeeded.
       if (response.ok) return await response.json();
-      error = new Error(`${response.status} ${response.statusText}: ${url}`);
+      let providerRetryAfter = 0;
+      try {
+        const body = await response.text();
+        const payload = JSON.parse(body);
+        providerRetryAfter = Number(payload.retryAfter || payload.retry_after || 0);
+      } catch {
+        // Some upstreams return an empty or non-JSON error body.
+      }
+      const retryAfter = Math.max(Number(response.headers.get("retry-after") || 0), providerRetryAfter);
+      const retrySuffix = retryAfter > 0 ? ` [retryAfter=${retryAfter}s]` : "";
+      error = new Error(`${response.status} ${response.statusText}: ${safeUrlForError(url)}${retrySuffix}`);
       if ((response.status === 429 || response.status >= 500) && attempt < retries) {
-        const retryAfter = Number(response.headers.get("retry-after") || 0);
         await pause(Math.max(retryAfter * 1000, 5000 * attempt));
       }
     } catch (fetchError) {
@@ -384,7 +406,9 @@ async function searchOpenAlex(query, index) {
     "per-page": "100",
     page: "1"
   });
-  const data = await getJson(`https://api.openalex.org/works?${params}`, 1, 8_000);
+  if (openAlexApiKey) params.set("api_key", openAlexApiKey);
+  if (openAlexMailto) params.set("mailto", openAlexMailto);
+  const data = await getJson(`https://api.openalex.org/works?${params}`, openAlexRetries, 8_000);
   return {
     label: `openalex_${String(index + 1).padStart(2, "0")}`,
     query,
@@ -578,6 +602,7 @@ function scoreRecord(record) {
   return {
     score,
     bucket,
+    gabaSignal: gabaText,
     routeSignals,
     interventionSignals,
     subjectSignals,
@@ -645,11 +670,16 @@ try {
 for (const article of pubmedArticles) article.queryLabels = labelsByPmid.get(article.pmid) ?? [];
 
 const openAlexSearches = [];
+let openAlexSkippedQueries = 0;
 for (let index = 0; index < OPENALEX_QUERIES.length; index += 1) {
   try {
     openAlexSearches.push(await searchOpenAlex(OPENALEX_QUERIES[index], index));
   } catch (error) {
     sourceErrors.push({ source: `OpenAlex:${OPENALEX_QUERIES[index]}`, error: String(error?.message || error) });
+    if (/\b429\b|rate limit/i.test(String(error?.message || error))) {
+      openAlexSkippedQueries = OPENALEX_QUERIES.length - index - 1;
+      break;
+    }
   }
   await pause(800);
 }
@@ -700,9 +730,10 @@ const reviewed = mergedRecords.map((record) => {
 const hasPublicationFollowup = (record) => record.queryLabels?.includes("publication_followup")
   && (/\bretract(?:ed|ion)?\b|\bexpression of concern\b|\bcorrection\b/i.test(record.title)
     || (record.publicationTypes ?? []).some((type) => /retract|correct/i.test(type)));
+const candidateEntrySignal = (record) => record.gabaSignal || hasPublicationFollowup(record);
 
 const candidates = reviewed
-  .filter((record) => !record.existingRecordId && (record.score >= 25 || hasPublicationFollowup(record)))
+  .filter((record) => candidateEntrySignal(record) && !record.existingRecordId && (record.score >= 25 || hasPublicationFollowup(record)))
   .sort((a, b) => {
     const aFollowup = hasPublicationFollowup(a) ? 1 : 0;
     const bFollowup = hasPublicationFollowup(b) ? 1 : 0;
@@ -721,7 +752,9 @@ const candidates = reviewed
         : record.bucket === "우선검토"
           ? "직접근거 우선검토"
           : "일반 원문검토",
-    ...record
+    ...record,
+    candidateEntrySignal: true,
+    candidateEntryReason: record.gabaSignal ? "제목·초록 GABA 신호" : "GABA 후속조치 검색 신호"
   }));
 
 const summary = {
@@ -745,7 +778,11 @@ const summary = {
   },
   openAlex: {
     queries: openAlexSearches.map(({ label, query, count, records }) => ({ label, query, count, retrieved: records.length })),
-    retrieved: openAlexSearches.reduce((sum, search) => sum + search.records.length, 0)
+    retrieved: openAlexSearches.reduce((sum, search) => sum + search.records.length, 0),
+    attemptedQueries: openAlexSearches.length + sourceErrors.filter((entry) => String(entry.source || "").startsWith("OpenAlex:")).length,
+    skippedQueries: openAlexSkippedQueries,
+    accessMode: openAlexApiKey ? "api-key" : openAlexMailto ? "mailto" : "anonymous",
+    retriesPerQuery: openAlexRetries
   },
   crossref: {
     queries: crossrefSearches.map(({ label, query, count, records }) => ({ label, query, count, retrieved: records.length })),
