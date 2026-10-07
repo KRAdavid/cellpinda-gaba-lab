@@ -28,7 +28,9 @@ const hasOpenAlexError = failedSources.includes("OpenAlex");
 const recoveryHint = hasOpenAlexError
   ? openAlexAccessMode === "anonymous"
     ? "운영자 조치: OPENALEX_API_KEY 또는 OPENALEX_MAILTO를 예약 실행 환경에 설정한 뒤 재실행"
-    : "운영자 조치: OpenAlex rate limit 재설정 후 재실행"
+    : openAlexAccessMode === "unknown"
+      ? "운영자 조치: OpenAlex 인증·응답 상태를 확인한 뒤 재실행"
+      : "운영자 조치: OpenAlex rate limit 재설정 후 재실행"
   : errors.length
     ? "운영자 조치: 실패 원천의 응답 상태를 확인한 뒤 재실행"
     : "운영자 조치: build·preflight·브라우저 QA 후 공개 반영 검토";
