@@ -40505,10 +40505,10 @@
       "publishedAt": "2026-10-06T17:34:22.042242Z",
       "verification": "Sites v485 · UI·public-surface·health·parity·Chrome CDP QA·candidateExportCount 정합성 통과",
       "currentCodeDeployment": {
-        "siteVersion": 682,
-        "sourceCommit": "9f7450081efda08b48a1dc0c83fd0c6cdf43118d",
-        "publicMirrorCommit": "76644b5d49e6bd9bddb01784c73da8b027d8b81a",
-        "publishedAt": "2026-10-07T10:12:00.000Z"
+        "siteVersion": 683,
+        "sourceCommit": "9d6f380292af769f0504f7128c87e141869d9c1f",
+        "publicMirrorCommit": "8ac6cb9470c389e9d162b3a17b5de7aada757054",
+        "publishedAt": "2026-10-07T10:18:00.000Z"
       }
     },
     "notice": "이 웹 인덱스는 배포 시점의 읽기 전용 스냅샷입니다."
