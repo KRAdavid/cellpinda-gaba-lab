@@ -2424,6 +2424,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
           <button class="quick-button" type="button" data-kind="규제">규제·안전성</button>
           <button class="quick-button" type="button" data-category="안전성">안전성 자료</button>
           <button class="quick-button" type="button" data-intervention="순수 GABA 섭취">순수 GABA <span class="quick-count" data-intervention-count="순수 GABA 섭취">__COUNT_PURE__</span></button>
+          <button class="quick-button" type="button" data-preset="oral">경구·섭취</button>
           <button class="quick-button" type="button" data-effect-category="수면">수면</button>
           <details class="quick-advanced" id="quick-advanced">
             <summary data-quick-advanced-summary>추가 필터</summary>
@@ -3335,8 +3336,9 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
 
       function activePreset() {
         if (state.q || state.from !== DB.meta.minYear || state.to !== DB.meta.maxYear || state.sort !== "latest") return "";
-        var common = ["category", "effectCategory", "marketing", "intervention", "followup", "grade", "agency", "safetyArea", "sci", "species", "topic", "extraction", "direction"];
+        var common = ["category", "effectCategory", "marketing", "intervention", "routeGroup", "followup", "grade", "agency", "safetyArea", "sci", "species", "topic", "extraction", "direction"];
         if (state.kind === "임상" && state.status === "포함" && state.intervention === "순수 GABA 섭취" && !state.source) return "human-direct";
+        if (state.routeGroup === "경구·섭취" && !state.kind && !state.status && !state.source) return "oral";
         if (common.some(function (key) { return state[key]; })) return "";
         if (state.kind === "임상" && !state.status && !state.source) return "clinical";
         if (state.kind === "규제" && !state.status && !state.source) return "regulatory";
