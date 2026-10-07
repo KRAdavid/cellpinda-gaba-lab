@@ -471,6 +471,7 @@ try {
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('Crossref')"), true);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes('이번 갱신 변화')"), true);
   assert.equal(await evaluate(client, "document.querySelector(\".portal-nav a[href='#market-use']\")?.textContent.includes('시장·활용')"), true);
+  assert.equal(await evaluate(client, "document.querySelector(\".portal-nav a[href='#review-queue']\")?.textContent.includes('추가 검토')"), true);
   assert.equal(await evaluate(client, "getComputedStyle(document.querySelector('#market-use')).scrollMarginTop"), "84px");
   const currentDeploymentLabel = "현재 운영 코드 기준(런타임) Sites v" + health.release.currentCodeDeployment.siteVersion + " · GitHub " + health.release.currentCodeDeployment.publicMirrorCommit.slice(0, 7);
   assert.equal(await evaluate(client, "document.querySelector('#discovery-stats')?.textContent.includes(" + JSON.stringify(currentDeploymentLabel) + ")"), true);

@@ -1978,6 +1978,7 @@ const PAGE_TEMPLATE = String.raw`<!doctype html>
         <a href="#intelligence">Intelligence</a>
         <a href="#distribution-title">규제·안전</a>
         <a href="#market-use">시장·활용</a>
+        <a href="#review-queue">추가 검토</a>
       </nav>
       <div class="top-actions">
         <a class="top-link" id="sheet-link" hidden target="_blank" rel="noopener noreferrer">관리 원본 Sheet</a>
